@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<SplitPane fx:id="split_text_frame" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <BorderPane fx:id="border_left_frame" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <MenuBar fx:id="menuBar_left" BorderPane.alignment="CENTER">
+                    <menus>
+                      <Menu fx:id="menu_left_file" mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem fx:id="menuItem_left_load" mnemonicParsing="false" text="Load" />
+                              <MenuItem fx:id="menuItem_left_save" mnemonicParsing="false" text="Save" />
+                              <MenuItem fx:id="menuItem_left_saveas" mnemonicParsing="false" text="Save as" />
+                              <MenuItem fx:id="menuItem_left_close" mnemonicParsing="false" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu fx:id="menu_left_edit" mnemonicParsing="false" text="Edit">
+                        <items>
+                          <MenuItem fx:id="menuItem_left_edit" mnemonicParsing="false" text="Edit" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+               </top>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <TextField fx:id="textField_left" text="Line : 6 , BlockIdx : 3" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <BorderPane fx:id="border_right_frame" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <TextField fx:id="textField_right" text="Line : 6 , BlockIdx : 3" BorderPane.alignment="CENTER" />
+               </bottom>
+               <top>
+                  <MenuBar fx:id="menuBar_right" BorderPane.alignment="CENTER">
+                     <menus>
+                        <Menu fx:id="menu_right_file" mnemonicParsing="false" text="File">
+                           <items>
+                              <MenuItem fx:id="menuItem_right_load" mnemonicParsing="false" text="Load" />
+                              <MenuItem fx:id="menuItem_right_save" mnemonicParsing="false" text="Save" />
+                              <MenuItem fx:id="menuItem_right_saveas" mnemonicParsing="false" text="Save as" />
+                              <MenuItem fx:id="menuItem_right_close" mnemonicParsing="false" text="Close" />
+                           </items>
+                        </Menu>
+                        <Menu fx:id="menu_right_edit" mnemonicParsing="false" text="Edit">
+                           <items>
+                              <MenuItem fx:id="menuItem_right_edit" mnemonicParsing="false" text="Edit" />
+                           </items>
+                        </Menu>
+                     </menus>
+                  </MenuBar>
+               </top>
+            </BorderPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
