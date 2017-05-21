@@ -50,8 +50,4 @@ public class Model_Block {
 	public void setisSame(boolean isSame){
 		this.isSame = isSame;
 	}
-	
-	//clone
-
-	
 }

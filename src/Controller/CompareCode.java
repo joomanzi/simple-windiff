@@ -12,13 +12,17 @@ import Model.Model_File;
 public class CompareCode {
 	Model_File file1;
 	Model_File file2;
-	ArrayList<String> file1LineContents = file1.getLineContent();
-	ArrayList<String> file2LineContents = file2.getLineContent();
+	ArrayList<String> file1LineContents;
+	ArrayList<String> file2LineContents;
 	LCSalgorithms LCS;
 	
 	CompareCode(Model_File file1, Model_File file2){
 		this.file1 = file1;
 		this.file2 = file2;
+		file1.blocks = new ArrayList<Model_Block>();
+		file2.blocks = new ArrayList<Model_Block>();
+		this.file1LineContents = file1.getLineContent();
+		this.file2LineContents = file2.getLineContent();
 		file1.setIsCompare(true);
 		file2.setIsCompare(true);
 		
@@ -27,7 +31,7 @@ public class CompareCode {
 	}
 	
 	private void createBlock(){
-		int previousPos_file1 = 0;
+/*		int previousPos_file1 = 0;
 		int previousPos_file2 = 0;
 		int pos_file1;
 		int pos_file2;
@@ -40,23 +44,23 @@ public class CompareCode {
 			blank_file1 = calculateBlank(pos_file1, pos_file2);
 			blank_file2 = calculateBlank(pos_file2, pos_file1);
 						
-			if(isPreviousBlockExist(pos_file1, previousPos_file1)){
-				file1.blocks.add(new Model_Block(pos_file1-1, previousPos_file1, blank_file1));
+			if(blank_file1 + previousPos_file1 == pos_file1){
+				file1.blocks.add(new Model_Block(previousPos_file1, pos_file1-1, blank_file1));
 			}
-			if(isPreviousBlockExist(pos_file2, previousPos_file2)){
-				file2.blocks.add(new Model_Block(pos_file2-1, previousPos_file2, blank_file2));
+			if(blank_file2 + previousPos_file2 == pos_file2){
+				file2.blocks.add(new Model_Block(previousPos_file2, pos_file2-1,  blank_file2));
 			}
 			
 			addCurrentBlock(pos_file1, pos_file2);
 			
-			previousPos_file1 = pos_file1++;
-			previousPos_file2 = pos_file2++;
+			previousPos_file1 = ++pos_file1;
+			previousPos_file2 = ++pos_file2;
 
 		}
-		
+		*/
 	}
 	private int calculateBlank(int pos1, int pos2){
-		return (pos1 > pos2) ? (pos1-pos2) : 0;
+		return (pos1 < pos2) ? (pos2-pos1) : 0;
 	}
 	
 	private boolean isPreviousBlockExist(int pos, int priorPos){

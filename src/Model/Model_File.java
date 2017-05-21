@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Model_File {
@@ -46,5 +47,22 @@ public class Model_File {
 	}
 	public void setIsCompare(boolean isComapre){
 		this.isCompare = isCompare;
+	}
+	public String toString(){
+		Iterator<Model_Block> list = blocks.iterator();
+		StringBuilder result = new StringBuilder();
+		
+		while(list.hasNext()){
+			Model_Block tmp = list.next();
+			for(int i = tmp.getStartIndex(); i <= tmp.getLastIndex(); i++){
+				result.append(lineContent.get(i));
+			}
+			for(int i = 0 ; i < tmp.getBlank(); i++){
+				result.append("\r\n");
+			}
+		}
+		
+		
+		return result.toString();
 	}
 }
