@@ -8,8 +8,16 @@ public class Model_File {
 	private String fileName; // 
 	private int lineNumber;
 	private ArrayList<String> lineContent;
+	private ArrayList<String> OriginContent;
+	
+	public Model_File(){
+		
+	}
 		
 	//getter
+	public ArrayList<String> getOriginContent() {
+		return OriginContent;
+	}
 	public String getDirectory(){
 		return this.directory;
 	}
@@ -23,10 +31,13 @@ public class Model_File {
 		return lineContent;
 	}
 	//setter
+	public void setOriginContent(ArrayList<String> originContent) {
+		OriginContent = originContent;
+	}
 	public void setDirectory(String directory){
 		this.directory = directory;
 	}
-	public void setfileName(String filename){
+	public void setfileName(String fileName){
 		this.fileName = fileName;
 	}
 	public void setLineNumber(int lineNumber){
