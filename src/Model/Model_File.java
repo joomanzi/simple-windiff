@@ -6,14 +6,15 @@ import java.util.Scanner;
 public class Model_File {
 	private String directory; //directory
 	private String fileName; // 
+  private boolean isCompare;
 	private ArrayList<String> lineContent;
-	
+	public ArrayList<Model_Block> blocks;
+  
 	public Model_File(String fileName){
-		
-		this.newLineContent();
+  	this.newLineContent();
 		this.setfileName(fileName);
 	}
-		
+  			
 	//getter
 	public String getDirectory(){
 		return this.directory;
@@ -27,7 +28,9 @@ public class Model_File {
 	public ArrayList<String> getLineContent(){
 		return this.lineContent;
 	}
-	
+	public boolean isCompare(){
+		return isCompare;
+	}
 	//setter
 	public void setDirectory(String directory){
 		this.directory = directory;
@@ -38,6 +41,10 @@ public class Model_File {
 	public void setLineContent(String lineContent){
 		this.lineContent.add(lineContent+"\r\n");
 	}
-
-	
+	public void setLineContent(ArrayList<String> lineContent){
+		this.lineContent = lineContent;
+	}
+	public void setIsCompare(boolean isComapre){
+		this.isCompare = isCompare;
+	}
 }
