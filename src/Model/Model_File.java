@@ -6,44 +6,38 @@ import java.util.Scanner;
 public class Model_File {
 	private String directory; //directory
 	private String fileName; // 
-	private int lineNumber;
 	private ArrayList<String> lineContent;
-	private ArrayList<String> OriginContent;
 	
-	public Model_File(){
+	public Model_File(String fileName){
 		
+		this.newLineContent();
+		this.setfileName(fileName);
 	}
 		
 	//getter
-	public ArrayList<String> getOriginContent() {
-		return OriginContent;
-	}
 	public String getDirectory(){
 		return this.directory;
 	}
 	public String getfileName(){ 
 		return this.fileName;
 	}
-	public int getLineNumber(){
-		return this.lineNumber;
+	public void newLineContent(){
+		this.lineContent = new ArrayList<String>();
 	}
 	public ArrayList<String> getLineContent(){
-		return lineContent;
+		return this.lineContent;
 	}
+	
 	//setter
-	public void setOriginContent(ArrayList<String> originContent) {
-		OriginContent = originContent;
-	}
 	public void setDirectory(String directory){
 		this.directory = directory;
 	}
 	public void setfileName(String fileName){
 		this.fileName = fileName;
 	}
-	public void setLineNumber(int lineNumber){
-		this.lineNumber = lineNumber;
+	public void setLineContent(String lineContent){
+		this.lineContent.add(lineContent+"\r\n");
 	}
-	public void setLineContent(ArrayList<String> lineContent){
-		this.lineContent = lineContent;
-	}	
+
+	
 }
