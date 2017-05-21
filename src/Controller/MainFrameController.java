@@ -1,3 +1,4 @@
+
 package Controller;
 
 import java.net.URL;
@@ -45,10 +46,5 @@ public class MainFrameController implements Initializable {
 	@FXML
 	public void righttoleftOnAction(){
 		System.out.println("Right To Left MERGE!");
-	}
-	
-	
-	
-	
+	}	
 }
-

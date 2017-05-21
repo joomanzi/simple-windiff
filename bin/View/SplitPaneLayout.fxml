@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<SplitPane fx:id="split_text_frame" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SplitPaneController">
+<SplitPane fx:id="split_text_frame" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -18,15 +18,15 @@
                     <menus>
                       <Menu fx:id="menu_left_file" mnemonicParsing="false" text="File">
                         <items>
-                          <MenuItem fx:id="menuItem_left_load" mnemonicParsing="false" onAction="#leftLoadOnAction" text="Load" />
-                              <MenuItem fx:id="menuItem_left_save" mnemonicParsing="false" onAction="#leftSaveOnAction" text="Save" />
-                              <MenuItem fx:id="menuItem_left_saveas" mnemonicParsing="false" onAction="#leftSaveasOnAction" text="Save as" />
-                              <MenuItem fx:id="menuItem_left_close" mnemonicParsing="false" onAction="#leftCloseOnAction" text="Close" />
+                          <MenuItem fx:id="menuItem_left_load" mnemonicParsing="false" text="Load" />
+                              <MenuItem fx:id="menuItem_left_save" mnemonicParsing="false" text="Save" />
+                              <MenuItem fx:id="menuItem_left_saveas" mnemonicParsing="false" text="Save as" />
+                              <MenuItem fx:id="menuItem_left_close" mnemonicParsing="false" text="Close" />
                         </items>
                       </Menu>
                       <Menu fx:id="menu_left_edit" mnemonicParsing="false" text="Edit">
                         <items>
-                          <MenuItem fx:id="menuItem_left_edit" mnemonicParsing="false" onAction="#leftEditOnAction" text="Edit" />
+                          <MenuItem fx:id="menuItem_left_edit" mnemonicParsing="false" text="Edit" />
                         </items>
                       </Menu>
                     </menus>
@@ -54,15 +54,15 @@
                      <menus>
                         <Menu fx:id="menu_right_file" mnemonicParsing="false" text="File">
                            <items>
-                              <MenuItem fx:id="menuItem_right_load" mnemonicParsing="false" onAction="#rightLoadOnAction" text="Load" />
-                              <MenuItem fx:id="menuItem_right_save" mnemonicParsing="false" onAction="#rightSaveOnAction" text="Save" />
-                              <MenuItem fx:id="menuItem_right_saveas" mnemonicParsing="false" onAction="#rightSaveasOnAction" text="Save as" />
-                              <MenuItem fx:id="menuItem_right_close" mnemonicParsing="false" onAction="#rightCloseOnAction" text="Close" />
+                              <MenuItem fx:id="menuItem_right_load" mnemonicParsing="false" text="Load" />
+                              <MenuItem fx:id="menuItem_right_save" mnemonicParsing="false" text="Save" />
+                              <MenuItem fx:id="menuItem_right_saveas" mnemonicParsing="false" text="Save as" />
+                              <MenuItem fx:id="menuItem_right_close" mnemonicParsing="false" text="Close" />
                            </items>
                         </Menu>
                         <Menu fx:id="menu_right_edit" mnemonicParsing="false" text="Edit">
                            <items>
-                              <MenuItem fx:id="menuItem_right_edit" mnemonicParsing="false" onAction="#rightEditOnAction" text="Edit" />
+                              <MenuItem fx:id="menuItem_right_edit" mnemonicParsing="false" text="Edit" />
                            </items>
                         </Menu>
                      </menus>
