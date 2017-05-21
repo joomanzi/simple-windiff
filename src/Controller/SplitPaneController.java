@@ -1,6 +1,7 @@
 
 package Controller;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 
 public class SplitPaneController implements Initializable {
 	
@@ -42,6 +44,9 @@ public class SplitPaneController implements Initializable {
 	
 	@FXML
  	public void leftLoadOnAction(){
+		FileChooser filechooser = myFileChooser("Left FileChooser");
+		File file = filechooser.showOpenDialog(null);
+		
  		System.out.println("Left LOAD!");
 	}
 	
@@ -69,7 +74,10 @@ public class SplitPaneController implements Initializable {
 	
 	@FXML
  	public void rightLoadOnAction(){
- 		System.out.println("Right LOAD!");
+		FileChooser filechooser = myFileChooser("Right FileChooser");
+		File file = filechooser.showOpenDialog(null);
+		
+		System.out.println("Right LOAD!");
 	}
 	
 	@FXML
@@ -90,5 +98,21 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void rightEditOnAction(){
  		System.out.println("Right EDIT!");
+	}
+	
+	
+	
+	/*FileChooser*/
+	FileChooser myFileChooser(String name){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle(name);
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("All Files","*.txt","*.c","*.java"),
+				new FileChooser.ExtensionFilter("Text Files","*.txt")
+				);
+
+		
+		
+		return fileChooser;
 	}
 }
