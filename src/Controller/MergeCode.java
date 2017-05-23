@@ -13,8 +13,7 @@ public class MergeCode {
 	}
 	
 	private void copy(Model_Block from, Model_Block to){
-		to.setStartIndex(from.getStartIndex());
-		to.setLastIndex(from.getLastIndex());
+		to.setLineInfo(from.getLineInfo());
 		to.setBlank(from.getBlank());
 		to.setisModified(true);
 	}

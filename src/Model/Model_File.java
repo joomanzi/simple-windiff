@@ -12,8 +12,9 @@ public class Model_File {
 	public ArrayList<Model_Block> blocks;
   
 	public Model_File(String fileName){
-  	this.newLineContent();
+		this.newLineContent();
 		this.setfileName(fileName);
+		
 	}
   			
 	//getter
@@ -48,7 +49,7 @@ public class Model_File {
 	public void setIsCompare(boolean isComapre){
 		this.isCompare = isCompare;
 	}
-	public String toString(){
+/*	public String toString(){
 		Iterator<Model_Block> list = blocks.iterator();
 		StringBuilder result = new StringBuilder();
 		
@@ -64,5 +65,5 @@ public class Model_File {
 		
 		
 		return result.toString();
-	}
+	}*/
 }

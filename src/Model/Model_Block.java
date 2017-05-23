@@ -1,27 +1,27 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Model_Block {
 	/*
-	 * startIndex : 블럭이 시작하는 index
-	 * lastIndex : 블럭이 끝나는 Index;
 	 * blank : 블럭에 공백 줄  수
 	 * modified: merge를 통해 수정이 됐는지
 	 * */
-	private ArrayList<String> lineInfo;
-	public ArrayList<String> getLineInfo() {
-		return lineInfo;
-	}
-	public void setLineInfo(ArrayList<String> lineInfo) {
-		this.lineInfo = lineInfo;
-	}
+	private ArrayList<Integer> lineInfo;
 	private int blank;
-	private boolean modified = false;
-	private boolean isSame = false;
+	private boolean modified;
+	private boolean isSame;
 	
-	public Model_Block(int blank){
-		this.blank = blank;
+	public Model_Block(){
+		lineInfo = new ArrayList<Integer>();
+		blank = 0;
+		modified = false;
+		modified = isSame;
 	}
 	//getter
+	public ArrayList<Integer> getLineInfo() {
+		return lineInfo;
+	}
 	public int getBlank(){
 		return blank;
 	}
@@ -32,6 +32,9 @@ public class Model_Block {
 		return isSame;
 	}
 	//setter
+	public void setLineInfo(ArrayList<Integer> lineInfo) {
+		this.lineInfo = lineInfo;
+	}
 	public void setBlank(int blank){
 		this.blank = blank;
 	}
