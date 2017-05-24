@@ -2,9 +2,13 @@
 package Controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.Model_File;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 
 public class SplitPaneController implements Initializable {
+	private Controller_File_IO controller_file_IO;
 	
 	@FXML
 	private SplitPane split_text_frame;
@@ -30,7 +35,6 @@ public class SplitPaneController implements Initializable {
 	
 	
 	
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -44,10 +48,11 @@ public class SplitPaneController implements Initializable {
 	
 	@FXML
  	public void leftLoadOnAction(){
+		
 		FileChooser filechooser = myFileChooser("Left FileChooser");
 		File file = filechooser.showOpenDialog(null);
-		
- 		System.out.println("Left LOAD!");
+		System.out.println(file.getAbsolutePath().toString());
+		controller_file_IO.saidSomething();
 	}
 	
 	@FXML
@@ -69,8 +74,6 @@ public class SplitPaneController implements Initializable {
  	public void leftEditOnAction(){
  		System.out.println("Left EDIT!");
 	}
-	
-	
 	
 	@FXML
  	public void rightLoadOnAction(){
@@ -100,7 +103,9 @@ public class SplitPaneController implements Initializable {
  		System.out.println("Right EDIT!");
 	}
 	
-	
+	public void setControllerFileIO(Controller_File_IO controller_file_IO){
+		this.controller_file_IO = controller_file_IO;
+	}
 	
 	/*FileChooser*/
 	FileChooser myFileChooser(String name){
@@ -110,9 +115,6 @@ public class SplitPaneController implements Initializable {
 				new FileChooser.ExtensionFilter("All Files","*.txt","*.c","*.java"),
 				new FileChooser.ExtensionFilter("Text Files","*.txt")
 				);
-
-		
-		
 		return fileChooser;
 	}
 }

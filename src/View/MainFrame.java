@@ -2,6 +2,7 @@ package View;
 
 import java.io.IOException;
 
+import Controller.MainFrameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,8 @@ public class MainFrame extends Application {
 
 	private Stage primaryStage;
     private BorderPane mainFrameLayout;
-
+    private MainFrameController mainFrameController;
+    
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -33,6 +35,10 @@ public class MainFrame extends Application {
             Scene scene = new Scene(mainFrameLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+            
+            mainFrameController = loader.getController();
+            mainFrameController.setMainFrame(this);
+            
             
             /*
             Parent loader = FXMLLoader.load(getClass().getResource("../View/MainFrameLayout.fxml"));

@@ -4,6 +4,9 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.jws.soap.SOAPBinding.Use;
+
+import View.MainFrame;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,6 +14,8 @@ import javafx.scene.layout.*;
 
 public class MainFrameController implements Initializable {
 
+	private MainFrame mainFrame;
+	
 	@FXML
 	private BorderPane border_main_frame;
 	@FXML
@@ -21,7 +26,9 @@ public class MainFrameController implements Initializable {
 	private SplitMenuButton splitMenu_merge;
 	@FXML
 	private MenuItem menuItem_lefttoright, menuItem_righttoleft;
-	
+	@FXML
+	private SplitPaneController splitPaneController = new SplitPaneController();
+	private Controller_File_IO controller_file_IO = new Controller_File_IO();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -31,6 +38,8 @@ public class MainFrameController implements Initializable {
 		splitMenu_merge = null;
 		menuItem_lefttoright = null;
 		menuItem_righttoleft = null;
+	
+		splitPaneController.setControllerFileIO(controller_file_IO);
 	}
 	
 	@FXML
@@ -47,4 +56,9 @@ public class MainFrameController implements Initializable {
 	public void righttoleftOnAction(){
 		System.out.println("Right To Left MERGE!");
 	}	
+	
+	public void setMainFrame(MainFrame mainFrame){
+		this.mainFrame = mainFrame;
+	}
+	
 }

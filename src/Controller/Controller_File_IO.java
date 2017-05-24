@@ -2,28 +2,35 @@ package Controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import Model.Model_File;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Controller_File_IO {
 
-	private Model_File model_File = null;
 	private BufferedReader bufferedReader = null;
 	private BufferedWriter bufferedWriter = null;
-	private ArrayList<String> fileContent;
+	private ObservableList<Model_File> files = null;
 	private Scanner in;
 	
 	public BufferedReader getBufferedReader() {return bufferedReader;}
 	
 	public void setBufferedReader(BufferedReader bufferedReader) {this.bufferedReader = bufferedReader;}
 	
-	public void newBufferedReader(String fileName) throws FileNotFoundException{this.bufferedReader = new BufferedReader(new FileReader(fileName));}
+	public void newBufferedReader(String fileName) throws FileNotFoundException{
+		FileInputStream fileInputStream = new FileInputStream(fileName);
+		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+		this.bufferedReader = new BufferedReader(new FileReader(fileName));
+	}
 	
 	public BufferedWriter getBufferedWriter() {return bufferedWriter;}
 	
@@ -31,52 +38,49 @@ public class Controller_File_IO {
 	
 	public void newBufferedWriter(String fileName) throws IOException{this.bufferedWriter = new BufferedWriter(new FileWriter(fileName));}
 	
-	public ArrayList<String> getFileContent() {return fileContent;}
+	public ObservableList<Model_File> getFileContent() {return files;}
 	
-	public void setFileContent(ArrayList<String> fileContent) {this.fileContent = fileContent;}
+	public void setFiles(ObservableList<Model_File> files) {this.files = files;}
 	
 	public Scanner getIn() {return in;}
 	
 	public void setIn(Scanner in) {this.in = in;}
 	
-	public Model_File getModel_File() {return model_File;}
-	
-	public void setModel_File(Model_File model_file) {this.model_File = model_file;}
-	
-	public void newModel_File(String fileName){this.model_File = new Model_File(fileName);}
-	
 	public Controller_File_IO(){
-		
+		files = FXCollections.observableArrayList();
 	}
 	
 	public void fileLoad(String fileName) throws IOException {
 		
-		this.newModel_File(fileName);
+		Model_File new_file = new Model_File(fileName);
+		
 		this.newBufferedReader(fileName);
 		
 		this.in = new Scanner(this.bufferedReader);
 		String s;
 		
 		while((s=this.getBufferedReader().readLine())!=null)		
-			this.model_File.setLineContent(s);
+			new_file.setLinesLineByLine(s);
 		
+		files.add(new_file);
+		if(files.isEmpty()){
+			System.out.println("is empty");
+		}
+		System.out.println(files.get(0).getfileName());
 	}
-	
-	public void fileSave(String fileName) throws IOException{
-		
+	public void saidSomething(){
+		System.out.println("hey I'm instatnciazed");
+	}
+	public void fileSave(String fileName, int idx) throws IOException{
 		this.newBufferedWriter(fileName);
 		int i = 0;
 		
-		while(i < this.model_File.getLineContent().size()){
-			
-			this.bufferedWriter.write(this.model_File.getLineContent().get(i));
-			
+		while(i < files.get(idx).getLines().size()){
+			this.bufferedWriter.write(files.get(idx).getLines().get(i).toString());
 			i++;
-			
 		}
 		
 		this.bufferedWriter.close();
-		
 	}
 	
 }

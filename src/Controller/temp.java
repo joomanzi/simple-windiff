@@ -17,10 +17,10 @@ public class temp {
 		c[2].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test3.txt");
 		c[3].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test4.txt");
 		
-		c[0].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test5.txt");
-		c[1].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test6.txt");
-		c[2].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test7.txt");
-		c[3].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test8.txt");
+		c[0].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test5.txt",0);
+		c[1].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test6.txt",0);
+		c[2].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test7.txt",0);
+		c[3].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test8.txt",0);
 		
 		
 	}

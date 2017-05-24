@@ -1,17 +1,20 @@
 package Model;
 
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
 public class Model_Block {
 	/*
-	 * startIndex : ºí·°ÀÌ ½ÃÀÛÇÏ´Â index
-	 * lastIndex : ºí·°ÀÌ ³¡³ª´Â Index;
-	 * blank : ºí·°¿¡ °ø¹é ÁÙ  ¼ö
-	 * modified: merge¸¦ ÅëÇØ ¼öÁ¤ÀÌ µÆ´ÂÁö
+	 * startIndex : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ index
+	 * lastIndex : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Index;
+	 * blank : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½  ï¿½ï¿½
+	 * modified: mergeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ï¿½ï¿½
 	 * */
-	private ArrayList<String> lineInfo;
-	public ArrayList<String> getLineInfo() {
+	private ObservableList<StringProperty> lineInfo;
+	public ObservableList<StringProperty> getLineInfo() {
 		return lineInfo;
 	}
-	public void setLineInfo(ArrayList<String> lineInfo) {
+	public void setLineInfo(ObservableList<StringProperty> lineInfo) {
 		this.lineInfo = lineInfo;
 	}
 	private int blank;
