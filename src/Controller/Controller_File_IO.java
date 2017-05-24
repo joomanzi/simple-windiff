@@ -27,8 +27,6 @@ public class Controller_File_IO {
 	public void setBufferedReader(BufferedReader bufferedReader) {this.bufferedReader = bufferedReader;}
 	
 	public void newBufferedReader(String fileName) throws FileNotFoundException{
-		FileInputStream fileInputStream = new FileInputStream(fileName);
-		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
 		this.bufferedReader = new BufferedReader(new FileReader(fileName));
 	}
 	
@@ -38,7 +36,7 @@ public class Controller_File_IO {
 	
 	public void newBufferedWriter(String fileName) throws IOException{this.bufferedWriter = new BufferedWriter(new FileWriter(fileName));}
 	
-	public ObservableList<Model_File> getFileContent() {return files;}
+	public ObservableList<Model_File> getFiles() {return files;}
 	
 	public void setFiles(ObservableList<Model_File> files) {this.files = files;}
 	

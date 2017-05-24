@@ -2,9 +2,12 @@ package Controller;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
 public class LCSalgorithms {
-	private ArrayList<String> X;
-	private ArrayList<String> Y;
+	private ObservableList<StringProperty> X;
+	private ObservableList<StringProperty> Y;
 	private int LCSlength;
 	private int [][] table;
 	public ArrayList<Integer> X_Index = new ArrayList<Integer>();
@@ -17,13 +20,12 @@ public class LCSalgorithms {
 	 * */
 	private int [][] solution;
 
-	LCSalgorithms(ArrayList<String> X, ArrayList<String> Y){
+	LCSalgorithms(ObservableList<StringProperty> X, ObservableList<StringProperty> Y){
 		this.X = X;
 		this.Y = Y;
 	
 		initTable();
 		findIndex();
-		
 	}
 	
 	public int getLCSlength(){
@@ -103,25 +105,4 @@ public class LCSalgorithms {
 	private int max(int a, int b){
 		return (a>b) ? a : b;
 	}
-	public static void main(String[] args){
-		ArrayList<String> X = new ArrayList<String>();
-		ArrayList<String> Y = new ArrayList<String>(); 	
-		X.add("a");
-		X.add("c");
-		X.add("a");
-		X.add("y");
-		X.add("k");
-		X.add("p");
-		Y.add("c");
-		Y.add("a");
-		Y.add("p");
-		Y.add("c");
-		Y.add("a");
-		Y.add("k");
-		//  A CAYKP
-		// CAPCA K
-		LCSalgorithms test =new LCSalgorithms(X, Y);
-		test.print();
-	}
-	
 }

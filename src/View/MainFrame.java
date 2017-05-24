@@ -36,9 +36,7 @@ public class MainFrame extends Application {
             Scene scene = new Scene(mainFrameLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-            
-            
-            
+                      
             /*
             Parent loader = FXMLLoader.load(getClass().getResource("../View/MainFrameLayout.fxml"));
             primaryStage.setTitle("Simple Merge");

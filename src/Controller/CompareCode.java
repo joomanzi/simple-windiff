@@ -4,34 +4,38 @@ import java.util.ArrayList;
 
 import Model.Model_Block;
 import Model.Model_File;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class CompareCode {
 	Model_File file1;
 	Model_File file2;
-	ArrayList<String> file1LineContents;
-	ArrayList<String> file2LineContents;
+	ObservableList<StringProperty> file1Lines;
+	ObservableList<StringProperty> file2Lines;
 	LCSalgorithms LCS;
 	
 	CompareCode(Model_File file1, Model_File file2){
 		this.file1 = file1;
 		this.file2 = file2;
-		file1.blocks = new ArrayList<Model_Block>();
-		file2.blocks = new ArrayList<Model_Block>();
-		this.file1LineContents = file1.getLineContent();
-		this.file2LineContents = file2.getLineContent();
+		file1.blocks = FXCollections.observableArrayList();
+		file2.blocks = FXCollections.observableArrayList();
+		
+		this.file1Lines = file1.getLines();
+		this.file2Lines = file2.getLines();
 		file1.setIsCompare(true);
 		file2.setIsCompare(true);
 		
-		LCS = new LCSalgorithms(file1LineContents, file2LineContents);
+		LCS = new LCSalgorithms(file1Lines, file2Lines);
 		createBlock();
 	}
 	
 	private void createBlock(){
 		/*
-		 * 1. ³Ö¾îÁà¾ßÇÒ ÀÌÀüÀÇ ºí¶ôÀÌ ÀÖ´ÂÁö È®ÀÎÇÑ´Ù.
-		 * 2. -> ¾ø´Â °æ¿ì, ÀÌÀüÀÇ ¸ðµ¨°ú °°´Ù¸é lineInfo¿¡ Ãß°¡¸¸. ÀÌÀüÀÇ ¸ðµ¨ÀÌ ¾ø´Ù¸é ±×³É ³Ö¾îÁÜ
-		 * 3. -> ÀÖ´Â °æ¿ì , ÀÌÀüÀÇ ºí¶ôÀ» ³Ö¾îÁÖ°í , Áö±Ý ºí¶ôÀ» »õ·Î¿î ºí¶ô¿¡ ³Ö¾îÁØ´Ù.
+		 * 1. ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ñ´ï¿½.
+		 * 2. -> ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ðµ¨°ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ lineInfoï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½×³ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½
+		 * 3. -> ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ , ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ö°ï¿½ , ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
 		 * */
 		int priorIndex1 = -1, priorIndex2 = -1;
 		int currentIndex1, currentIndex2;
@@ -49,7 +53,7 @@ public class CompareCode {
 			priorIndex2 = currentIndex2;
 		}
 		//insertLastblock
-		insertLastBlock(priorIndex1, priorIndex2, file1.getLineContent().size()-1, file2.getLineContent().size()-1);
+		insertLastBlock(priorIndex1, priorIndex2, file1.getLines().size()-1, file2.getLines().size()-1);
 	
 	}
 	private boolean hasPriorBlock(int prior1, int prior2, int current1, int current2){
@@ -87,14 +91,14 @@ public class CompareCode {
 		block2.setisSame(true);
 		
 		
-		if(!hasPriorBlock(prior1, prior2, current1, current2)){// ³ÖÀ» ºí¶ôÀÌ ¾ø¾ú´Ù¸é
-			if(file1.blocks.size() == 0 && file2.blocks.size() == 0){//ºí¶ôÀÌ ÇÏ³ªµµ ¾ø´Â°æ¿ì
+		if(!hasPriorBlock(prior1, prior2, current1, current2)){// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½
+			if(file1.blocks.size() == 0 && file2.blocks.size() == 0){//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ï¿½
 				block1.getLineInfo().add(current1);
 				block2.getLineInfo().add(current2);
 				file1.blocks.add(block1);
 				file2.blocks.add(block2);
 			}
-			else{ //ºí¶ôÀÌ ÇÏ³ª¶óµµ ÀÖ´Ù¸é ÀÌÀü ºí¶ô¿¡´Ù°¡ ¶óÀÎÁ¤º¸¸¸ Ãß°¡ÇÑ´Ù.
+			else{ //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½.
 				file1.blocks.get(file1.blocks.size()-1).getLineInfo().add(current1);
 				file2.blocks.get(file2.blocks.size()-1).getLineInfo().add(current2);
 			}		
@@ -110,9 +114,9 @@ public class CompareCode {
 		return;
 	}
 	private void insertLastBlock(int start1, int start2, int last1, int last2){
-		//insertÇÒ blockÀÌ ¾ø´Â °æ¿ì
+		//insertï¿½ï¿½ blockï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if(start1 == last1 && start2 == last2) return;
-		//insertÇÒ blockÀÌ µÑ´Ù line ÇÏ³ªÀÎ °æ¿ì.
+		//insertï¿½ï¿½ blockï¿½ï¿½ ï¿½Ñ´ï¿½ line ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 		
 		if(!hasPriorBlock(start1, start2, last1, last2)){
 			Model_Block block1 = new Model_Block();
@@ -126,14 +130,5 @@ public class CompareCode {
 			insertBlock(start1, start2, last1, last2);
 		}
 		return;
-	}
-	public static void main(String[] args) throws IOException{
-		Controller_File_IO a = new Controller_File_IO();
-		Controller_File_IO b = new Controller_File_IO();
-		
-		a.fileLoad("C:\\Users\\USER01\\Desktop\\test.txt");
-		b.fileLoad("C:\\Users\\USER01\\Desktop\\test2.txt");
-		new CompareCode(a.getModel_File(), b.getModel_File());
-		System.out.println("done");
 	}
 }

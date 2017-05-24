@@ -18,11 +18,8 @@ public class Model_File {
 	public ObservableList<Model_Block> blocks;
   
 	public Model_File(String fileName){
-<<<<<<< HEAD
+
 		this.newLines();
-=======
-		this.newLineContent();
->>>>>>> 5d6182eaafdd2a5348f266f286f361acf5b11510
 		this.setfileName(fileName);
 		
 	}
@@ -53,34 +50,11 @@ public class Model_File {
 	public void setLines(ObservableList<StringProperty> lines){
 		this.lines = lines;
 	}
-	public void setIsCompare(boolean isComapre){
+	public void setIsCompare(boolean isCompare){
 		this.isCompare = isCompare;
 	}
-<<<<<<< HEAD
-	
 	public void setLinesLineByLine(String value){
 		line = new SimpleStringProperty(value+"\r\n");
 		lines.add(line);
 	}
-	
-	public String toString(){
-=======
-/*	public String toString(){
->>>>>>> 5d6182eaafdd2a5348f266f286f361acf5b11510
-		Iterator<Model_Block> list = blocks.iterator();
-		StringBuilder result = new StringBuilder();
-		
-		/*while(list.hasNext()){
-			Model_Block tmp = list.next();
-			for(int i = tmp.getStartIndex(); i <= tmp.getLastIndex(); i++){
-				result.append(lines.get(i));
-			}
-			for(int i = 0 ; i < tmp.getBlank(); i++){
-				result.append("\r\n");
-			}
-		}*/
-		
-		
-		return result.toString();
-	}*/
 }
