@@ -40,12 +40,19 @@ public class SplitPaneController implements Initializable {
 		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
 		textField_left = null; textField_right = null;
 		
+		//textArea_left.setDisable(true);  //아예 안보임 -> 파일을 load하면 false로 바뀌게끔
+		
 	}
 	
 	@FXML
  	public void leftLoadOnAction(){
 		FileChooser filechooser = myFileChooser("Left FileChooser");
 		File file = filechooser.showOpenDialog(null);
+		
+		//load할때 중복검사 flag변수 필요
+		//load했으면 textArea disable true -> false로
+		//load했으면 edit button 활성화(선택사항)
+		
 		
  		System.out.println("Left LOAD!");
 	}
@@ -76,6 +83,10 @@ public class SplitPaneController implements Initializable {
  	public void rightLoadOnAction(){
 		FileChooser filechooser = myFileChooser("Right FileChooser");
 		File file = filechooser.showOpenDialog(null);
+		
+		if(file != null){
+			
+		}
 		
 		System.out.println("Right LOAD!");
 	}
