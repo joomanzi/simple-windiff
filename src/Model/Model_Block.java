@@ -1,5 +1,6 @@
 package Model;
 
+<<<<<<< HEAD
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
@@ -17,14 +18,30 @@ public class Model_Block {
 	public void setLineInfo(ObservableList<StringProperty> lineInfo) {
 		this.lineInfo = lineInfo;
 	}
+=======
+import java.util.ArrayList;
+
+public class Model_Block {
+	/*
+	 * blank : 블럭에 공백 줄  수
+	 * modified: merge를 통해 수정이 됐는지
+	 * */
+	private ArrayList<Integer> lineInfo;
+>>>>>>> 5d6182eaafdd2a5348f266f286f361acf5b11510
 	private int blank;
-	private boolean modified = false;
-	private boolean isSame = false;
+	private boolean modified;
+	private boolean isSame;
 	
-	public Model_Block(int blank){
-		this.blank = blank;
+	public Model_Block(){
+		lineInfo = new ArrayList<Integer>();
+		blank = 0;
+		modified = false;
+		modified = isSame;
 	}
 	//getter
+	public ArrayList<Integer> getLineInfo() {
+		return lineInfo;
+	}
 	public int getBlank(){
 		return blank;
 	}
@@ -35,6 +52,9 @@ public class Model_Block {
 		return isSame;
 	}
 	//setter
+	public void setLineInfo(ArrayList<Integer> lineInfo) {
+		this.lineInfo = lineInfo;
+	}
 	public void setBlank(int blank){
 		this.blank = blank;
 	}
