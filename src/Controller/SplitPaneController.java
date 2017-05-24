@@ -44,6 +44,7 @@ public class SplitPaneController implements Initializable {
 		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
 		textField_left = null; textField_right = null;
 		
+		controller_file_IO = new Controller_File_IO();
 	}
 	
 	@FXML
@@ -107,6 +108,10 @@ public class SplitPaneController implements Initializable {
 		this.controller_file_IO = controller_file_IO;
 	}
 	
+	
+	public void foo(String foo) {
+	       System.out.println(foo);
+	    }
 	/*FileChooser*/
 	FileChooser myFileChooser(String name){
 		FileChooser fileChooser = new FileChooser();

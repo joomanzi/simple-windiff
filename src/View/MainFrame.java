@@ -32,12 +32,11 @@ public class MainFrame extends Application {
             loader.setLocation(MainFrame.class.getResource("/View/MainFrameLayout.fxml"));
             mainFrameLayout = (BorderPane) loader.load();
 
+            
             Scene scene = new Scene(mainFrameLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            mainFrameController = loader.getController();
-            mainFrameController.setMainFrame(this);
             
             
             /*
