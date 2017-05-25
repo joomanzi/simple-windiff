@@ -30,7 +30,7 @@ public class MainFrameController implements Initializable {
 	@FXML
 	private Parent split_text_frame;
 	@FXML
-	private SplitPaneController split_text_frameController;
+	private SplitPaneController split_text_frameController; 		//Nested Controllers
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -39,7 +39,6 @@ public class MainFrameController implements Initializable {
 		splitMenu_merge = null;
 		menuItem_lefttoright = null;
 		menuItem_righttoleft = null;
-		split_text_frameController.foo("It works");
 	}
 	
 	@FXML

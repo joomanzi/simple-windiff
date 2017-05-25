@@ -7,14 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-<<<<<<< HEAD
-import javafx.scene.control.TextArea;
 
-public class TextAreaLeftController implements Initializable {
-	
-	@FXML
-	private TextArea textArea_left;
-=======
 import javafx.scene.control.*;
 
 public class TextAreaLeftController implements Initializable {
@@ -25,25 +18,21 @@ public class TextAreaLeftController implements Initializable {
 	
 	@FXML
 	TextArea textArea_left;
->>>>>>> a767bd64df522f920ea76ddf337d3d43c99c48b0
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
-		textArea_left = null;
-=======
+
 		
-		textArea_left.setEditable(false); //SplitPane¿¡¼­ ÇØ¾ßÇÒµí
-		//textArea_left.setDisable(true);  //¾Æ¿¹ ¾Èº¸ÀÓ -> ÆÄÀÏÀ» loadÇÏ¸é false·Î ¹Ù²î°Ô²û
-										  //closeÇÏ¸é setDisable true»óÅÂ·Î¹Ù²Þ
+		textArea_left.setEditable(false); //SplitPaneï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Òµï¿½
+		//textArea_left.setDisable(true);  //ï¿½Æ¿ï¿½ ï¿½Èºï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ loadï¿½Ï¸ï¿½ falseï¿½ï¿½ ï¿½Ù²ï¿½Ô²ï¿½
+										  //closeï¿½Ï¸ï¿½ setDisable trueï¿½ï¿½ï¿½Â·Î¹Ù²ï¿½
 		//textArea_left.setVisible(true); //
 		
-		//textArea_left.requestFocus(); //Ä¿¼­Àç¹èÄ¡
+		//textArea_left.requestFocus(); //Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡
 		
 		setString();
 		setTextArea(test1);
->>>>>>> a767bd64df522f920ea76ddf337d3d43c99c48b0
 	}
 
 	public void setString(){
@@ -58,7 +47,7 @@ public class TextAreaLeftController implements Initializable {
 	public void setTextArea(ArrayList<String> str){
 		
 		for(int i=0;i<str.size();i++){
-			textArea_left.appendText(str.get(i)); //setText´Â textº¯°æ appendText´Â textÃß°¡
+			textArea_left.appendText(str.get(i)); //setTextï¿½ï¿½ textï¿½ï¿½ï¿½ï¿½ appendTextï¿½ï¿½ textï¿½ß°ï¿½
 		}
 	}
 	

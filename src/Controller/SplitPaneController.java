@@ -44,12 +44,7 @@ public class SplitPaneController implements Initializable {
 		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
 		textField_left = null; textField_right = null;
 		
-<<<<<<< HEAD
-		controller_file_IO = new Controller_File_IO();
-=======
-		//textArea_left.setDisable(true);  //¾Æ¿¹ ¾Èº¸ÀÓ -> ÆÄÀÏÀ» loadÇÏ¸é false·Î ¹Ù²î°Ô²û
-		
->>>>>>> a767bd64df522f920ea76ddf337d3d43c99c48b0
+		//textArea_left.setDisable(true);  //ï¿½Æ¿ï¿½ ï¿½Èºï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ loadï¿½Ï¸ï¿½ falseï¿½ï¿½ ï¿½Ù²ï¿½Ô²
 	}
 	
 	@FXML
@@ -57,18 +52,14 @@ public class SplitPaneController implements Initializable {
 		
 		FileChooser filechooser = myFileChooser("Left FileChooser");
 		File file = filechooser.showOpenDialog(null);
-<<<<<<< HEAD
-		System.out.println(file.getAbsolutePath().toString());
-		controller_file_IO.saidSomething();
-=======
+
 		
-		//loadÇÒ¶§ Áßº¹°Ë»ç flagº¯¼ö ÇÊ¿ä
-		//loadÇßÀ¸¸é textArea disable true -> false·Î
-		//loadÇßÀ¸¸é edit button È°¼ºÈ­(¼±ÅÃ»çÇ×)
+		//loadï¿½Ò¶ï¿½ ï¿½ßºï¿½ï¿½Ë»ï¿½ flagï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
+		//loadï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ textArea disable true -> falseï¿½ï¿½
+		//loadï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ edit button È°ï¿½ï¿½È­(ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½)
 		
 		
  		System.out.println("Left LOAD!");
->>>>>>> a767bd64df522f920ea76ddf337d3d43c99c48b0
 	}
 	
 	@FXML

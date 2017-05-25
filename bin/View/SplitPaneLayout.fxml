@@ -33,11 +33,7 @@
                   </MenuBar>
                </top>
                <center>
-<<<<<<< HEAD
                   <fx:include source="TextAreaLeft.fxml" fx:id="textArea_left"/>
-=======
-                  <fx:include source="TextAreaLeft.fxml" />
->>>>>>> a767bd64df522f920ea76ddf337d3d43c99c48b0
                </center>
                <bottom>
                   <TextField fx:id="textField_left" text="Line : 6 , BlockIdx : 3" BorderPane.alignment="CENTER" />
