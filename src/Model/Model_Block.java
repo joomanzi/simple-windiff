@@ -13,6 +13,8 @@ public class Model_Block {
 	private boolean modified;
 	private boolean isSame;
 	
+	private String testName;
+	
 	public Model_Block(){
 		lineInfo = new ArrayList<Integer>();
 		blank = 0;
@@ -44,5 +46,12 @@ public class Model_Block {
 	}
 	public void setisSame(boolean isSame){
 		this.isSame = isSame;
+	}
+	
+	public void setNameForTest(String n){
+		this.testName = n;
+	}
+	public String getNameForTest(){
+		return this.testName;
 	}
 }

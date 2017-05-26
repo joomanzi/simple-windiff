@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
@@ -32,7 +33,10 @@ public class SplitPaneController implements Initializable {
 					menuItem_right_load, menuItem_right_save, menuItem_right_saveas, menuItem_right_close, menuItem_right_edit;
 	@FXML
 	private TextField textField_left, textField_right;
-	
+	@FXML
+	private Parent listView_left;
+	@FXML
+	private ListViewLeftController listView_leftController;
 	
 	
 	@Override
@@ -44,6 +48,8 @@ public class SplitPaneController implements Initializable {
 		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
 		textField_left = null; textField_right = null;
 		
+		
+		//listView_leftController.foo("Hello world");
 		//textArea_left.setDisable(true);  //�ƿ� �Ⱥ��� -> ������ load�ϸ� false�� �ٲ�Բ
 	}
 	
@@ -52,8 +58,13 @@ public class SplitPaneController implements Initializable {
 		
 		FileChooser filechooser = myFileChooser("Left FileChooser");
 		File file = filechooser.showOpenDialog(null);
-
 		
+		try {
+			controller_file_IO.fileLoad(file.getAbsolutePath().toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//load�Ҷ� �ߺ��˻� flag���� �ʿ�
 		//load������ textArea disable true -> false��
 		//load������ edit button Ȱ��ȭ(���û���)

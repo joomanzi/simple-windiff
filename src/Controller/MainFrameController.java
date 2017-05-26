@@ -16,7 +16,7 @@ import javafx.scene.layout.*;
 public class MainFrameController implements Initializable {
 
 	private MainFrame mainFrame;
-	
+	private Controller_File_IO controller_file_IO;
 	@FXML
 	private BorderPane border_main_frame;
 	@FXML
@@ -39,6 +39,9 @@ public class MainFrameController implements Initializable {
 		splitMenu_merge = null;
 		menuItem_lefttoright = null;
 		menuItem_righttoleft = null;
+		
+		controller_file_IO = new Controller_File_IO();
+		split_text_frameController.setControllerFileIO(controller_file_IO);
 	}
 	
 	@FXML
