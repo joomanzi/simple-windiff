@@ -46,6 +46,8 @@ public class MainFrameController implements Initializable {
 	
 	@FXML
  	public void compareOnAction(){
+ 		
+ 		new CompareCode(controller_file_IO);
  		System.out.println("COMPARE!");
  	}
 	

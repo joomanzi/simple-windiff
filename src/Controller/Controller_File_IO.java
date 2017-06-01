@@ -21,7 +21,7 @@ public class Controller_File_IO {
 	private BufferedReader bufferedReader = null;
 	private BufferedWriter bufferedWriter = null;
 	private ObservableList<Model_File> files = null;
-	private ObservableList<Model_Block> blocks = null;
+	private ObservableList<Model_Block> blocks = FXCollections.observableArrayList();
 
 	private Scanner in;
 	
