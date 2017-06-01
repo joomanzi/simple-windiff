@@ -4,25 +4,31 @@ import Model.Model_Block;
 import Model.Model_File;
 
 public class MergeCode {
-	Model_Block left;
-	Model_Block right;
+	Model_Block block;	
+	int flag;
 	
-	MergeCode(Model_Block left, Model_Block right){
-		this.left = left;
-		this.right = right;
+	MergeCode(Model_Block block, int flag){
+		this.block = block;
+		this.flag = flag;
+		copy(flag);
 	}
+	private void copy(int flag){
+		if(flag == 1) copyRightToleft();  
+		if(flag == 2) copyLeftToRight();  
+		else return;
+	}
+		
+	private void copyRightToleft(){
+		block.setFlag(flag);
+		block.setLeftLineInfo(block.getRightLineInfo());
+		block.setLeftBlank(block.getRightBlank());
+		block.setisModified(true);
+	} 
 	
-	private void copy(Model_Block from, Model_Block to){
-		to.setLineInfo(from.getLineInfo());
-		to.setBlank(from.getBlank());
-		to.setisModified(true);
-	}
-	public void copyLeftToRight(){
-		copy(this.left,this.right);
-	}
-	
-	public void copyRightToleft(){
-		copy(this.right,this.left);
-	}
-	
+	private void copyLeftToRight(){
+		block.setFlag(flag);
+		block.setRightLineInfo(block.getLeftLineInfo());
+		block.setRightBlank(block.getLeftBlank());
+		block.setisModified(true);
+	} 
 }

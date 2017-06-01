@@ -9,6 +9,7 @@ public class Model_Block {
 	private ArrayList<Integer> rightLineInfo;
 	private int leftBlank;
 	private int rightBlank;
+	private int flag;
 	private boolean modified;
 	private boolean isSame;
 		
@@ -17,8 +18,15 @@ public class Model_Block {
 		rightLineInfo = new ArrayList<Integer>();
 		leftBlank = 0;
 		rightBlank = 0;
+		flag = 0;
 		modified = false;
-		modified = isSame;
+		isSame = false;
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 	//getter
 	public boolean isModified(){

@@ -15,13 +15,11 @@ public class Model_File {
 	private boolean isCompare;
 	private ObservableList<StringProperty> lines;
 	private StringProperty line;
-	public ObservableList<Model_Block> blocks;
+	//public ObservableList<Model_Block> blocks;
   
 	public Model_File(String fileName){
-
 		this.newLines();
 		this.setfileName(fileName);
-		
 	}
   			
 	//getter
