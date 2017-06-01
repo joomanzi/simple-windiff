@@ -37,6 +37,8 @@ public class SplitPaneController implements Initializable {
 	private Parent listView_left;
 	@FXML
 	private ListViewLeftController listView_leftController;
+	@FXML
+	private ListViewRightController listView_rightController;
 	
 	
 	@Override
@@ -96,14 +98,18 @@ public class SplitPaneController implements Initializable {
 	
 	@FXML
  	public void rightLoadOnAction(){
+		System.out.println("Right LOAD!");
 		FileChooser filechooser = myFileChooser("Right FileChooser");
 		File file = filechooser.showOpenDialog(null);
 		
-		if(file != null){
-			
+		try {
+			controller_file_IO.fileLoad(file.getAbsolutePath().toString());
+			listView_rightController.setDatas();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		System.out.println("Right LOAD!");
 	}
 	
 	@FXML
@@ -129,6 +135,7 @@ public class SplitPaneController implements Initializable {
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 		listView_leftController.setControllerFileIO(controller_file_IO);
+		listView_rightController.setControllerFileIO(controller_file_IO);
 	}
 	
 	

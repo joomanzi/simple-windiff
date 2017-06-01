@@ -32,7 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 import javafx.scene.control.ListCell;
-public class ListViewLeftController implements Initializable {
+public class ListViewRightController implements Initializable {
 	/*TODO
 	 * FXML로 TextArea짜기
 	 * Model_File 읽어내고, Model_Block 형태로 변환, Model_Block 하나하나 TextArea에 넣
@@ -40,7 +40,7 @@ public class ListViewLeftController implements Initializable {
 	private Controller_File_IO controller_file_IO;
 	
 	@FXML
-	private ListView<TextArea> listView_left;
+	private ListView<TextArea> listView_right;
 	
 	private ObservableList<TextArea> data = FXCollections.observableArrayList();
 	
@@ -59,7 +59,7 @@ public class ListViewLeftController implements Initializable {
            	ta.appendText(file.getLines().get(i).getValue());
         }
         data.add(ta);
-        listView_left.setItems(data);
+        listView_right.setItems(data);
 	}
 	
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){

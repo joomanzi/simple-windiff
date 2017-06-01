@@ -62,10 +62,6 @@ public class Controller_File_IO {
 			new_file.setLinesLineByLine(s);
 		
 		files.add(new_file);
-		if(files.isEmpty()){
-			System.out.println("is empty");
-		}
-		System.out.println(files.get(0).getfileName());
 	}
 	public void saidSomething(){
 		System.out.println("hey I'm instatnciazed");
