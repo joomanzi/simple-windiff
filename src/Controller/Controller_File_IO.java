@@ -52,6 +52,8 @@ public class Controller_File_IO {
 	
 	public void setIn(Scanner in) {this.in = in;}
 	
+	public void initialBlocks(){ blocks = FXCollections.observableArrayList(); }
+	
 	public Controller_File_IO(){
 		files = FXCollections.observableArrayList();
 		System.out.println("Controller IO : constructor");

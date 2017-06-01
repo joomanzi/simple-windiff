@@ -31,6 +31,7 @@ public class MainFrameController implements Initializable {
 	private Parent split_text_frame;
 	@FXML
 	private SplitPaneController split_text_frameController; 		//Nested Controllers
+	private CompareCode compare;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -46,6 +47,8 @@ public class MainFrameController implements Initializable {
 	
 	@FXML
  	public void compareOnAction(){
+		controller_file_IO.initialBlocks();
+ 		compare = new CompareCode(controller_file_IO);
  		System.out.println("COMPARE!");
  	}
 	
