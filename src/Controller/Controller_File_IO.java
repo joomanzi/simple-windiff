@@ -22,6 +22,7 @@ public class Controller_File_IO {
 	private BufferedWriter bufferedWriter = null;
 	private ObservableList<Model_File> files = null;
 	private ObservableList<Model_Block> blocks = null;
+
 	private Scanner in;
 	
 	public BufferedReader getBufferedReader() {return bufferedReader;}
@@ -31,7 +32,12 @@ public class Controller_File_IO {
 	public void newBufferedReader(String fileName) throws FileNotFoundException{
 		this.bufferedReader = new BufferedReader(new FileReader(fileName));
 	}
-	
+	public ObservableList<Model_Block> getBlocks() {
+		return blocks;
+	}
+	public void setBlocks(ObservableList<Model_Block> blocks) {
+		this.blocks = blocks;
+	}
 	public BufferedWriter getBufferedWriter() {return bufferedWriter;}
 	
 	public void setBufferedWriter(BufferedWriter bufferedWriter) {this.bufferedWriter = bufferedWriter;}
