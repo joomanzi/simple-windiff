@@ -46,6 +46,7 @@ public class Controller_File_IO {
 	
 	public Controller_File_IO(){
 		files = FXCollections.observableArrayList();
+		System.out.println("Controller IO : constructor");
 	}
 	
 	public void fileLoad(String fileName) throws IOException {

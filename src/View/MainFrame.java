@@ -32,9 +32,9 @@ public class MainFrame extends Application {
             loader.setLocation(MainFrame.class.getResource("/View/MainFrameLayout.fxml"));
             mainFrameLayout = (BorderPane) loader.load();
 
-            
             Scene scene = new Scene(mainFrameLayout);
             primaryStage.setScene(scene);
+            primaryStage.getScene().getStylesheets().add("/View/touch.css");
             primaryStage.show();
                       
             /*

@@ -1,107 +1,72 @@
 package Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import Model.Model_Block;
+import View.MainFrame;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.Parent;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Callback;
+import javafx.scene.control.ListCell;
 public class ListViewLeftController implements Initializable {
+	/*TODO
+	 * FXML로 TextArea짜기
+	 * Model_File 읽어내고, Model_Block 형태로 변환, Model_Block 하나하나 TextArea에 넣
+	 */
+	private Controller_File_IO controller_file_IO;
 	
 	@FXML
-	private ListView<Model_Block> listView_left;
+	private ListView listView_left;
 	
-	private ObservableList<Model_Block> listItems;
+	private ObservableList<TextArea> data = FXCollections.observableArrayList();
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		listView_left = new ListView<>();
-		listItems = FXCollections.observableArrayList(
-				new Model_Block(),
-				new Model_Block()
-				);
-		listItems.get(0).setNameForTest("model first");
-		listItems.get(1).setNameForTest("model Second");
+		//setDatas();
 		
-		listView_left.setEditable(true);
-		listView_left.setItems(listItems);
-		
-		System.out.println(listView_left.getItems().get(0).getNameForTest());
-        /*listView_left.setCellFactory(lv -> new ListCell<Model_Block>() {
-            private TextField textField = new TextField() ;
-
-            {
-                textField.setOnAction(e -> {
-                    commitEdit(getItem());
-                });
-                textField.addEventFilter(KeyEvent.KEY_RELEASED, e -> {
-                    if (e.getCode() == KeyCode.ESCAPE) {
-                        cancelEdit();
-                    }
-                });
-            }
-
-            @Override
-            protected void updateItem(Model_Block model, boolean empty) {
-                super.updateItem(model, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else if (isEditing()) {
-                    textField.setText(model.getNameForTest());
-                    setText(null);
-                    setGraphic(textField);
-                } else {
-                    setText(model.getNameForTest());
-                    setGraphic(null);
-                }
-            }
-
-            @Override
-            public void startEdit() {
-                super.startEdit();
-                textField.setText(getItem().getNameForTest());
-                setText(null);
-                setGraphic(textField);
-                textField.selectAll();
-                textField.requestFocus();
-            }
-
-            @Override
-            public void cancelEdit() {
-                super.cancelEdit();
-                setText(getItem().getNameForTest());
-                setGraphic(null);
-            }
-
-            @Override
-            public void commitEdit(Model_Block model) {
-                super.commitEdit(model);
-                model.setNameForTest(textField.getText());
-                setText(textField.getText());
-                setGraphic(null);
-            }
-        });*/
-        
-        listView_left.setOnMouseClicked(e -> {
-            if (e.getClickCount() == 2) {
-                listView_left.getItems().forEach(p -> System.out.println(p.getNameForTest()));
-            }
-        });
-        
-	}
-	public void foo(String foo){
-		System.out.println("foo");
 	}
 	
+	public void setDatas(){
+		TextArea ta = new TextArea();
+		
+		//ta.setPrefSize(ta.getParent().getScaleX(), ta.getParent().getScaleY());
+		
+        for(int i = 0 ; i < controller_file_IO.getFiles().get(0).getLines().size(); i++){
+        	ta.appendText(controller_file_IO.getFiles().get(0).getLines().get(i).getValue());
+        }
+        data.add(ta);
+        listView_left.setItems(data);
+	}
+	
+	public void setControllerFileIO(Controller_File_IO controller_file_IO){
+		this.controller_file_IO = controller_file_IO;
+		//System.out.println(controller_file_IO.toString());
+	}
+	
+	public void foo(String foo){
+		controller_file_IO.saidSomething();
+	} 
 }

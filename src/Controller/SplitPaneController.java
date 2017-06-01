@@ -47,9 +47,8 @@ public class SplitPaneController implements Initializable {
 		menuItem_left_load = null; menuItem_left_save = null; menuItem_left_saveas = null; menuItem_left_close = null; menuItem_left_edit = null;
 		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
 		textField_left = null; textField_right = null;
+	
 		
-		
-		//listView_leftController.foo("Hello world");
 		//textArea_left.setDisable(true);  //�ƿ� �Ⱥ��� -> ������ load�ϸ� false�� �ٲ�Բ
 	}
 	
@@ -61,10 +60,12 @@ public class SplitPaneController implements Initializable {
 		
 		try {
 			controller_file_IO.fileLoad(file.getAbsolutePath().toString());
+			listView_leftController.setDatas();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		//load�Ҷ� �ߺ��˻� flag���� �ʿ�
 		//load������ textArea disable true -> false��
 		//load������ edit button Ȱ��ȭ(���û���)
@@ -127,6 +128,7 @@ public class SplitPaneController implements Initializable {
 	
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
+		listView_leftController.setControllerFileIO(controller_file_IO);
 	}
 	
 	

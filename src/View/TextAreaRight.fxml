@@ -3,4 +3,4 @@
 <?import javafx.scene.control.TextArea?>
 
 
-<TextArea fx:id="textArea_right" prefHeight="200.0" prefWidth="200.0" styleClass="text-area" stylesheets="@touch.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TextAreaRightController" />
+<TextArea fx:id="textArea_right" prefHeight="200.0" prefWidth="200.0" styleClass="text-area" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TextAreaRightController" />

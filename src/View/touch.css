@@ -275,8 +275,14 @@
 */
 
 .textArea{
+	-fx-border-width: 0px;
 	-fx-highlight-fill : red;
 	-fx-prompt-text-fill : blue;
 	-fx-text-fill : white;
 	-fx-background-color : black;
+}
+
+.listView{
+	-fx-border-width: 0px;
+	
 }
