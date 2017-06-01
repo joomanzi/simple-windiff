@@ -53,7 +53,7 @@ public class ListViewRightController implements Initializable {
 	public void setDatas(){
 		//ta.setPrefSize(ta.getParent().getScaleX(), ta.getParent().getScaleY());
 		
-		file = controller_file_IO.getFiles().get(controller_file_IO.getFiles().size()-1);
+		file = controller_file_IO.getRightFile();
 		TextArea ta = new TextArea();
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
@@ -77,10 +77,5 @@ public class ListViewRightController implements Initializable {
 	}
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
-		//System.out.println(controller_file_IO.toString());
-	}
-	
-	public void foo(String foo){
-		controller_file_IO.saidSomething();
 	} 
 }

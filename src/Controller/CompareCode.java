@@ -2,8 +2,9 @@ package Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Model.Model_Block;
+import Controller.Controller_File_IO;
 import Model.Model_File;
+import Model.Model_Block;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +21,8 @@ public class CompareCode {
 	
 	
 	CompareCode(Controller_File_IO fileIO){
-		this.left = fileIO.getFiles().get(0); // left
-		this.right = fileIO.getFiles().get(1); //FXCollections.observableArrayList();
+		this.left = fileIO.getLeftFile(); // left
+		this.right = fileIO.getRightFile(); //FXCollections.observableArrayList();
 		this.blocks = fileIO.getBlocks(); //FXCollections.observableArrayList();
 		this.file1Lines = left.getLines();
 		this.file2Lines = right.getLines();
