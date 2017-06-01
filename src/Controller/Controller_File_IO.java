@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Model.Model_Block;
 import Model.Model_File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ public class Controller_File_IO {
 	private BufferedReader bufferedReader = null;
 	private BufferedWriter bufferedWriter = null;
 	private ObservableList<Model_File> files = null;
+	private ObservableList<Model_Block> blocks = null;
 	private Scanner in;
 	
 	public BufferedReader getBufferedReader() {return bufferedReader;}

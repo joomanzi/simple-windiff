@@ -4,30 +4,23 @@ package Model;
 import java.util.ArrayList;
 
 public class Model_Block {
-	/*
-	 * blank : ���� ���� ��  ��
-	 * modified: merge�� ���� ������ �ƴ���
-	 * */
-	private ArrayList<Integer> lineInfo;
-	private int blank;
+	
+	private ArrayList<Integer> leftLineInfo;
+	private ArrayList<Integer> rightLineInfo;
+	private int leftBlank;
+	private int rightBlank;
 	private boolean modified;
 	private boolean isSame;
-	
-	private String testName;
-	
+		
 	public Model_Block(){
-		lineInfo = new ArrayList<Integer>();
-		blank = 0;
+		leftLineInfo = new ArrayList<Integer>();
+		rightLineInfo = new ArrayList<Integer>();
+		leftBlank = 0;
+		rightBlank = 0;
 		modified = false;
 		modified = isSame;
 	}
 	//getter
-	public ArrayList<Integer> getLineInfo() {
-		return lineInfo;
-	}
-	public int getBlank(){
-		return blank;
-	}
 	public boolean isModified(){
 		return modified;
 	}
@@ -35,23 +28,34 @@ public class Model_Block {
 		return isSame;
 	}
 	//setter
-	public void setLineInfo(ArrayList<Integer> lineInfo) {
-		this.lineInfo = lineInfo;
+	public ArrayList<Integer> getLeftLineInfo() {
+		return leftLineInfo;
 	}
-	public void setBlank(int blank){
-		this.blank = blank;
+	public void setLeftLineInfo(ArrayList<Integer> leftLineInfo) {
+		this.leftLineInfo = leftLineInfo;
+	}
+	public ArrayList<Integer> getRightLineInfo() {
+		return rightLineInfo;
+	}
+	public void setRightLineInfo(ArrayList<Integer> rightLineInfo) {
+		this.rightLineInfo = rightLineInfo;
+	}
+	public int getLeftBlank() {
+		return leftBlank;
+	}
+	public void setLeftBlank(int leftBlank) {
+		this.leftBlank = leftBlank;
+	}
+	public int getRightBlank() {
+		return rightBlank;
+	}
+	public void setRightBlank(int rightBlank) {
+		this.rightBlank = rightBlank;
 	}
 	public void setisModified(boolean modified){
 		this.modified = modified;
 	}
 	public void setisSame(boolean isSame){
 		this.isSame = isSame;
-	}
-	
-	public void setNameForTest(String n){
-		this.testName = n;
-	}
-	public String getNameForTest(){
-		return this.testName;
 	}
 }
