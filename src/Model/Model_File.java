@@ -1,8 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

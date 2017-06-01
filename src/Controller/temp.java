@@ -1,5 +1,6 @@
 package Controller;
 
+
 import java.io.IOException;
 
 public class temp {
@@ -12,17 +13,16 @@ public class temp {
 		for(int i=0;i<4;i++)
 			c[i] = new Controller_File_IO();
 		
-		c[0].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test.txt");
-		c[1].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test2.txt");
-		c[2].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test3.txt");
-		c[3].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test4.txt");
+		c[0].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test.txt",0);
+		c[1].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test2.txt",1);
+		c[2].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test3.txt",1);
+		c[3].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test4.txt",0);
 		
-		c[0].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test5.txt",0);
-		c[1].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test6.txt",0);
-		c[2].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test7.txt",0);
-		c[3].fileSave("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test8.txt",0);
-		
-		
+		c[0].fileSave(0);
+		c[1].fileSave(1);
+		c[2].fileSave(1);
+		c[3].fileSave(0);
+
 	}
 
 }
