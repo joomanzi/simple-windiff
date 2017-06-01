@@ -44,7 +44,7 @@ public class LCSalgorithms {
 		
 		for(i = 1 ; i < X.size() + 1;  i++) {
 			for(j = 1; j < Y.size() + 1; j++) {
-				if(X.get(i-1).equals(Y.get(j-1))){
+				if(X.get(i-1).getValue().equals(Y.get(j-1).getValue())){
 					table[i][j] = table[i-1][j-1] + 1;
 					solution[i][j] =  1;
 				}

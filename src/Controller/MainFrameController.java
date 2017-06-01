@@ -16,6 +16,7 @@ import javafx.scene.layout.*;
 public class MainFrameController implements Initializable {
 
 	private MainFrame mainFrame;
+	private CompareCode compareCode;
 	private Controller_File_IO controller_file_IO;
 	@FXML
 	private BorderPane border_main_frame;
@@ -46,7 +47,13 @@ public class MainFrameController implements Initializable {
 	
 	@FXML
  	public void compareOnAction(){
+ 		compareCode = new CompareCode(controller_file_IO);
+ 		compareCode.foo();
  		System.out.println("COMPARE!");
+ 		ListViewLeftController lc = split_text_frameController.getListViewLeftController();
+ 		ListViewRightController rc = split_text_frameController.getListViewRightController();
+ 		lc.showBlocks();
+ 		rc.showBlocks();
  	}
 	
 	@FXML

@@ -5,7 +5,5 @@
 <?import javafx.collections.*?>
 <?import java.lang.*?>
 
-<ListView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" styleClass="listView" fx:id="listView_right" fx:controller="Controller.ListViewRightController">
-    <fx:include fx:id="blockTextArea" source="blockTextArea.fxml" />
-</ListView>
+<ListView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" styleClass="listView" fx:id="listView_right" fx:controller="Controller.ListViewRightController"></ListView>
 

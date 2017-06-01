@@ -40,7 +40,6 @@ public class SplitPaneController implements Initializable {
 	@FXML
 	private ListViewRightController listView_rightController;
 	
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -50,7 +49,6 @@ public class SplitPaneController implements Initializable {
 		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
 		textField_left = null; textField_right = null;
 	
-		
 		//textArea_left.setDisable(true);  //�ƿ� �Ⱥ��� -> ������ load�ϸ� false�� �ٲ�Բ
 	}
 	
@@ -138,7 +136,12 @@ public class SplitPaneController implements Initializable {
 		listView_rightController.setControllerFileIO(controller_file_IO);
 	}
 	
-	
+	public ListViewLeftController getListViewLeftController(){
+		return this.listView_leftController;
+	}
+	public ListViewRightController getListViewRightController(){
+		return this.listView_rightController;
+	}
 	public void foo(String foo) {
 	       System.out.println(foo);
 	    }

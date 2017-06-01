@@ -60,8 +60,6 @@ public class CompareCode {
 	private void insertBlock(int prior1, int prior2, int current1, int current2){
 		int blockSize;
 		Model_Block block = new Model_Block();
-		Model_Block block1 = new Model_Block();
-		Model_Block block2 = new Model_Block();
 		insertLineInfo(block, prior1, current1, prior2,current2);
 		//insertLineInfo(block2, prior2, current2);
 		
@@ -121,5 +119,8 @@ public class CompareCode {
 			insertBlock(start1, start2, last1, last2);
 		}
 		return;
+	}
+	public void foo(){
+		System.out.println("foo");
 	}
 }
