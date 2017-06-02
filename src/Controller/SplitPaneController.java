@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Controller.Controller_File_IO;
 import Model.Model_File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,8 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 
 public class SplitPaneController implements Initializable {
+	private static int FILE_LEFT = 0;
+	private static int FILE_RIGHT = 1;
 	private Controller_File_IO controller_file_IO;
 	
 	@FXML
@@ -59,7 +62,7 @@ public class SplitPaneController implements Initializable {
 		File file = filechooser.showOpenDialog(null);
 		
 		try {
-			controller_file_IO.fileLoad(file.getAbsolutePath().toString());
+			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
 			listView_leftController.setDatas();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -101,13 +104,12 @@ public class SplitPaneController implements Initializable {
 		File file = filechooser.showOpenDialog(null);
 		
 		try {
-			controller_file_IO.fileLoad(file.getAbsolutePath().toString());
+			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
 			listView_rightController.setDatas();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 	@FXML
