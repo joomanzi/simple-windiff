@@ -274,15 +274,17 @@
 ** TextArea fx background color
 */
 
+
 .textArea{
-	-fx-border-width: 0px;
-	-fx-highlight-fill : red;
-	-fx-prompt-text-fill : blue;
-	-fx-text-fill : white;
-	-fx-background-color : black;
+	-fx-background-color : transparent;
 }
 
-.listView{
-	-fx-border-width: 0px;
+.list-view .list-cell:even{
+	-fx-background-color : white;
+	-fx-padding : 0;
 	
+}
+
+.list-View .list-cell:odd{
+	-fx-background-color : red;
 }

@@ -33,7 +33,7 @@
                   </MenuBar>
                </top>
                <center>
-                  <fx:include source="ListViewLeft.fxml" fx:id="listView_left"/>
+                  <fx:include fx:id="listView_left" source="ListViewLeft.fxml" />
                </center>
                <bottom>
                   <TextField fx:id="textField_left" text="Line : 6 , BlockIdx : 3" BorderPane.alignment="CENTER" />
@@ -44,7 +44,7 @@
          <children>
             <BorderPane fx:id="border_right_frame" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <center>
-                  <fx:include source="ListViewRight.fxml" fx:id="listView_right"/>
+                  <fx:include fx:id="listView_right" source="ListViewRight.fxml" />
                </center>
                <bottom>
                   <TextField fx:id="textField_right" text="Line : 6 , BlockIdx : 3" BorderPane.alignment="CENTER" />
