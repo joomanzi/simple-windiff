@@ -79,5 +79,7 @@ public class ListViewLeftController implements Initializable {
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 	}
-
+	public ListView<TextArea> getListViewLeft(){
+		return this.listView_left;
+	}
 }

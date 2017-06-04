@@ -78,4 +78,7 @@ public class ListViewRightController implements Initializable {
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 	} 
+	public ListView<TextArea> getListViewRight(){
+		return this.listView_right;
+	}
 }

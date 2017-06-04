@@ -4,6 +4,7 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Controller.Controller_File_IO;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 
@@ -90,6 +92,16 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void leftCloseOnAction(){
  		System.out.println("Left CLOSE!");
+ 		Alert alert = new Alert(AlertType.WARNING, 
+                "열려있는 파일이 없습니다.", 
+                ButtonType.YES, ButtonType.NO);
+
+ 		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.YES){
+			alert.close();
+		} else {
+			alert.close();
+		}
 	}
 	
 	@FXML
@@ -136,6 +148,7 @@ public class SplitPaneController implements Initializable {
 		this.controller_file_IO = controller_file_IO;
 		listView_leftController.setControllerFileIO(controller_file_IO);
 		listView_rightController.setControllerFileIO(controller_file_IO);
+		
 	}
 	
 	public ListViewLeftController getListViewLeftController(){
