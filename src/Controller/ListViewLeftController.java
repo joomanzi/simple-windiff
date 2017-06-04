@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
@@ -44,6 +45,7 @@ public class ListViewLeftController implements Initializable {
 	
 	private ObservableList<TextArea> data = FXCollections.observableArrayList();
 	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//setDatas();
@@ -55,6 +57,27 @@ public class ListViewLeftController implements Initializable {
 		
 		file = controller_file_IO.getLeftFile();
 		TextArea ta = new TextArea();
+		
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(ListViewLeftController.class.getResource("/View/BlockTextArea.fxml"));
+			ta = (TextArea) loader.load();
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		
+		ta.setMinHeight(file.getLines().size()*ta.getFont().getSize());
+		ta.setPrefHeight(file.getLines().size()*ta.getFont().getSize());
+		ta.setMaxHeight(file.getLines().size()*ta.getFont().getSize());
+		ta.setWrapText(true);
+		
+		ScrollBar scrollBarv = (ScrollBar)ta.lookup(".scroll-bar:vertical");
+		//scrollBarv.setOpacity(0.0);
+		//scrollBarv.setDisable(true)
+		
+		
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
         }
@@ -68,15 +91,36 @@ public class ListViewLeftController implements Initializable {
 		for(int i = 0 ; i < blocks.size() ; i++){
 			TextArea ta = new TextArea();
 			ArrayList<Integer> index = blocks.get(i).getLeftLineInfo();
-			ta.setMinHeight(10000);
+			
+			try{
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(ListViewLeftController.class.getResource("/View/BlockTextArea.fxml"));
+				ta = (TextArea) loader.load();
+				
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+
+			//ta size
+			ta.setPrefHeight(Math.max(index.size(), blocks.get(i).getRightLineInfo().size())*ta.getFont().getSize());
+			ta.setMinHeight(Math.max(index.size(), blocks.get(i).getRightLineInfo().size())*ta.getFont().getSize());
+			ta.setMaxHeight(Math.max(index.size(), blocks.get(i).getRightLineInfo().size())*ta.getFont().getSize());
+			ta.setWrapText(true);
+			if(blocks.get(i).isSame() == false){
+				ta.setStyle("-fx-background-color:red");
+				//ta.setStyle("-fx-text-color:red");
+				
+				//색칠
+			}
 			
 			
-			//height = index.size();
-			//fxml을 따로 씌우거나 css
+			
 			for(int j = 0 ; j < index.size() ; j++){
 				ta.appendText(file.getLines().get(index.get(j)).getValue());
 			}
 			data.add(ta);
+			
+			
         }
         listView_left.setItems(data);
 	}

@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxWidth="1.7976931348623157E308" styleClass="ancherPane" stylesheets="@touch.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TextArea fx:id="blockTextArea" disable="true" editable="false" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="textArea" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets></TextArea>
-   </children>
-</AnchorPane>
+
+<TextArea prefHeight="200.0" prefWidth="200.0" styleClass="textArea" stylesheets="@touch.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" />

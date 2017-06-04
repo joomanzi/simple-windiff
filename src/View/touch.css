@@ -257,8 +257,6 @@
 }
 
 
-
-
 .combo-box:focused:external-focus {
     -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
 }
@@ -275,22 +273,24 @@
 */
 
 
+.textArea .scroll-bar:vertical {
+	
+	/* -fx-opacity : 0; */
+	-fx-padding : 0;
+	
+}
 
 .textArea{
-	
-	/*
-	1. listview의 size를 고정시켜버리면 mainFrame최대화 할 때 같이 움직이지 않음
-	2. cell마다 가로 scrollbar가 생기는 건 listview가로길이가 아닌 textarea가로길이를 조정시켜야한다.
-	3. textarea 세로길이를 건들여야하는데
-	*/
-	
-	-fx-background-color : transparent;
-	-fx-max-row-count : 100;
+	-fx-padding : 0;	
 }
 
 .listView .list-cell{
-	-fx-background-color : white;
 	-fx-padding : 0;
+	-fx-border-color : white;
+	-fx-border-width : 0;
+}
+
+.listView {
 	
 }
 
