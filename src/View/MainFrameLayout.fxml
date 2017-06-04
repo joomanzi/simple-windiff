@@ -27,7 +27,7 @@
    </top>
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
-          <fx:include source="SplitPaneLayout.fxml" fx:id="split_text_frame" />
+          <fx:include fx:id="split_text_frame" source="SplitPaneLayout.fxml" />
       </AnchorPane>
    </center>
 </BorderPane>
