@@ -34,8 +34,8 @@ import javafx.util.Callback;
 import javafx.scene.control.ListCell;
 public class ListViewLeftController implements Initializable {
 	/*TODO
-	 * FXML로 TextArea짜기
-	 * Model_File 읽어내고, Model_Block 형태로 변환, Model_Block 하나하나 TextArea에 넣
+	 * FXML濡� TextArea吏쒓린
+	 * Model_File �씫�뼱�궡怨�, Model_Block �삎�깭濡� 蹂��솚, Model_Block �븯�굹�븯�굹 TextArea�뿉 �꽔
 	 */
 	private Controller_File_IO controller_file_IO;
 	private Model_File file;
@@ -68,6 +68,11 @@ public class ListViewLeftController implements Initializable {
 		for(int i = 0 ; i < blocks.size() ; i++){
 			TextArea ta = new TextArea();
 			ArrayList<Integer> index = blocks.get(i).getLeftLineInfo();
+			ta.setMinHeight(10000);
+			
+			
+			//height = index.size();
+			//fxml을 따로 씌우거나 css
 			for(int j = 0 ; j < index.size() ; j++){
 				ta.appendText(file.getLines().get(index.get(j)).getValue());
 			}
