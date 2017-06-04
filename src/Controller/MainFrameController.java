@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.jws.soap.SOAPBinding.Use;
 
+import Controller.Controller_File_IO;
 import View.MainFrame;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.layout.*;
 public class MainFrameController implements Initializable {
 
 	private MainFrame mainFrame;
+	private CompareCode compareCode;
 	private Controller_File_IO controller_file_IO;
 	@FXML
 	private BorderPane border_main_frame;
@@ -47,9 +49,13 @@ public class MainFrameController implements Initializable {
 	
 	@FXML
  	public void compareOnAction(){
-		controller_file_IO.initialBlocks();
- 		compare = new CompareCode(controller_file_IO);
+ 		compareCode = new CompareCode(controller_file_IO);
+ 		compareCode.foo();
  		System.out.println("COMPARE!");
+ 		ListViewLeftController lc = split_text_frameController.getListViewLeftController();
+ 		ListViewRightController rc = split_text_frameController.getListViewRightController();
+ 		lc.showBlocks();
+ 		rc.showBlocks();
  	}
 	
 	@FXML

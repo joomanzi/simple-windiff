@@ -38,7 +38,7 @@ public class ListViewLeftController implements Initializable {
 	 * Model_File 읽어내고, Model_Block 형태로 변환, Model_Block 하나하나 TextArea에 넣
 	 */
 	private Controller_File_IO controller_file_IO;
-	
+	private Model_File file;
 	@FXML
 	private ListView<TextArea> listView_left;
 	
@@ -53,7 +53,7 @@ public class ListViewLeftController implements Initializable {
 	public void setDatas(){
 		//ta.setPrefSize(ta.getParent().getScaleX(), ta.getParent().getScaleY());
 		
-		Model_File file = controller_file_IO.getFiles().get(controller_file_IO.getFiles().size()-1);
+		file = controller_file_IO.getLeftFile();
 		TextArea ta = new TextArea();
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
@@ -62,12 +62,22 @@ public class ListViewLeftController implements Initializable {
         listView_left.setItems(data);
 	}
 	
-	public void setControllerFileIO(Controller_File_IO controller_file_IO){
-		this.controller_file_IO = controller_file_IO;
-		//System.out.println(controller_file_IO.toString());
+	public void showBlocks(){
+		data.clear();
+		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
+		for(int i = 0 ; i < blocks.size() ; i++){
+			TextArea ta = new TextArea();
+			ArrayList<Integer> index = blocks.get(i).getLeftLineInfo();
+			for(int j = 0 ; j < index.size() ; j++){
+				ta.appendText(file.getLines().get(index.get(j)).getValue());
+			}
+			data.add(ta);
+        }
+        listView_left.setItems(data);
 	}
 	
-	public void foo(String foo){
-		controller_file_IO.saidSomething();
-	} 
+	public void setControllerFileIO(Controller_File_IO controller_file_IO){
+		this.controller_file_IO = controller_file_IO;
+	}
+
 }
