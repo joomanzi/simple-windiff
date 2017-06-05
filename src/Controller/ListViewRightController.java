@@ -46,48 +46,88 @@ public class ListViewRightController implements Initializable {
 	 */
 	private Controller_File_IO controller_file_IO;
 	@FXML
-	private ListView<String> listView_right;
+	private ListView<Model_Block> listView_right;
 	@FXML
-	private ObservableList<String> listItems = FXCollections.observableArrayList();
+	private ObservableList<Model_Block> listItems = FXCollections.observableArrayList();
+	@FXML
+	private Model_File file;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		 listView_right.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
+	            @Override
+	            public ListCell<Model_Block> call(ListView<Model_Block> p) {
+	 
+	                ListCell<Model_Block> cell = new ListCell<Model_Block>() {
+	                    @Override
+	                    protected void updateItem(Model_Block t, boolean bln) {
+	                        super.updateItem(t, bln); 
+	                       
+	                        if (t != null) {
+	                        	int blankNum = t.getRightBlank();
+	                        	StringBuilder sb = new StringBuilder();
+	                        	if(!t.isModified()){
+		                        	for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
+		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
+		                        	}
+		                        	for(int j = 0 ; j < blankNum ; j++){
+		                        		sb.append("\n");
+		                        	}
+	                        	}else if(t.isModified() && t.getFlag()==2){
+	                        		for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
+		                        		sb.append(controller_file_IO.getLeftFile().getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
+		                        	}
+		                        	for(int j = 0 ; j < blankNum ; j++){
+		                        		sb.append("\n");
+		                        	}
+	                        	}else if(t.isModified() && t.getFlag()==1){
+	                        		for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
+		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
+		                        	}
+		                        	for(int j = 0 ; j < blankNum ; j++){
+		                        		sb.append("\n");
+		                        	}
+	                        	}
+	                        	this.setText(sb.toString());
+	                            
+	                        }
+	                    }
+	                };
+	                return cell;
+	            }
+		 });
+		 listView_right.setItems(listItems);
 	}
 	
 	public void showFile(){
-		Model_File file = controller_file_IO.getRightFile();
-		listView_right.setPrefHeight(listItems.size()*15+2);
-		listItems.addListener(new ListChangeListener(){
-			@Override
-			public void onChanged(Change c) {
-				// TODO Auto-generated method stub
-				 listView_right.setPrefHeight(listItems.size() * 15+ 2);
+		listItems.clear();
+		file = controller_file_IO.getRightFile();
+		listItems = controller_file_IO.getBlocks();
+		
+		Model_Block initBlock;
+		if(listItems.isEmpty()){
+			initBlock = new Model_Block(null, file);
+			listItems.add(initBlock);
+		}else{
+			initBlock = listItems.get(0);
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0 ; i < file.getLines().size() ; i++){
+				al.add(i);
 			}
-		});
+			initBlock.setRightLineInfo(al);
+		}
 		for(int i = 0 ; i < file.getLines().size(); i++){
-	           	listItems.add(file.getLines().get(i).getValue());
-	        }
+	           	//listItems.add(file.getLines().get(i).getValue());
+	     }
 		 listView_right.setItems(listItems);
 		
 	}
 	
 	public void showBlocks(){
-		Model_File file = controller_file_IO.getRightFile();
-		listItems.clear();
+		//listItems.clear();
 		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
-			ArrayList<Integer> index = blocks.get(i).getRightLineInfo();
-			int blankNum = blocks.get(i).getRightBlank();
-
-			StringBuilder sb = new StringBuilder();
-			for(int j = 0 ; j < index.size() ; j++){
-				sb.append(file.getLines().get(index.get(j)).getValue()+"\n");
-			}
-			for(int j = 0 ; j < blankNum ; j++){
-				sb.append("\n");
-			}
-			
-			listItems.add(sb.toString());
+			listItems.add(blocks.get(i));
         }
 		listView_right.autosize();
         listView_right.setItems(listItems);
@@ -95,7 +135,7 @@ public class ListViewRightController implements Initializable {
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 	} 
-	public ListView<String> getListViewRight(){
+	public ListView<Model_Block> getListViewRight(){
 		return this.listView_right;
 	}
 	

@@ -30,6 +30,7 @@ public class CompareCode {
 		right.setIsCompare(true); // file2 is compared
 		
 		LCS = new LCSalgorithms(file1Lines, file2Lines); //do LCS algorithms
+		this.blocks.clear();
 		createBlock();
 	}
 	

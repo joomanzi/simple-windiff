@@ -56,16 +56,35 @@ public class ListViewLeftController implements Initializable {
  
                 ListCell<Model_Block> cell = new ListCell<Model_Block>() {
                     @Override
-                    protected void updateItem(Model_Block t, boolean bln) {
-                        super.updateItem(t, bln);
-                         
-                        TextArea ta = new TextArea();
+                    protected void updateItem(Model_Block t, boolean empty) {
+                        super.updateItem(t, empty); 
                         if (t != null) {
-                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
-                        		ta.appendText(file.getLines().get((t.getLeftLineInfo().get(j))).getValue());
-                        		
+                        	int blankNum = t.getLeftBlank();
+                        	StringBuilder sb = new StringBuilder();
+                        	if(!t.isModified()){
+	                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
+	                        		sb.append(file.getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
+	                        	}
+	                        	for(int j = 0 ; j < blankNum ; j++){
+	                        		sb.append("\n");
+	                        	}
+                        	}else if(t.isModified() && t.getFlag()==1){
+                        		System.out.println("when t is modified as right to left");
+	                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
+		                        	sb.append(controller_file_IO.getRightFile().getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
+		                       	}
+		                       	for(int j = 0 ; j < blankNum ; j++){
+		                       		sb.append("\n");
+		                       	}
+                        	}else if(t.isModified() && t.getFlag()==2){
+	                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
+	                        		sb.append(file.getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
+	                        	}
+	                        	for(int j = 0 ; j < blankNum ; j++){
+	                        		sb.append("\n");
+	                        	}
                         	}
-                            ta.autosize();
+                        	this.setText(sb.toString());
                         }
                     }
                 };
@@ -79,32 +98,32 @@ public class ListViewLeftController implements Initializable {
 		file = controller_file_IO.getLeftFile();
 		listItems = controller_file_IO.getBlocks();
 		
-		Model_Block initBlock = new Model_Block(file);
-		for(int i = 0 ; i < initBlock.getLeftLineInfo().size() ; i++){
-			System.out.println(initBlock.getLeftLineInfo().get(i));
+		Model_Block initBlock;
+		if(listItems.isEmpty()){
+			initBlock = new Model_Block(file, null);
+			listItems.add(initBlock);
+		}else{
+			initBlock = listItems.get(0);
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0 ; i < file.getLines().size() ; i++){
+				al.add(i);
+			}
+			initBlock.setLeftLineInfo(al);
 		}
-		listItems.add(initBlock);
+		
+		for(int i = 0 ; i < initBlock.getLeftLineInfo().size() ; i++){
+			//	System.out.println(initBlock.getLeftLineInfo().get(i));
+			}
 		listView_left.setItems(listItems);
 	}
 	public void showBlocks(){
-		/*listItems.clear();
+		//listItems.clear();
 		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
-			ArrayList<Integer> index = blocks.get(i).getLeftLineInfo();
-			int blankNum = blocks.get(i).getLeftBlank();
-
-			StringBuilder sb = new StringBuilder();
-			for(int j = 0 ; j < index.size() ; j++){
-				sb.append(file.getLines().get(index.get(j)).getValue()+"\n");
-			}
-			for(int j = 0 ; j < blankNum ; j++){
-				sb.append("\n");
-			}
-			listItems.add(sb.toString());
+			listItems.add(blocks.get(i));
 		}
-		 listView_left.cell
 		listView_left.autosize();
-        listView_left.setItems(listItems);*/
+        listView_left.setItems(listItems);
 	}
 	
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){

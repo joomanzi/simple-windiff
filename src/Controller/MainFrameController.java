@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.jws.soap.SOAPBinding.Use;
 
 import Controller.Controller_File_IO;
+import Model.Model_Block;
 import View.MainFrame;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,22 +55,25 @@ public class MainFrameController implements Initializable {
  		ListViewLeftController lc = split_text_frameController.getListViewLeftController();
  		ListViewRightController rc = split_text_frameController.getListViewRightController();
  		ScrollbarBinding.bind(lc.getListViewLeft(), rc.getListViewRight());
- 		lc.showBlocks();
- 		rc.showBlocks();
  	}
 	
 	@FXML
 	public void lefttorightOnAction(){
 		System.out.println("Left To Right MERGE!");
+		System.out.println(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()).getLeftLineInfo().size());
 		MergeCode mc = new MergeCode(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()), 2);
-		split_text_frameController.getListViewLeftController().showBlocks();
+		
+		
+		controller_file_IO.getBlocks().set(controller_file_IO.getSelectedBlockIndex(), mc.getModelBlock());
 	}
 	
 	@FXML
 	public void righttoleftOnAction(){
 		System.out.println("Right To Left MERGE!");
+		System.out.println(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()).getLeftLineInfo().size());
 		MergeCode mc = new MergeCode(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()), 1);
-		split_text_frameController.getListViewRightController().showBlocks();
+		
+		controller_file_IO.getBlocks().set(controller_file_IO.getSelectedBlockIndex(), mc.getModelBlock());
 	}	
 	
 	public void setMainFrame(MainFrame mainFrame){
