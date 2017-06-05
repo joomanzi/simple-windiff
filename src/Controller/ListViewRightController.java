@@ -103,5 +103,6 @@ public class ListViewRightController implements Initializable {
 	public void onListViewRightMouseClicked(){
 		int index = listView_right.getSelectionModel().getSelectedIndex();
 		System.out.println("BlockIdx : "+ index);
+		controller_file_IO.setSelectedBlockIndex(index);
 	}
 }

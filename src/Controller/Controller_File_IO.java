@@ -22,7 +22,7 @@ public class Controller_File_IO {
 	private ObservableList<Model_Block> blocks = null;
 
 	private Scanner in;
-	
+	private int selectedBlockIndex;
 	public Model_File getLeftFile() {return leftFile;}
 
 	public void setLeftFile(Model_File leftFile) {this.leftFile = leftFile;}
@@ -50,6 +50,10 @@ public class Controller_File_IO {
 	public Scanner getIn() {return in;}
 	
 	public void setIn(Scanner in) {this.in = in;}
+	
+	public void setSelectedBlockIndex(int selectedBlockIndex){ this.selectedBlockIndex = selectedBlockIndex; }
+	
+	public int getSelectedBlockIndex(){ return this.selectedBlockIndex; }
 	
 	public Controller_File_IO(){ blocks = FXCollections.observableArrayList(); }
 	

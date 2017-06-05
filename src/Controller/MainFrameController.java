@@ -61,11 +61,13 @@ public class MainFrameController implements Initializable {
 	@FXML
 	public void lefttorightOnAction(){
 		System.out.println("Left To Right MERGE!");
+		MergeCode mc = new MergeCode(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()), 2);
 	}
 	
 	@FXML
 	public void righttoleftOnAction(){
 		System.out.println("Right To Left MERGE!");
+		MergeCode mc = new MergeCode(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()), 1);
 	}	
 	
 	public void setMainFrame(MainFrame mainFrame){

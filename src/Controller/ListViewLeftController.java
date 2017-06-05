@@ -100,6 +100,7 @@ public class ListViewLeftController implements Initializable {
 	public void onListViewLeftMouseClicked(){
 		int index = listView_left.getSelectionModel().getSelectedIndex();
 		System.out.println("BlockIdx : " + index);
+		controller_file_IO.setSelectedBlockIndex(index);
 	}
 	
 }
