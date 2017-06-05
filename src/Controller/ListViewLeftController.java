@@ -38,10 +38,6 @@ import javafx.util.Callback;
 import javafx.scene.control.ListCell;
 
 public class ListViewLeftController implements Initializable {
-	/*TODO
-	 * FXML濡� TextArea吏쒓린
-	 * Model_File �씫�뼱�궡怨�, Model_Block �삎�깭濡� 蹂��솚, Model_Block �븯�굹�븯�굹 TextArea�뿉 �꽔
-	 */
 	private Controller_File_IO controller_file_IO;
 	@FXML
 	private ListView<String> listView_left;
