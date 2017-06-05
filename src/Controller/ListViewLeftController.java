@@ -12,6 +12,7 @@ import View.MainFrame;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,88 +43,56 @@ public class ListViewLeftController implements Initializable {
 	 * Model_File �씫�뼱�궡怨�, Model_Block �삎�깭濡� 蹂��솚, Model_Block �븯�굹�븯�굹 TextArea�뿉 �꽔
 	 */
 	private Controller_File_IO controller_file_IO;
-	private Model_File file;
 	@FXML
-	private ListView<TextArea> listView_left;
-	
+	private ListView<String> listView_left;
 	@FXML
-	private TextArea ta;
-	private Text textHolder;
-	private double oldHeight = 0;
-	@FXML
-	private ObservableList<TextArea> data = FXCollections.observableArrayList();
-	
+	private ObservableList<String> listItems = FXCollections.observableArrayList();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(ListViewLeftController.class.getResource("/View/BlockTextArea.fxml"));
-			ta = (TextArea) loader.load();
-			
-		}catch(IOException e){
-			e.printStackTrace();
-		}
 	}
 	
-	public void setDatas(){
-		file = controller_file_IO.getLeftFile();
-		ta = new TextArea();
-		ta.setWrapText(true);
-		textHolder = new Text();
-        textHolder.textProperty().bind(ta.textProperty());
-        textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
-            @Override
-            public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-                if (oldHeight != newValue.getHeight()) {
-                    System.out.println("newValue = " + newValue.getHeight());
-                    oldHeight = newValue.getHeight();
-                    ta.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20); // +20 is for paddings
-                }
-            }
-        });
-        for(int i = 0 ; i < file.getLines().size(); i++){
-           	ta.appendText(file.getLines().get(i).getValue());
-        }
-        data.add(ta);
-        listView_left.setItems(data);
+	public void showFile(){
+		Model_File file = controller_file_IO.getLeftFile();
+		listView_left.setPrefHeight(listItems.size()*15+2);
+		listItems.addListener(new ListChangeListener(){
+			@Override
+			public void onChanged(Change c) {
+				// TODO Auto-generated method stub
+				 listView_left.setPrefHeight(listItems.size() * 15+ 2);
+			}
+		});
+		for(int i = 0 ; i < file.getLines().size(); i++){
+	           	listItems.add(file.getLines().get(i).getValue());
+	        }
+		 listView_left.setItems(listItems);
+		
 	}
-	
 	public void showBlocks(){
-		data.clear();
+		Model_File file = controller_file_IO.getLeftFile();
+		listItems.clear();
 		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
-			ta = new TextArea();
 			ArrayList<Integer> index = blocks.get(i).getLeftLineInfo();
-			ta.setWrapText(true);
-			textHolder = new Text();
-	        textHolder.textProperty().bind(ta.textProperty());
-	        textHolder.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
-	            @Override
-	            public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-	                if (oldHeight != newValue.getHeight()) {
-	                    System.out.println("newValue = " + newValue.getHeight());
-	                    oldHeight = newValue.getHeight();
-	                    ta.setPrefHeight(textHolder.getLayoutBounds().getHeight() + 20); // +20 is for paddings
-	                }
-	            }
-	        });
-			if(blocks.get(i).isSame() == false){
-				ta.setStyle("-fx-control-inner-background:yellow");
-			}
+			int blankNum = blocks.get(i).getLeftBlank();
+
+			StringBuilder sb = new StringBuilder();
 			for(int j = 0 ; j < index.size() ; j++){
-				ta.appendText(file.getLines().get(index.get(j)).getValue());
+				sb.append(file.getLines().get(index.get(j)).getValue()+"\n");
 			}
-			data.add(ta);
-        }
+			for(int j = 0 ; j < blankNum ; j++){
+				sb.append("\n");
+			}
+			listItems.add(sb.toString());
+		}
 		listView_left.autosize();
-        listView_left.setItems(data);
+        listView_left.setItems(listItems);
 	}
 	
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 	}
-	public ListView<TextArea> getListViewLeft(){
+	public ListView<String> getListViewLeft(){
 		return this.listView_left;
 	}
 	
