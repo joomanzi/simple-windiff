@@ -21,6 +21,21 @@ public class Model_Block {
 		modified = false;
 		isSame = false;
 	}
+	public Model_Block(Model_File file){
+		leftLineInfo = new ArrayList<Integer>();
+		rightLineInfo = new ArrayList<Integer>();
+		leftBlank = 0;
+		rightBlank = 0;
+		flag = 0;
+		modified = false;
+		isSame = false;
+		ArrayList<Integer> al = new ArrayList<Integer>();
+		for (int i = 0 ; i < file.getLines().size() ; i++){
+			al.add(i);
+		}
+		setLeftLineInfo(al);
+		setRightLineInfo(al);
+	}
 	public int getFlag() {
 		return flag;
 	}

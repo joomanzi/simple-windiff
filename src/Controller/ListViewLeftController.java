@@ -28,6 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -40,33 +41,53 @@ import javafx.scene.control.ListCell;
 public class ListViewLeftController implements Initializable {
 	private Controller_File_IO controller_file_IO;
 	@FXML
-	private ListView<String> listView_left;
+	private ListView<Model_Block> listView_left;
 	@FXML
-	private ObservableList<String> listItems = FXCollections.observableArrayList();
+	private ObservableList<Model_Block> listItems = FXCollections.observableArrayList();
+	@FXML
+	private Model_File file;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+        listView_left.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
+            @Override
+            public ListCell<Model_Block> call(ListView<Model_Block> p) {
+ 
+                ListCell<Model_Block> cell = new ListCell<Model_Block>() {
+                    @Override
+                    protected void updateItem(Model_Block t, boolean bln) {
+                        super.updateItem(t, bln);
+                         
+                        TextArea ta = new TextArea();
+                        if (t != null) {
+                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
+                        		ta.appendText(file.getLines().get((t.getLeftLineInfo().get(j))).getValue());
+                        		
+                        	}
+                            ta.autosize();
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        listView_left.setItems(listItems);
 	}
 	
 	public void showFile(){
-		Model_File file = controller_file_IO.getLeftFile();
-		listView_left.setPrefHeight(listItems.size()*15+2);
-		listItems.addListener(new ListChangeListener(){
-			@Override
-			public void onChanged(Change c) {
-				// TODO Auto-generated method stub
-				 listView_left.setPrefHeight(listItems.size() * 15+ 2);
-			}
-		});
-		for(int i = 0 ; i < file.getLines().size(); i++){
-	           	listItems.add(file.getLines().get(i).getValue());
-	        }
-		 listView_left.setItems(listItems);
+		file = controller_file_IO.getLeftFile();
+		listItems = controller_file_IO.getBlocks();
 		
+		Model_Block initBlock = new Model_Block(file);
+		for(int i = 0 ; i < initBlock.getLeftLineInfo().size() ; i++){
+			System.out.println(initBlock.getLeftLineInfo().get(i));
+		}
+		listItems.add(initBlock);
+		listView_left.setItems(listItems);
 	}
 	public void showBlocks(){
-		Model_File file = controller_file_IO.getLeftFile();
-		listItems.clear();
+		/*listItems.clear();
 		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
 			ArrayList<Integer> index = blocks.get(i).getLeftLineInfo();
@@ -81,14 +102,15 @@ public class ListViewLeftController implements Initializable {
 			}
 			listItems.add(sb.toString());
 		}
+		 listView_left.cell
 		listView_left.autosize();
-        listView_left.setItems(listItems);
+        listView_left.setItems(listItems);*/
 	}
 	
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 	}
-	public ListView<String> getListViewLeft(){
+	public ListView<Model_Block> getListViewLeft(){
 		return this.listView_left;
 	}
 	
