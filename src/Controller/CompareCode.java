@@ -95,7 +95,7 @@ public class CompareCode {
 			}
 			else{ 
 				blocks.get(blocks.size()-1).getLeftLineInfo().add(current1);
-				blocks.get(blocks.size()-1).getRightLineInfo().add(current1);
+				blocks.get(blocks.size()-1).getRightLineInfo().add(current2);
 			}		
 		}
 		
@@ -110,15 +110,7 @@ public class CompareCode {
 	private void insertLastBlock(int start1, int start2, int last1, int last2){
 		if(start1 == last1 && start2 == last2) return;
 		
-		if(!hasPriorBlock(start1, start2, last1, last2)){
-			Model_Block block = new Model_Block();
-			block.getLeftLineInfo().add(last1);
-			block.getRightLineInfo().add(last2);
-			blocks.add(block);
-		}
-		else{
-			insertBlock(start1, start2, last1, last2);
-		}
+		insertBlock(start1, start2, last1+1, last2+1);
 		return;
 	}
 	public void foo(){
