@@ -95,7 +95,7 @@ public class CompareCode {
 			}
 			else{ 
 				blocks.get(blocks.size()-1).getLeftLineInfo().add(current1);
-				blocks.get(blocks.size()-1).getRightLineInfo().add(current1);
+				blocks.get(blocks.size()-1).getRightLineInfo().add(current2);
 			}		
 		}
 		

@@ -14,9 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
@@ -33,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 import javafx.scene.control.ListCell;
+
 public class ListViewLeftController implements Initializable {
 	/*TODO
 	 * FXML濡� TextArea吏쒓린
@@ -42,6 +41,9 @@ public class ListViewLeftController implements Initializable {
 	private Model_File file;
 	@FXML
 	private ListView<TextArea> listView_left;
+	
+	@FXML
+	private TextArea ta;
 	
 	private ObservableList<TextArea> data = FXCollections.observableArrayList();
 	
@@ -56,7 +58,7 @@ public class ListViewLeftController implements Initializable {
 		//ta.setPrefSize(ta.getParent().getScaleX(), ta.getParent().getScaleY());
 		
 		file = controller_file_IO.getLeftFile();
-		TextArea ta = new TextArea();
+		ta = new TextArea();
 		
 		try{
 			FXMLLoader loader = new FXMLLoader();
@@ -73,10 +75,6 @@ public class ListViewLeftController implements Initializable {
 		ta.setMaxHeight(file.getLines().size()*ta.getFont().getSize());
 		ta.setWrapText(true);
 		
-		ScrollBar scrollBarv = (ScrollBar)ta.lookup(".scroll-bar:vertical");
-		//scrollBarv.setOpacity(0.0);
-		//scrollBarv.setDisable(true)
-		
 		
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
@@ -89,7 +87,7 @@ public class ListViewLeftController implements Initializable {
 		data.clear();
 		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
-			TextArea ta = new TextArea();
+			ta = new TextArea();
 			ArrayList<Integer> index = blocks.get(i).getLeftLineInfo();
 			
 			try{
@@ -107,10 +105,7 @@ public class ListViewLeftController implements Initializable {
 			ta.setMaxHeight(Math.max(index.size(), blocks.get(i).getRightLineInfo().size())*ta.getFont().getSize());
 			ta.setWrapText(true);
 			if(blocks.get(i).isSame() == false){
-				ta.setStyle("-fx-background-color:red");
-				//ta.setStyle("-fx-text-color:red");
-				
-				//색칠
+				ta.setStyle("-fx-control-inner-background:yellow");
 			}
 			
 			
@@ -131,4 +126,11 @@ public class ListViewLeftController implements Initializable {
 	public ListView<TextArea> getListViewLeft(){
 		return this.listView_left;
 	}
+	
+	@FXML
+	public void onListViewLeftMouseClicked(){
+		int index = listView_left.getSelectionModel().getSelectedIndex();
+		System.out.println("BlockIdx : " + index);
+	}
+	
 }
