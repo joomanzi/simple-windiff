@@ -285,6 +285,7 @@
 }
 
 .listView .list-cell{
+	-fx-background-color : white;
 	-fx-padding : 0;
 	-fx-border-color : white;
 	-fx-border-width : 0;

@@ -70,14 +70,12 @@ public class ListViewRightController implements Initializable {
 		ta.setPrefHeight(file.getLines().size()*ta.getFont().getSize());
 		ta.setMaxHeight(file.getLines().size()*ta.getFont().getSize());
 		ta.setWrapText(true);
-		ScrollBar scrollBarv = (ScrollBar)ta.lookup(".scroll-bar:vertical");
 	
 		
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
         }
         
-		
         data.add(ta);
         listView_right.setItems(data);
 	}
@@ -102,10 +100,10 @@ public class ListViewRightController implements Initializable {
 			ta.setMinHeight(Math.max(index.size(), blocks.get(i).getLeftLineInfo().size())*ta.getFont().getSize());
 			ta.setMaxHeight(Math.max(index.size(), blocks.get(i).getLeftLineInfo().size())*ta.getFont().getSize());
 			ta.setPrefHeight(Math.max(index.size(), blocks.get(i).getLeftLineInfo().size())*ta.getFont().getSize());
+			
 			ta.setWrapText(true);
 			if(blocks.get(i).isSame() == false){
-				ta.setStyle("-fx-background-color:red");
-			//	ta.setStyle("-fx-text-color:red");
+				ta.setStyle("-fx-control-inner-background:yellow");
 				//색칠
 			}
 			
@@ -125,5 +123,11 @@ public class ListViewRightController implements Initializable {
 	} 
 	public ListView<TextArea> getListViewRight(){
 		return this.listView_right;
+	}
+	
+	@FXML
+	public void onListViewRightMouseClicked(){
+		int index = listView_right.getSelectionModel().getSelectedIndex();
+		System.out.println("BlockIdx : "+ index);
 	}
 }
