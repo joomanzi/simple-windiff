@@ -49,7 +49,7 @@ public class Model_File {
 		this.isCompare = isCompare;
 	}
 	public void setLinesLineByLine(String value){
-		line = new SimpleStringProperty(value+"\r\n");
+		line = new SimpleStringProperty(value);
 		lines.add(line);
 	}
 }

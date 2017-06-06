@@ -62,7 +62,7 @@ public class SplitPaneController implements Initializable {
 		
 		try {
 			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
-			listView_leftController.setDatas();
+			listView_leftController.showFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,7 +114,7 @@ public class SplitPaneController implements Initializable {
 		
 		try {
 			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
-			listView_rightController.setDatas();
+			listView_rightController.showFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

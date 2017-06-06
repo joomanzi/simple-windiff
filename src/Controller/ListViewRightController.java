@@ -9,12 +9,16 @@ import java.util.Set;
 import Model.Model_Block;
 import Model.Model_File;
 import View.MainFrame;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
@@ -42,110 +46,98 @@ public class ListViewRightController implements Initializable {
 	 * Model_File �씫�뼱�궡怨�, Model_Block �삎�깭濡� 蹂��솚, Model_Block �븯�굹�븯�굹 TextArea�뿉 �꽔
 	 */
 	private Controller_File_IO controller_file_IO;
-	private Model_File file;
-	
 	@FXML
-	private ListView<TextArea> listView_right;
-	private ObservableList<TextArea> data = FXCollections.observableArrayList();
+	private ListView<Model_Block> listView_right;
+	@FXML
+	private ObservableList<Model_Block> listItems = FXCollections.observableArrayList();
+	@FXML
+	private Model_File file;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//setDatas();
-
+		 listView_right.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
+	            @Override
+	            public ListCell<Model_Block> call(ListView<Model_Block> p) {
+	 
+	                ListCell<Model_Block> cell = new ListCell<Model_Block>() {
+	                    @Override
+	                    protected void updateItem(Model_Block t, boolean bln) {
+	                        super.updateItem(t, bln); 
+	                       
+	                        if (t != null) {
+	                        	int blankNum = t.getRightBlank();
+	                        	StringBuilder sb = new StringBuilder();
+	                        	if(!t.isModified()){
+		                        	for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
+		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
+		                        	}
+		                        	for(int j = 0 ; j < blankNum ; j++){
+		                        		sb.append("\n");
+		                        	}
+	                        	}else if(t.isModified() && t.getFlag()==2){
+	                        		for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
+		                        		sb.append(controller_file_IO.getLeftFile().getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
+		                        	}
+		                        	for(int j = 0 ; j < blankNum ; j++){
+		                        		sb.append("\n");
+		                        	}
+	                        	}else if(t.isModified() && t.getFlag()==1){
+	                        		for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
+		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
+		                        	}
+		                        	for(int j = 0 ; j < blankNum ; j++){
+		                        		sb.append("\n");
+		                        	}
+	                        	}
+	                        	this.setText(sb.toString());
+	                            
+	                        }
+	                    }
+	                };
+	                return cell;
+	            }
+		 });
+		 listView_right.setItems(listItems);
 	}
 	
-	public void setDatas(){
-		//ta.setPrefSize(ta.getParent().getScaleX(), ta.getParent().getScaleY());
-		
+	public void showFile(){
+		listItems.clear();
 		file = controller_file_IO.getRightFile();
-		TextArea ta = new TextArea();
+		listItems = controller_file_IO.getBlocks();
 		
-		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(ListViewRightController.class.getResource("/View/BlockTextArea.fxml"));
-			ta = (TextArea) loader.load();
-			
-		}catch(IOException e){
-			e.printStackTrace();
+		Model_Block initBlock;
+		if(listItems.isEmpty()){
+			initBlock = new Model_Block(null, file);
+			listItems.add(initBlock);
+		}else{
+			initBlock = listItems.get(0);
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			for (int i = 0 ; i < file.getLines().size() ; i++){
+				al.add(i);
+			}
+			initBlock.setRightLineInfo(al);
 		}
-		
-		ta.setMinHeight(file.getLines().size()*ta.getFont().getSize());
-		ta.setPrefHeight(file.getLines().size()*ta.getFont().getSize());
-		ta.setMaxHeight(file.getLines().size()*ta.getFont().getSize());
-		ta.setWrapText(true);
-		ta.setEditable(false);
-		
-        for(int i = 0 ; i < file.getLines().size(); i++){
-           	ta.appendText(file.getLines().get(i).getValue());
-        }
-        
-        data.add(ta);
-        listView_right.setItems(data);
+		for(int i = 0 ; i < file.getLines().size(); i++){
+	           	//listItems.add(file.getLines().get(i).getValue());
+	     }
+		 listView_right.setItems(listItems);
 	}
 	
 	public void showBlocks(){
-		data.clear();
+		//listItems.clear();
 		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
-			TextArea ta = new TextArea();
-			ArrayList<Integer> index = blocks.get(i).getRightLineInfo();
 
-			try{
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(ListViewRightController.class.getResource("/View/BlockTextArea.fxml"));
-				ta = (TextArea) loader.load();
-				
-			}catch(IOException e){
-				e.printStackTrace();
-			}
+			listItems.add(blocks.get(i));
 
-			//ta size
-			ta.setMinHeight(Math.max(index.size(), blocks.get(i).getLeftLineInfo().size())*ta.getFont().getSize());
-			ta.setMaxHeight(Math.max(index.size(), blocks.get(i).getLeftLineInfo().size())*ta.getFont().getSize());
-			ta.setPrefHeight(Math.max(index.size(), blocks.get(i).getLeftLineInfo().size())*ta.getFont().getSize());
-			
-			ta.setWrapText(true);
-			ta.setEditable(false);
-			if(blocks.get(i).isSame() == false){
-				ta.setStyle("-fx-control-inner-background:yellow");
-				//색칠
-			}
-			
-
-			for(int j = 0 ; j < index.size() ; j++){
-				ta.appendText(file.getLines().get(index.get(j)).getValue());
-			}
-			data.add(ta);
-			
-			
-			ta.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-				public void handle(final MouseEvent mouseEvent){
-					//System.out.println(mouseEvent.getTarget().getClass().getSimpleName());
-					//splitPaneController.setRightTextField(Integer.toString(i));
-					//mouseEvent.consume(); //없애는거
-					onListViewRightMouseClicked();
-					TextArea ta = (TextArea)event.get
-				}
-			});
-			
-			/*
-			AutoControl.setOnMouseClicked(new EventHandler<MouseEvent>(){
-				public void handle(MouseEvent event){
-					splitPaneController.setRightTextField(Integer.toString(i));
-				}
-			});
-			*/
-		
-			
-			
-			
         }
-        listView_right.setItems(data);
+		listView_right.autosize();
+        listView_right.setItems(listItems);
 	}
 	public void setControllerFileIO(Controller_File_IO controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 	} 
-	public ListView<TextArea> getListViewRight(){
+	public ListView<Model_Block> getListViewRight(){
 		return this.listView_right;
 	}
 	
@@ -153,9 +145,8 @@ public class ListViewRightController implements Initializable {
 	@FXML
 	public void onListViewRightMouseClicked(){
 		int index = listView_right.getSelectionModel().getSelectedIndex();
-		
-		System.out.println("Right" + index);
-		
+		System.out.println("BlockIdx : "+ index);
+		controller_file_IO.setSelectedBlockIndex(index);
 	}
 	
 }

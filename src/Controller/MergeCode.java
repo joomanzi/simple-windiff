@@ -31,4 +31,8 @@ public class MergeCode {
 		block.setRightBlank(block.getLeftBlank());
 		block.setisModified(true);
 	} 
+	
+	public Model_Block getModelBlock(){
+		return this.block;
+	}
 }
