@@ -150,6 +150,8 @@ public class ListViewLeftController implements Initializable {
 		fileIOController.setSelectedBlockIndex(index);
 		//listView_right.getSelectionModel().select(index);
 		
+		
+		
 	}
 	
 	

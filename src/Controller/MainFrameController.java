@@ -45,6 +45,8 @@ public class MainFrameController implements Initializable {
 		
 		fileIOController = new FileIOController();
 		split_text_frameController.setControllerFileIO(fileIOController);
+		split_text_frameController.setMainFrameController(this);
+		
 	}
 	
 	public void setCompare(String compare){
