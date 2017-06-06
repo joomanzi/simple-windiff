@@ -6,8 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.jws.soap.SOAPBinding.Use;
 
-import Controller.Controller_File_IO;
-import Model.Model_Block;
+import Controller.FileIOController;
 import View.MainFrame;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +18,7 @@ public class MainFrameController implements Initializable {
 
 	private MainFrame mainFrame;
 	private CompareCode compareCode;
-	private Controller_File_IO controller_file_IO;
+	private FileIOController fileIOController;
 	@FXML
 	private BorderPane border_main_frame;
 	@FXML
@@ -43,14 +42,13 @@ public class MainFrameController implements Initializable {
 		menuItem_lefttoright = null;
 		menuItem_righttoleft = null;
 		
-		controller_file_IO = new Controller_File_IO();
-		split_text_frameController.setControllerFileIO(controller_file_IO);
+		fileIOController = new FileIOController();
+		split_text_frameController.setControllerFileIO(fileIOController);
 	}
 	
 	@FXML
  	public void compareOnAction(){
- 		compareCode = new CompareCode(controller_file_IO);
- 		compareCode.foo();
+ 		compareCode = new CompareCode(fileIOController);
  		System.out.println("COMPARE!");
  		ListViewLeftController lc = split_text_frameController.getListViewLeftController();
  		ListViewRightController rc = split_text_frameController.getListViewRightController();
@@ -60,20 +58,13 @@ public class MainFrameController implements Initializable {
 	@FXML
 	public void lefttorightOnAction(){
 		System.out.println("Left To Right MERGE!");
-		System.out.println(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()).getLeftLineInfo().size());
-		MergeCode mc = new MergeCode(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()), 2);
-		
-		
-		controller_file_IO.getBlocks().set(controller_file_IO.getSelectedBlockIndex(), mc.getModelBlock());
+		MergeCode mc = new MergeCode(fileIOController, 2);
 	}
 	
 	@FXML
 	public void righttoleftOnAction(){
 		System.out.println("Right To Left MERGE!");
-		System.out.println(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()).getLeftLineInfo().size());
-		MergeCode mc = new MergeCode(controller_file_IO.getBlocks().get(controller_file_IO.getSelectedBlockIndex()), 1);
-		
-		controller_file_IO.getBlocks().set(controller_file_IO.getSelectedBlockIndex(), mc.getModelBlock());
+		MergeCode mc = new MergeCode(fileIOController, 1);
 	}	
 	
 	public void setMainFrame(MainFrame mainFrame){

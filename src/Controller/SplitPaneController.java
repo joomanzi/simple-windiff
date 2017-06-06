@@ -7,7 +7,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import Controller.Controller_File_IO;
+import Controller.FileIOController;
+import Model.Model_File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import javafx.stage.FileChooser;
 public class SplitPaneController implements Initializable {
 	private static int FILE_LEFT = 0;
 	private static int FILE_RIGHT = 1;
-	private Controller_File_IO controller_file_IO;
+	private FileIOController fileIOController;
 	
 	@FXML
 	private SplitPane split_text_frame;
@@ -61,7 +62,7 @@ public class SplitPaneController implements Initializable {
 		File file = filechooser.showOpenDialog(null);
 		
 		try {
-			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
+			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
 			listView_leftController.showFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -77,7 +78,8 @@ public class SplitPaneController implements Initializable {
 	}
 	
 	@FXML
- 	public void leftSaveOnAction(){
+ 	public void leftSaveOnAction() throws IOException{
+		this.fileIOController.fileSave(FILE_LEFT);
  		System.out.println("Left SAVE!");
 	}
 	
@@ -113,7 +115,7 @@ public class SplitPaneController implements Initializable {
 		File file = filechooser.showOpenDialog(null);
 		
 		try {
-			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
+			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
 			listView_rightController.showFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -141,10 +143,10 @@ public class SplitPaneController implements Initializable {
  		System.out.println("Right EDIT!");
 	}
 	
-	public void setControllerFileIO(Controller_File_IO controller_file_IO){
-		this.controller_file_IO = controller_file_IO;
-		listView_leftController.setControllerFileIO(controller_file_IO);
-		listView_rightController.setControllerFileIO(controller_file_IO);
+	public void setControllerFileIO(FileIOController fileIOController){
+		this.fileIOController = fileIOController;
+		listView_leftController.setControllerFileIO(fileIOController);
+		listView_rightController.setControllerFileIO(fileIOController);
 
 	}
 	

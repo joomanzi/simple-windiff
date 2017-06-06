@@ -1,16 +1,19 @@
 package Controller;
 
-import Model.Model_File;
 import Model.Model_Block;
 
 public class MergeCode {
-	Model_Block block;	
+	FileIOController fileIO;
 	int flag;
+	int blockIndex;
 	
-	MergeCode(Model_Block block, int flag){
-		this.block = block;
+	public MergeCode(FileIOController fileIO, int flag){
+		this.fileIO = fileIO;
 		this.flag = flag;
-		copy(flag);
+		this.blockIndex = fileIO.getSelectedBlockIndex();
+		this.copy(this.flag);
+		
+		this.fileIO.getBlocks().set(this.blockIndex, this.fileIO.getBlocks().get(this.blockIndex));
 	}
 	private void copy(int flag){
 		if(flag == 1) copyRightToleft();  
@@ -19,20 +22,16 @@ public class MergeCode {
 	}
 		
 	private void copyRightToleft(){
-		block.setFlag(flag);
-		block.setLeftLineInfo(block.getRightLineInfo());
-		block.setLeftBlank(block.getRightBlank());
-		block.setisModified(true);
+		this.fileIO.getBlocks().get(this.blockIndex).setFlag(flag);
+		this.fileIO.getBlocks().get(this.blockIndex).setLeftLineInfo(this.fileIO.getBlocks().get(this.blockIndex).getRightLineInfo());
+		this.fileIO.getBlocks().get(this.blockIndex).setLeftBlank(this.fileIO.getBlocks().get(this.blockIndex).getRightBlank());
+		this.fileIO.getBlocks().get(this.blockIndex).setisModified(true);
 	} 
 	
 	private void copyLeftToRight(){
-		block.setFlag(flag);
-		block.setRightLineInfo(block.getLeftLineInfo());
-		block.setRightBlank(block.getLeftBlank());
-		block.setisModified(true);
+		this.fileIO.getBlocks().get(this.blockIndex).setFlag(flag);
+		this.fileIO.getBlocks().get(this.blockIndex).setRightLineInfo(this.fileIO.getBlocks().get(this.blockIndex).getLeftLineInfo());
+		this.fileIO.getBlocks().get(this.blockIndex).setRightBlank(this.fileIO.getBlocks().get(this.blockIndex).getLeftBlank());
+		this.fileIO.getBlocks().get(this.blockIndex).setisModified(true);
 	} 
-	
-	public Model_Block getModelBlock(){
-		return this.block;
-	}
 }

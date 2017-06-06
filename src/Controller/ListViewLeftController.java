@@ -40,7 +40,13 @@ import javafx.util.Callback;
 import javafx.scene.control.ListCell;
 
 public class ListViewLeftController implements Initializable {
-	private Controller_File_IO controller_file_IO;
+	/*TODO
+	 * FXML濡� TextArea吏쒓린
+	 * Model_File �씫�뼱�궡怨�, Model_Block �삎�깭濡� 蹂��솚, Model_Block �븯�굹�븯�굹 TextArea�뿉 �꽔
+	 */
+	private FileIOController fileIOController;
+//	private Model_File file;
+
 	@FXML
 	private ListView<Model_Block> listView_left;
 	@FXML
@@ -64,25 +70,19 @@ public class ListViewLeftController implements Initializable {
                         	StringBuilder sb = new StringBuilder();
                         	if(!t.isModified()){
 	                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
-	                        		sb.append(file.getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
+	                        		sb.append(file.getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\t\n");
 	                        	}
 	                        	for(int j = 0 ; j < blankNum ; j++){
-	                        		sb.append("\n");
+	                        		sb.append("\t\n");
 	                        	}
                         	}else if(t.isModified() && t.getFlag()==1){
                         		System.out.println("when t is modified as right to left");
 	                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
-		                        	sb.append(controller_file_IO.getRightFile().getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
-		                       	}
-		                       	for(int j = 0 ; j < blankNum ; j++){
-		                       		sb.append("\n");
+		                        	sb.append(fileIOController.getRightFile().getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\t\n");
 		                       	}
                         	}else if(t.isModified() && t.getFlag()==2){
 	                        	for(int j = 0 ; j < t.getLeftLineInfo().size() ; j++){
 	                        		sb.append(file.getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
-	                        	}
-	                        	for(int j = 0 ; j < blankNum ; j++){
-	                        		sb.append("\n");
 	                        	}
                         	}
                         	this.setText(sb.toString());
@@ -96,8 +96,8 @@ public class ListViewLeftController implements Initializable {
 	}
 	
 	public void showFile(){
-		file = controller_file_IO.getLeftFile();
-		listItems = controller_file_IO.getBlocks();
+		file = fileIOController.getLeftFile();
+		listItems = fileIOController.getBlocks();
 		
 		Model_Block initBlock;
 		if(listItems.isEmpty()){
@@ -118,8 +118,7 @@ public class ListViewLeftController implements Initializable {
 		listView_left.setItems(listItems);
 	}
 	public void showBlocks(){
-		//listItems.clear();
-		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
+		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
 			listItems.add(blocks.get(i));
 		}
@@ -127,8 +126,8 @@ public class ListViewLeftController implements Initializable {
         listView_left.setItems(listItems);
 	}
 	
-	public void setControllerFileIO(Controller_File_IO controller_file_IO){
-		this.controller_file_IO = controller_file_IO;
+	public void setControllerFileIO(FileIOController fileIOController){
+		this.fileIOController = fileIOController;
 	}
 	public ListView<Model_Block> getListViewLeft(){
 		return this.listView_left;
@@ -140,7 +139,7 @@ public class ListViewLeftController implements Initializable {
 		int index = listView_left.getSelectionModel().getSelectedIndex();
 
 		System.out.println("BlockIdx : " + index);
-		controller_file_IO.setSelectedBlockIndex(index);
+		fileIOController.setSelectedBlockIndex(index);
 	}
 	
 	

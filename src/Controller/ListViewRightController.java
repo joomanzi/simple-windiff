@@ -45,7 +45,8 @@ public class ListViewRightController implements Initializable {
 	 * FXML濡� TextArea吏쒓린
 	 * Model_File �씫�뼱�궡怨�, Model_Block �삎�깭濡� 蹂��솚, Model_Block �븯�굹�븯�굹 TextArea�뿉 �꽔
 	 */
-	private Controller_File_IO controller_file_IO;
+
+	private FileIOController fileIOController;
 	@FXML
 	private ListView<Model_Block> listView_right;
 	@FXML
@@ -69,24 +70,18 @@ public class ListViewRightController implements Initializable {
 	                        	StringBuilder sb = new StringBuilder();
 	                        	if(!t.isModified()){
 		                        	for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
-		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
+		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\t\n");
 		                        	}
 		                        	for(int j = 0 ; j < blankNum ; j++){
-		                        		sb.append("\n");
+		                        		sb.append("\t\n");
 		                        	}
 	                        	}else if(t.isModified() && t.getFlag()==2){
 	                        		for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
-		                        		sb.append(controller_file_IO.getLeftFile().getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
-		                        	}
-		                        	for(int j = 0 ; j < blankNum ; j++){
-		                        		sb.append("\n");
+		                        		sb.append(fileIOController.getLeftFile().getLines().get((t.getRightLineInfo().get(j))).getValue()+"\t\n");
 		                        	}
 	                        	}else if(t.isModified() && t.getFlag()==1){
 	                        		for(int j = 0 ; j < t.getRightLineInfo().size() ; j++){
-		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\n");
-		                        	}
-		                        	for(int j = 0 ; j < blankNum ; j++){
-		                        		sb.append("\n");
+		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\t\n");
 		                        	}
 	                        	}
 	                        	this.setText(sb.toString());
@@ -99,11 +94,10 @@ public class ListViewRightController implements Initializable {
 		 });
 		 listView_right.setItems(listItems);
 	}
-	
 	public void showFile(){
 		listItems.clear();
-		file = controller_file_IO.getRightFile();
-		listItems = controller_file_IO.getBlocks();
+		file = fileIOController.getRightFile();
+		listItems = fileIOController.getBlocks();
 		
 		Model_Block initBlock;
 		if(listItems.isEmpty()){
@@ -124,8 +118,7 @@ public class ListViewRightController implements Initializable {
 	}
 	
 	public void showBlocks(){
-		//listItems.clear();
-		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
+		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
 
 			listItems.add(blocks.get(i));
@@ -134,8 +127,8 @@ public class ListViewRightController implements Initializable {
 		listView_right.autosize();
         listView_right.setItems(listItems);
 	}
-	public void setControllerFileIO(Controller_File_IO controller_file_IO){
-		this.controller_file_IO = controller_file_IO;
+	public void setControllerFileIO(FileIOController fileIOController){
+		this.fileIOController = fileIOController;
 	} 
 	public ListView<Model_Block> getListViewRight(){
 		return this.listView_right;
@@ -146,7 +139,7 @@ public class ListViewRightController implements Initializable {
 	public void onListViewRightMouseClicked(){
 		int index = listView_right.getSelectionModel().getSelectedIndex();
 		System.out.println("BlockIdx : "+ index);
-		controller_file_IO.setSelectedBlockIndex(index);
+		fileIOController.setSelectedBlockIndex(index);
 	}
 	
 }

@@ -8,7 +8,7 @@ public class Model_Block {
 	private ArrayList<Integer> rightLineInfo;
 	private int leftBlank;
 	private int rightBlank;
-	private int flag; //flag==1 getData From Left, flag==2 getDataFromright flag==0 getDataFromThis
+	private int flag; 		//flag==1 getData From Left, flag==2 getDataFromright flag==0 getDataFromThis
 	private boolean modified;
 	private boolean isSame;
 		
@@ -36,14 +36,14 @@ public class Model_Block {
 				all.add(i);
 			}
 		}catch (NullPointerException e){
-			e.printStackTrace();
+			System.out.println("Right only ");
 		}
 		try{
 			for (int i = 0 ; i < fileright.getLines().size() ; i++){
 				alr.add(i);
 			}
 		}catch (NullPointerException e){
-			e.printStackTrace();
+			System.out.println("Left only ");
 		}
 		setLeftLineInfo(all);
 		setRightLineInfo(alr);

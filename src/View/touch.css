@@ -286,6 +286,9 @@
 .list-cell:empty {
 	-fx-opacity: 0;
 }
+.listView .list-cell {
+	-fx-padding : 1px;
+}
 
 .listView .list-cell {
 	-fx-padding : 1px;
