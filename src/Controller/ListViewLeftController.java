@@ -117,6 +117,7 @@ public class ListViewLeftController implements Initializable {
 			}
 		listView_left.setItems(listItems);
 	}
+	
 	public void showBlocks(){
 		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
