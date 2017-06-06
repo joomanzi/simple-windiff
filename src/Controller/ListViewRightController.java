@@ -11,6 +11,7 @@ import Model.Model_File;
 import View.MainFrame;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,11 +27,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.scene.control.ListCell;
 public class ListViewRightController implements Initializable {
@@ -40,15 +43,15 @@ public class ListViewRightController implements Initializable {
 	 */
 	private Controller_File_IO controller_file_IO;
 	private Model_File file;
+	
 	@FXML
 	private ListView<TextArea> listView_right;
-	
 	private ObservableList<TextArea> data = FXCollections.observableArrayList();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//setDatas();
-		
+
 	}
 	
 	public void setDatas(){
@@ -70,7 +73,7 @@ public class ListViewRightController implements Initializable {
 		ta.setPrefHeight(file.getLines().size()*ta.getFont().getSize());
 		ta.setMaxHeight(file.getLines().size()*ta.getFont().getSize());
 		ta.setWrapText(true);
-	
+		ta.setEditable(false);
 		
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
@@ -102,16 +105,37 @@ public class ListViewRightController implements Initializable {
 			ta.setPrefHeight(Math.max(index.size(), blocks.get(i).getLeftLineInfo().size())*ta.getFont().getSize());
 			
 			ta.setWrapText(true);
+			ta.setEditable(false);
 			if(blocks.get(i).isSame() == false){
 				ta.setStyle("-fx-control-inner-background:yellow");
 				//색칠
 			}
 			
-			
+
 			for(int j = 0 ; j < index.size() ; j++){
 				ta.appendText(file.getLines().get(index.get(j)).getValue());
 			}
 			data.add(ta);
+			
+			
+			ta.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+				public void handle(final MouseEvent mouseEvent){
+					//System.out.println(mouseEvent.getTarget().getClass().getSimpleName());
+					//splitPaneController.setRightTextField(Integer.toString(i));
+					//mouseEvent.consume(); //없애는거
+					onListViewRightMouseClicked();
+					TextArea ta = (TextArea)event.get
+				}
+			});
+			
+			/*
+			AutoControl.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent event){
+					splitPaneController.setRightTextField(Integer.toString(i));
+				}
+			});
+			*/
+		
 			
 			
 			
@@ -125,9 +149,13 @@ public class ListViewRightController implements Initializable {
 		return this.listView_right;
 	}
 	
+	
 	@FXML
 	public void onListViewRightMouseClicked(){
 		int index = listView_right.getSelectionModel().getSelectedIndex();
-		System.out.println("BlockIdx : "+ index);
+		
+		System.out.println("Right" + index);
+		
 	}
+	
 }

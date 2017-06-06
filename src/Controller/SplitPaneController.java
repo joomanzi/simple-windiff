@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Controller.Controller_File_IO;
-import Model.Model_File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,8 +35,7 @@ public class SplitPaneController implements Initializable {
 	@FXML
 	private MenuItem menuItem_left_load, menuItem_left_save, menuItem_left_saveas, menuItem_left_close, menuItem_left_edit,
 					menuItem_right_load, menuItem_right_save, menuItem_right_saveas, menuItem_right_close, menuItem_right_edit;
-	@FXML
-	private TextField textField_left, textField_right;
+	
 	@FXML
 	private Parent listView_left;
 	@FXML
@@ -51,9 +49,8 @@ public class SplitPaneController implements Initializable {
 		menuBar_left = null; menuBar_right = null;
 		menu_left_file = null; menu_left_edit = null; menu_right_file = null; menu_right_edit = null;
 		menuItem_left_load = null; menuItem_left_save = null; menuItem_left_saveas = null; menuItem_left_close = null; menuItem_left_edit = null;
-		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
-		textField_left = null; textField_right = null;
-	
+		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;	
+		
 		//textArea_left.setDisable(true);  //占싣울옙 占싫븝옙占쏙옙 -> 占쏙옙占쏙옙占쏙옙 load占싹몌옙 false占쏙옙 占쌕뀐옙途
 	}
 	
@@ -148,7 +145,7 @@ public class SplitPaneController implements Initializable {
 		this.controller_file_IO = controller_file_IO;
 		listView_leftController.setControllerFileIO(controller_file_IO);
 		listView_rightController.setControllerFileIO(controller_file_IO);
-		
+
 	}
 	
 	public ListViewLeftController getListViewLeftController(){
@@ -161,6 +158,7 @@ public class SplitPaneController implements Initializable {
 	public void foo(String foo) {
 	       System.out.println(foo);
 	    }
+
 	/*FileChooser*/
 	FileChooser myFileChooser(String name){
 		FileChooser fileChooser = new FileChooser();
@@ -171,6 +169,8 @@ public class SplitPaneController implements Initializable {
 				);
 		return fileChooser;
 	}
+	
+	
 
 	
 

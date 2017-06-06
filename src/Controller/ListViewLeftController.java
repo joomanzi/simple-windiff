@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+
 import Model.Model_Block;
 import Model.Model_File;
 import View.MainFrame;
@@ -74,7 +75,7 @@ public class ListViewLeftController implements Initializable {
 		ta.setPrefHeight(file.getLines().size()*ta.getFont().getSize());
 		ta.setMaxHeight(file.getLines().size()*ta.getFont().getSize());
 		ta.setWrapText(true);
-		
+		ta.setEditable(false);
 		
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
@@ -104,6 +105,7 @@ public class ListViewLeftController implements Initializable {
 			ta.setMinHeight(Math.max(index.size(), blocks.get(i).getRightLineInfo().size())*ta.getFont().getSize());
 			ta.setMaxHeight(Math.max(index.size(), blocks.get(i).getRightLineInfo().size())*ta.getFont().getSize());
 			ta.setWrapText(true);
+			ta.setEditable(false);
 			if(blocks.get(i).isSame() == false){
 				ta.setStyle("-fx-control-inner-background:yellow");
 			}
@@ -127,10 +129,15 @@ public class ListViewLeftController implements Initializable {
 		return this.listView_left;
 	}
 	
+	
+	
 	@FXML
 	public void onListViewLeftMouseClicked(){
 		int index = listView_left.getSelectionModel().getSelectedIndex();
-		System.out.println("BlockIdx : " + index);
+		System.out.println("Left " + index);
 	}
+	
+	
+	
 	
 }

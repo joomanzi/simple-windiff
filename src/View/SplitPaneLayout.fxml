@@ -4,7 +4,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -35,9 +34,6 @@
                <center>
                   <fx:include fx:id="listView_left" source="ListViewLeft.fxml" />
                </center>
-               <bottom>
-                  <TextField fx:id="textField_left"  BorderPane.alignment="CENTER" />
-               </bottom>
             </BorderPane>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" stylesheets="@touch.css">
@@ -46,9 +42,6 @@
                <center>
                   <fx:include fx:id="listView_right" source="ListViewRight.fxml" />
                </center>
-               <bottom>
-                  <TextField fx:id="textField_right" BorderPane.alignment="CENTER" />
-               </bottom>
                <top>
                   <MenuBar fx:id="menuBar_right" BorderPane.alignment="CENTER">
                      <menus>
