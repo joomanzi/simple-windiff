@@ -67,15 +67,7 @@ public class ListViewLeftController implements Initializable {
                 
                     @Override
                     protected void updateItem(Model_Block t, boolean empty) {
-                        super.updateItem(t, empty); 
-                        
-                        if (empty || t == null) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(t.toString());
-                        }
-                        
+                        super.updateItem(t, empty);
                         if (t != null) {
                         	int blankNum = t.getLeftBlank();
                         	StringBuilder sb = new StringBuilder();
@@ -97,9 +89,10 @@ public class ListViewLeftController implements Initializable {
 	                        	}
                         	}
                         	if(!t.isSame()&&fileIOController.getBlocks().size()>1){
-                         		this.setStyle("-fx-background-color : yellow");
+                         		this.getStyleClass().add("diff-cell");
                          	}
                         	this.setText(sb.toString());
+                 
                         }
                     }
                 };

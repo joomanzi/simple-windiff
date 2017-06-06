@@ -56,22 +56,7 @@ public class ListViewRightController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		listView_right.setEditable(true);
-		listView_right.setOnEditCommit(new EventHandler<ListView.EditEvent<Model_Block>>() {
-			@Override
-			public void handle(ListView.EditEvent<Model_Block> t) {
-				listView_right.getItems().set(t.getIndex(), t.getNewValue());
-				System.out.println("setOnEditCommit");
-			}
-						
-		});
-
-		listView_right.setOnEditCancel(new EventHandler<ListView.EditEvent<Model_Block>>() {
-			@Override
-			public void handle(ListView.EditEvent<Model_Block> t) {
-				System.out.println("setOnEditCancel");
-			}
-		});
+		
 		listView_right.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
 	            @Override
 	            public ListCell<Model_Block> call(ListView<Model_Block> p) {
@@ -101,7 +86,7 @@ public class ListViewRightController implements Initializable {
 		                        	}
 	                        	}
 	                        	if(!t.isSame()&&fileIOController.getBlocks().size()>1){
-	                         		this.setStyle("-fx-background-color : yellow");
+	                        		this.getStyleClass().add("diff-cell");
 	                         	}
 	                        	this.setText(sb.toString());   
 	                        }

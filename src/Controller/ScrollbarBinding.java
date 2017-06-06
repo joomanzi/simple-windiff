@@ -95,6 +95,7 @@ public class ScrollbarBinding {
       	           public void changed(ObservableValue<? extends Number> observable,
       	                                    Number oldVal , Number newVal) {
       	        	   lv1.getSelectionModel().clearAndSelect(newVal.intValue());
+      	        	   
       	           }
       	      }
       	);
