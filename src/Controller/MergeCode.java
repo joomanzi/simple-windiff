@@ -1,26 +1,19 @@
 package Controller;
 
+import Model.Model_Block;
+
 public class MergeCode {
-//	Model_Block block;	
 	FileIOController fileIO;
 	int flag;
 	int blockIndex;
 	
-	/*
-	MergeCode(Model_Block block, int flag){
-		this.block = block;
-		this.flag = flag;
-		copy(flag);
-	}
-	*/
-	
-	public MergeCode(FileIOController fileIO, int blockIndex, int flag){
+	public MergeCode(FileIOController fileIO, int flag){
 		this.fileIO = fileIO;
 		this.flag = flag;
-		this.blockIndex = blockIndex;
+		this.blockIndex = fileIO.getSelectedBlockIndex();
 		this.copy(this.flag);
 		
-		
+		this.fileIO.getBlocks().set(this.blockIndex, this.fileIO.getBlocks().get(this.blockIndex));
 	}
 	private void copy(int flag){
 		if(flag == 1) copyRightToleft();  

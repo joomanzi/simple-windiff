@@ -23,6 +23,9 @@ public class FileIOController {
 	private ObservableList<Model_Block> blocks = null;
 
 	private Scanner in;
+
+	private int selectedBlockIndex;
+	
 	public Model_File getLeftFile() {return leftFile;}
 	public void setLeftFile(Model_File leftFile) {this.leftFile = leftFile;}
 	public Model_File getRightFile() {return rightFile;}
@@ -37,7 +40,13 @@ public class FileIOController {
 	public void newBufferedWriter(String fileName) throws IOException{this.bufferedWriter = new BufferedWriter(new FileWriter(fileName));}
 	public Scanner getIn() {return in;}
 	public void setIn(Scanner in) {this.in = in;}
+
 	public FileIOController(){ blocks = FXCollections.observableArrayList(); }
+
+	
+	public void setSelectedBlockIndex(int selectedBlockIndex){ this.selectedBlockIndex = selectedBlockIndex; }
+	
+	public int getSelectedBlockIndex(){ return this.selectedBlockIndex; }
 	
 	public void fileLoad(String fileName, int leftOrRight) throws IOException {
 		

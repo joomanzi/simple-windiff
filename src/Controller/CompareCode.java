@@ -29,6 +29,7 @@ public class CompareCode {
 		this.fileIO.getRightFile().setIsCompare(true); // file2 is compared
 		
 		LCS = new LCSalgorithms(file1Lines, file2Lines); //do LCS algorithms
+		fileIO.getBlocks().clear();
 		createBlock();
 	}
 	
@@ -112,16 +113,8 @@ public class CompareCode {
 	private void insertLastBlock(int start1, int start2, int last1, int last2){
 		if(start1 == last1 && start2 == last2) return;
 		
-/*		if(!hasPriorBlock(start1, start2, last1, last2)){
-			Model_Block block = new Model_Block();
-			block.getLeftLineInfo().add(last1);
-			block.getRightLineInfo().add(last2);
-			blocks.add(block);
-		}
-		else{*/
-			insertBlock(start1, start2, last1+1, last2+1);
-/*		}
-		return;*/
+		insertBlock(start1, start2, last1+1, last2+1);
+		return;
 	}
 	public void foo(){
 		System.out.println("foo");

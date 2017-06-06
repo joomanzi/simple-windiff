@@ -18,7 +18,7 @@ public class MainFrameController implements Initializable {
 
 	private MainFrame mainFrame;
 	private CompareCode compareCode;
-	private FileIOController controller_file_IO;
+	private FileIOController fileIOController;
 	@FXML
 	private BorderPane border_main_frame;
 	@FXML
@@ -42,30 +42,29 @@ public class MainFrameController implements Initializable {
 		menuItem_lefttoright = null;
 		menuItem_righttoleft = null;
 		
-		controller_file_IO = new FileIOController();
-		split_text_frameController.setControllerFileIO(controller_file_IO);
+		fileIOController = new FileIOController();
+		split_text_frameController.setControllerFileIO(fileIOController);
 	}
 	
 	@FXML
  	public void compareOnAction(){
- 		compareCode = new CompareCode(controller_file_IO);
- 		compareCode.foo();
+ 		compareCode = new CompareCode(fileIOController);
  		System.out.println("COMPARE!");
  		ListViewLeftController lc = split_text_frameController.getListViewLeftController();
  		ListViewRightController rc = split_text_frameController.getListViewRightController();
  		ScrollbarBinding.bind(lc.getListViewLeft(), rc.getListViewRight());
- 		lc.showBlocks();
- 		rc.showBlocks();
  	}
 	
 	@FXML
 	public void lefttorightOnAction(){
 		System.out.println("Left To Right MERGE!");
+		MergeCode mc = new MergeCode(fileIOController, 2);
 	}
 	
 	@FXML
 	public void righttoleftOnAction(){
 		System.out.println("Right To Left MERGE!");
+		MergeCode mc = new MergeCode(fileIOController, 1);
 	}	
 	
 	public void setMainFrame(MainFrame mainFrame){

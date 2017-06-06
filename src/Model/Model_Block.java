@@ -21,6 +21,33 @@ public class Model_Block {
 		modified = false;
 		isSame = false;
 	}
+	public Model_Block(Model_File fileleft, Model_File fileright){
+		leftLineInfo = new ArrayList<Integer>();
+		rightLineInfo = new ArrayList<Integer>();
+		leftBlank = 0;
+		rightBlank = 0;
+		flag = 0;
+		modified = false;
+		isSame = false;
+		ArrayList<Integer> all = new ArrayList<Integer>();
+		ArrayList<Integer> alr = new ArrayList<Integer>();
+		try{
+			for (int i = 0 ; i < fileleft.getLines().size() ; i++){
+				all.add(i);
+			}
+		}catch (NullPointerException e){
+			e.printStackTrace();
+		}
+		try{
+			for (int i = 0 ; i < fileright.getLines().size() ; i++){
+				alr.add(i);
+			}
+		}catch (NullPointerException e){
+			e.printStackTrace();
+		}
+		setLeftLineInfo(all);
+		setRightLineInfo(alr);
+	}
 	public int getFlag() {
 		return flag;
 	}

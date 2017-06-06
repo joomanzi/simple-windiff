@@ -65,7 +65,7 @@ public class SplitPaneController implements Initializable {
 		
 		try {
 			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
-			listView_leftController.setDatas();
+			listView_leftController.showFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,7 +118,7 @@ public class SplitPaneController implements Initializable {
 		
 		try {
 			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
-			listView_rightController.setDatas();
+			listView_rightController.showFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,10 +145,10 @@ public class SplitPaneController implements Initializable {
  		System.out.println("Right EDIT!");
 	}
 	
-	public void setControllerFileIO(FileIOController controller_file_IO){
-		this.fileIOController = controller_file_IO;
-		listView_leftController.setControllerFileIO(controller_file_IO);
-		listView_rightController.setControllerFileIO(controller_file_IO);
+	public void setControllerFileIO(FileIOController fileIOController){
+		this.fileIOController = fileIOController;
+		listView_leftController.setControllerFileIO(fileIOController);
+		listView_rightController.setControllerFileIO(fileIOController);
 		
 	}
 	
@@ -158,6 +158,7 @@ public class SplitPaneController implements Initializable {
 	public ListViewRightController getListViewRightController(){
 		return this.listView_rightController;
 	}
+	
 	public void foo(String foo) {
 	       System.out.println(foo);
 	    }
@@ -171,4 +172,8 @@ public class SplitPaneController implements Initializable {
 				);
 		return fileChooser;
 	}
+
+	
+
+
 }
