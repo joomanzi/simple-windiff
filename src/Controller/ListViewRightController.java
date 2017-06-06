@@ -48,6 +48,8 @@ public class ListViewRightController implements Initializable {
 	 */
 
 	private FileIOController fileIOController;
+	private MainFrameController mainFrameController;
+	
 	@FXML
 	private ListView<Model_Block> listView_right;
 	@FXML
@@ -133,6 +135,9 @@ public class ListViewRightController implements Initializable {
 	public void setControllerFileIO(FileIOController fileIOController){
 		this.fileIOController = fileIOController;
 	} 
+	public void setMainFrameController(MainFrameController mainFrameController){
+		this.mainFrameController = mainFrameController;
+	}
 	public ListView<Model_Block> getListViewRight(){
 		return this.listView_right;
 	}
@@ -143,6 +148,11 @@ public class ListViewRightController implements Initializable {
 		int index = listView_right.getSelectionModel().getSelectedIndex();
 		System.out.println("BlockIdx : "+ index);
 		fileIOController.setSelectedBlockIndex(index);
+		
+		if(!listView_right.getItems().get(index).isSame()){
+			mainFrameController.setMerge("true");
+		}
+		else mainFrameController.setMerge("false");
 	}
 	
 }
