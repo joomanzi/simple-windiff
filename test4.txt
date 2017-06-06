@@ -1,9 +1,5 @@
-
-
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-
-
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -12,11 +8,8 @@ void generalization(float* input, float* temp, int size) {		//this function make
 
 	int i;
 
-
-
 	for (i = 0; i < size; i++) {								//the criteria is making all numbers in input array into 5 digit numbers.
 																//(4 digit integer and 1 digit real number which is more than 0 and less than 1)
-
 
 		if (input[i] == 1000) {									//1000 will be 1000.1
 
@@ -35,16 +28,12 @@ void generalization(float* input, float* temp, int size) {		//this function make
 			
 			temp[i] = (input[i] * 1000) + (input[i] * 100) + (input[i] * 10) + input[i] + (input[i] * 0.1);
 		}
-
-
 	}
 }
 
 void selectionSort(float* input, float* temp, int size) {	//this selection sorting algorithm is a proper algorithm for 'greedy approach'.
 
 	int i, j, minIndex, tp;
-
-
 
 	for (i = 0; i < size - 1; i++) {
 
@@ -58,12 +47,98 @@ void selectionSort(float* input, float* temp, int size) {	//this selection sorti
 		temp[minIndex] = temp[i];
 		temp[i] = tp;
 
-
-
 		tp = input[minIndex];
 		input[minIndex] = input[i];
 		input[i] = tp;
 	}
+}
+/*
+void insertionSort(float* input, float* temp, int size) {	//A general insertion sorting algorithm.
+															//If we want to make program faster, i think it will be good to use a this sorting algorithm.
+	int i, j;												//So I attached insertion sorting algorithm codes by comment.
+	float key[2];											//This program is satisfied with the time limit,
+															//whether using selection sorting algorithm or insertion sorting algorithm
+	for (i = 1; i < size; i++) {
+
+		key[0] = temp[i];
+		key[1] = input[i];
+
+		for (j = i - 1; j >= 0 && temp[j] > key[0]; j--) {
+
+			temp[j + 1] = temp[j];
+			input[j + 1] = input[j];
+		}
+
+		temp[j + 1] = key[0];
+		input[j + 1] = key[1];
+	}
+}
+*/
+
+char* LargestNumber(float* input, float* temp, int size) {	//this function will make a answer string by selecting the largest number of inputs.
+
+	char* answer;
+	char ch[5];
+	int i, j, max, count = 0;
+
+	generalization(input, temp, size);						//making numbers in input array to generalized number by the criteria.
+	answer = (char*)malloc(sizeof(char)*size * 4);
+
+//	insertionSort(input, temp, size);						//if we want faster program, use this function.
+	selectionSort(input, temp, size);						
+
+	for (i = size - 1; i >= 0; i--) {
+
+		sprintf(ch, "%d", (int)input[i]);
+
+		if (i == size - 1)
+			strcpy(answer, ch);								//at first, use strcpy to write a first number.
+		else
+			strcat(answer, ch);								//after that, use strcat to append numbers.
+
+	}
+
+	return answer;
+}
+
+int main(int argc, char* argv[]) {
+
+	float* input, *temp;
+	char* answer;
+	int size, index, i = 0;
+	FILE* file;
+	clock_t start, end;
+	
+	file = fopen(argv[1], "r");
+	fscanf(file, "%d", &size);
+
+	if (size > 100)
+		return 0;
+
+	input = (float*)malloc(sizeof(float)*size);
+	temp = (float*)malloc(sizeof(float)*size);
+
+	i = 0;
+
+	while (!feof(file) && i < size) {				//read txt file to store numbers in array
+		
+		fscanf(file, "%f", &input[i]);
+		i++;
+	}
+
+	start = clock();
+	answer = LargestNumber(input, temp, size);
+	end = clock();
+
+	printf("%s\n", answer);
+	printf("Running time = %lf s\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+
+	free(input);
+	free(temp);
+	fclose(file);
+
+	return 0;
+
 }
 /*
 void insertionSort(float* input, float* temp, int size) {	//A general insertion sorting algorithm.

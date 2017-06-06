@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.jws.soap.SOAPBinding.Use;
 
-import Controller.Controller_File_IO;
+import Controller.FileIOController;
 import View.MainFrame;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +18,7 @@ public class MainFrameController implements Initializable {
 
 	private MainFrame mainFrame;
 	private CompareCode compareCode;
-	private Controller_File_IO controller_file_IO;
+	private FileIOController controller_file_IO;
 	@FXML
 	private BorderPane border_main_frame;
 	@FXML
@@ -42,7 +42,7 @@ public class MainFrameController implements Initializable {
 		menuItem_lefttoright = null;
 		menuItem_righttoleft = null;
 		
-		controller_file_IO = new Controller_File_IO();
+		controller_file_IO = new FileIOController();
 		split_text_frameController.setControllerFileIO(controller_file_IO);
 	}
 	

@@ -1,8 +1,6 @@
 package Controller;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import Controller.Controller_File_IO;
+import Controller.FileIOController;
 import Model.Model_File;
 import Model.Model_Block;
 import javafx.beans.property.StringProperty;
@@ -11,23 +9,24 @@ import javafx.collections.ObservableList;
 
 
 public class CompareCode {
-	Model_File left;
-	Model_File right;
+	//Model_File left;
+	//Model_File right;
 	ObservableList<StringProperty> file1Lines;
 	ObservableList<StringProperty> file2Lines;
-	ObservableList<Model_Block> blocks;
-	//Controller_File_IO fileIO;
+	//ObservableList<Model_Block> blocks;
+	FileIOController fileIO;
 	LCSalgorithms LCS;
 	
 	
-	CompareCode(Controller_File_IO fileIO){
-		this.left = fileIO.getLeftFile(); // left
-		this.right = fileIO.getRightFile(); //FXCollections.observableArrayList();
-		this.blocks = fileIO.getBlocks(); //FXCollections.observableArrayList();
-		this.file1Lines = left.getLines();
-		this.file2Lines = right.getLines();
-		left.setIsCompare(true); //file1 is compared
-		right.setIsCompare(true); // file2 is compared
+	CompareCode(FileIOController fileIO){
+		this.fileIO = fileIO;
+		//this.fileIO. = fileIO.getLeftFile(); // left
+		//this.right = fileIO.getRightFile(); //FXCollections.observableArrayList();
+	//	this.blocks = this.fileIO.getBlocks(); //FXCollections.observableArrayList();
+		this.file1Lines = this.fileIO.getLeftFile().getLines();
+		this.file2Lines = this.fileIO.getRightFile().getLines();
+		this.fileIO.getLeftFile().setIsCompare(true); //file1 is compared
+		this.fileIO.getRightFile().setIsCompare(true); // file2 is compared
 		
 		LCS = new LCSalgorithms(file1Lines, file2Lines); //do LCS algorithms
 		createBlock();
@@ -50,7 +49,7 @@ public class CompareCode {
 			priorIndex2 = currentIndex2;
 		}
 		//insertLastblock
-		insertLastBlock(priorIndex1, priorIndex2, left.getLines().size()-1, right.getLines().size()-1);
+		insertLastBlock(priorIndex1, priorIndex2, this.file1Lines.size()-1, this.file2Lines.size()-1);
 	
 	}
 	private boolean hasPriorBlock(int prior1, int prior2, int current1, int current2){
@@ -60,6 +59,7 @@ public class CompareCode {
 	}
 	private void insertBlock(int prior1, int prior2, int current1, int current2){
 		int blockSize;
+		ObservableList<Model_Block> blocks = this.fileIO.getBlocks();
 		Model_Block block = new Model_Block();
 		insertLineInfo(block, prior1, current1, prior2,current2);
 		//insertLineInfo(block2, prior2, current2);
@@ -84,6 +84,8 @@ public class CompareCode {
 		}
 	}
 	private void insertCurrentBlock(int prior1, int prior2, int current1, int current2){
+		
+		ObservableList<Model_Block> blocks = this.fileIO.getBlocks();
 		Model_Block block = new Model_Block();
 		block.setisSame(true);
 		
@@ -95,7 +97,7 @@ public class CompareCode {
 			}
 			else{ 
 				blocks.get(blocks.size()-1).getLeftLineInfo().add(current1);
-				blocks.get(blocks.size()-1).getRightLineInfo().add(current1);
+				blocks.get(blocks.size()-1).getRightLineInfo().add(current2);
 			}		
 		}
 		
@@ -110,16 +112,16 @@ public class CompareCode {
 	private void insertLastBlock(int start1, int start2, int last1, int last2){
 		if(start1 == last1 && start2 == last2) return;
 		
-		if(!hasPriorBlock(start1, start2, last1, last2)){
+/*		if(!hasPriorBlock(start1, start2, last1, last2)){
 			Model_Block block = new Model_Block();
 			block.getLeftLineInfo().add(last1);
 			block.getRightLineInfo().add(last2);
 			blocks.add(block);
 		}
-		else{
-			insertBlock(start1, start2, last1, last2);
-		}
-		return;
+		else{*/
+			insertBlock(start1, start2, last1+1, last2+1);
+/*		}
+		return;*/
 	}
 	public void foo(){
 		System.out.println("foo");

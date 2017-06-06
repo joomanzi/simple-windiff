@@ -8,10 +8,10 @@ public class temp {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
-		Controller_File_IO[] c = new Controller_File_IO[4];
+		FileIOController[] c = new FileIOController[4];
 		
 		for(int i=0;i<4;i++)
-			c[i] = new Controller_File_IO();
+			c[i] = new FileIOController();
 		
 		c[0].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test.txt",0);
 		c[1].fileLoad("C:\\Users\\MINWOOK\\gitHub\\SimpleMergeSGJA\\test2.txt",1);

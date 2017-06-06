@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import Controller.Controller_File_IO;
+import Controller.FileIOController;
 import Model.Model_File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +22,7 @@ import javafx.stage.FileChooser;
 public class SplitPaneController implements Initializable {
 	private static int FILE_LEFT = 0;
 	private static int FILE_RIGHT = 1;
-	private Controller_File_IO controller_file_IO;
+	private FileIOController fileIOController;
 	
 	@FXML
 	private SplitPane split_text_frame;
@@ -54,7 +54,7 @@ public class SplitPaneController implements Initializable {
 		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
 		textField_left = null; textField_right = null;
 	
-		//textArea_left.setDisable(true);  //�ƿ� �Ⱥ��� -> ������ load�ϸ� false�� �ٲ�Բ
+		//textArea_left.setDisable(true);  //占싣울옙 占싫븝옙占쏙옙 -> 占쏙옙占쏙옙占쏙옙 load占싹몌옙 false占쏙옙 占쌕뀐옙途
 	}
 	
 	@FXML
@@ -64,23 +64,24 @@ public class SplitPaneController implements Initializable {
 		File file = filechooser.showOpenDialog(null);
 		
 		try {
-			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
+			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
 			listView_leftController.setDatas();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		//load�Ҷ� �ߺ��˻� flag���� �ʿ�
-		//load������ textArea disable true -> false��
-		//load������ edit button Ȱ��ȭ(���û���)
+		//load占쌀띰옙 占쌩븝옙占싯삼옙 flag占쏙옙占쏙옙 占십울옙
+		//load占쏙옙占쏙옙占쏙옙 textArea disable true -> false占쏙옙
+		//load占쏙옙占쏙옙占쏙옙 edit button 활占쏙옙화(占쏙옙占시삼옙占쏙옙)
 		
 		
  		System.out.println("Left LOAD!");
 	}
 	
 	@FXML
- 	public void leftSaveOnAction(){
+ 	public void leftSaveOnAction() throws IOException{
+		this.fileIOController.fileSave(FILE_LEFT);
  		System.out.println("Left SAVE!");
 	}
 	
@@ -93,7 +94,7 @@ public class SplitPaneController implements Initializable {
  	public void leftCloseOnAction(){
  		System.out.println("Left CLOSE!");
  		Alert alert = new Alert(AlertType.WARNING, 
-                "열려있는 파일이 없습니다.", 
+                "�뿴�젮�엳�뒗 �뙆�씪�씠 �뾾�뒿�땲�떎.", 
                 ButtonType.YES, ButtonType.NO);
 
  		Optional<ButtonType> result = alert.showAndWait();
@@ -116,7 +117,7 @@ public class SplitPaneController implements Initializable {
 		File file = filechooser.showOpenDialog(null);
 		
 		try {
-			controller_file_IO.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
+			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
 			listView_rightController.setDatas();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -144,8 +145,8 @@ public class SplitPaneController implements Initializable {
  		System.out.println("Right EDIT!");
 	}
 	
-	public void setControllerFileIO(Controller_File_IO controller_file_IO){
-		this.controller_file_IO = controller_file_IO;
+	public void setControllerFileIO(FileIOController controller_file_IO){
+		this.fileIOController = controller_file_IO;
 		listView_leftController.setControllerFileIO(controller_file_IO);
 		listView_rightController.setControllerFileIO(controller_file_IO);
 		

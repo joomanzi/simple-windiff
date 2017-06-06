@@ -34,11 +34,10 @@ import javafx.util.Callback;
 import javafx.scene.control.ListCell;
 public class ListViewRightController implements Initializable {
 	/*TODO
-	 * FXML로 TextArea짜기
-	 * Model_File 읽어내고, Model_Block 형태로 변환, Model_Block 하나하나 TextArea에 넣
+	 * FXML濡� TextArea吏쒓린
+	 * Model_File �씫�뼱�궡怨�, Model_Block �삎�깭濡� 蹂��솚, Model_Block �븯�굹�븯�굹 TextArea�뿉 �꽔
 	 */
-	private Controller_File_IO controller_file_IO;
-	private Model_File file;
+	private FileIOController controller_file_IO;
 	@FXML
 	private ListView<TextArea> listView_right;
 	
@@ -52,8 +51,7 @@ public class ListViewRightController implements Initializable {
 	
 	public void setDatas(){
 		//ta.setPrefSize(ta.getParent().getScaleX(), ta.getParent().getScaleY());
-		
-		file = controller_file_IO.getRightFile();
+		Model_File file = controller_file_IO.getRightFile();
 		TextArea ta = new TextArea();
         for(int i = 0 ; i < file.getLines().size(); i++){
            	ta.appendText(file.getLines().get(i).getValue());
@@ -63,6 +61,7 @@ public class ListViewRightController implements Initializable {
 	}
 	
 	public void showBlocks(){
+		Model_File file = controller_file_IO.getRightFile();
 		data.clear();
 		ObservableList<Model_Block> blocks = controller_file_IO.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
@@ -75,7 +74,7 @@ public class ListViewRightController implements Initializable {
         }
         listView_right.setItems(data);
 	}
-	public void setControllerFileIO(Controller_File_IO controller_file_IO){
+	public void setControllerFileIO(FileIOController controller_file_IO){
 		this.controller_file_IO = controller_file_IO;
 	} 
 	public ListView<TextArea> getListViewRight(){

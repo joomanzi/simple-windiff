@@ -1,12 +1,12 @@
 package Controller;
 
-import Controller.Controller_File_IO;
+import Controller.FileIOController;
 
 public class EditController {
 
 	private boolean editFlag = false;
 	
-	public EditController(Controller_File_IO controller_File_IO){}
+	public EditController(FileIOController controller_File_IO){}
 	
 	public void stateChanger(){
 		
