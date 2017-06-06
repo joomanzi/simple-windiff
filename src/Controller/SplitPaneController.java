@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Controller.FileIOController;
+import View.EditingWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -123,9 +124,15 @@ public class SplitPaneController implements Initializable {
  	 		checkCompareButton();
  			fileIOController.getBlocks().clear();
 			fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
-			fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
 			listView_leftController.showFile();
-			listView_rightController.showFile();
+			try{
+				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
+				listView_rightController.showFile();
+			}catch (NullPointerException e){
+				System.out.println("Edit when no right file");
+			}
+			
+			EditingWindow ew = new EditingWindow(fileIOController.getLeftFile());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -206,6 +213,9 @@ public class SplitPaneController implements Initializable {
 	 		checkCompareButton();
 			listView_leftController.showFile();
 			listView_rightController.showFile();
+			
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
