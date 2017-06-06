@@ -85,6 +85,9 @@ public class ListViewLeftController implements Initializable {
 	                        		sb.append(file.getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
 	                        	}
                         	}
+                        	if(!t.isSame()&&fileIOController.getBlocks().size()>1){
+                         		this.setStyle("-fx-background-color : yellow");
+                         	}
                         	this.setText(sb.toString());
                         }
                     }

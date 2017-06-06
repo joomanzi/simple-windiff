@@ -240,7 +240,7 @@
     -fx-background-color: -fx-shadow-highlight-color, -fx-text-box-border, -fx-control-inner-background;
 }
 
-
+/*
 .text-area:focused:external-focus {
     -fx-background-color: -fx-focus-color, -fx-text-box-border, -fx-control-inner-background;
     -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
@@ -255,7 +255,7 @@
     -fx-background-color: -fx-shadow-highlight-color, -fx-text-box-border, -fx-control-inner-background;
     -fx-prompt-text-fill: transparent;
 }
-
+*/
 
 .combo-box:focused:external-focus {
     -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
@@ -300,9 +300,9 @@
     -fx-text-fill: white;
 }*/
 
-
+/*
 .list-cell:filled:hover {
     -fx-background-color: #0093ff;
     -fx-text-fill: white;
-}
+}*/
 
