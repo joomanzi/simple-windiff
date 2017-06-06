@@ -61,10 +61,8 @@ public class SplitPaneController implements Initializable {
 	
 	@FXML
  	public void leftLoadOnAction(){
-		
 		FileChooser filechooser = myFileChooser("Left FileChooser");
 		File file = filechooser.showOpenDialog(null);
-		
 		try {
 			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
 			listView_leftController.showFile();
@@ -74,13 +72,6 @@ public class SplitPaneController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		//load占쌀띰옙 占쌩븝옙占싯삼옙 flag占쏙옙占쏙옙 占십울옙
-		//load占쏙옙占쏙옙占쏙옙 textArea disable true -> false占쏙옙
-		//load占쏙옙占쏙옙占쏙옙 edit button 활占쏙옙화(占쏙옙占시삼옙占쏙옙)
-		
-		
  		System.out.println("Left LOAD!");
 	}
 	

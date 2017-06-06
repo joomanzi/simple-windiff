@@ -115,12 +115,8 @@ public class ListViewLeftController implements Initializable {
 			initBlock = new Model_Block(file, null);
 			listItems.add(initBlock);
 		}else{
-			initBlock = listItems.get(0);
-			ArrayList<Integer> al = new ArrayList<Integer>();
-			for (int i = 0 ; i < file.getLines().size() ; i++){
-				al.add(i);
-			}
-			initBlock.setLeftLineInfo(al);
+			initBlock = new Model_Block(file, fileIOController.getRightFile());
+			listItems.set(0, initBlock);
 		}
 		
 		for(int i = 0 ; i < initBlock.getLeftLineInfo().size() ; i++){

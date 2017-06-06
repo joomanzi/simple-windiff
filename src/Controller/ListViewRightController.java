@@ -107,12 +107,8 @@ public class ListViewRightController implements Initializable {
 			initBlock = new Model_Block(null, file);
 			listItems.add(initBlock);
 		}else{
-			initBlock = listItems.get(0);
-			ArrayList<Integer> al = new ArrayList<Integer>();
-			for (int i = 0 ; i < file.getLines().size() ; i++){
-				al.add(i);
-			}
-			initBlock.setRightLineInfo(al);
+			initBlock = new Model_Block(fileIOController.getLeftFile(), file);
+			listItems.set(0, initBlock);
 		}
 		for(int i = 0 ; i < file.getLines().size(); i++){
 	           	//listItems.add(file.getLines().get(i).getValue());
