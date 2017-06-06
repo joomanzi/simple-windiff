@@ -93,15 +93,26 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void leftCloseOnAction(){
  		System.out.println("Left CLOSE!");
- 		Alert alert = new Alert(AlertType.WARNING, 
+ 		if(fileIOController.getLeftFile()!=null){
+ 			fileIOController.getBlocks().clear();
+ 			try {
+				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			listView_rightController.showFile();
+ 		}else{
+ 			Alert alert = new Alert(AlertType.WARNING, 
  				"No file to close", 
                 ButtonType.YES, ButtonType.NO);
 
- 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.YES){
-			alert.close();
-		} else {
-			alert.close();
+ 			Optional<ButtonType> result = alert.showAndWait();
+ 			if (result.get() == ButtonType.YES){
+ 				alert.close();
+			} else {
+				alert.close();
+			}
 		}
 	}
 	
@@ -148,15 +159,26 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void rightCloseOnAction(){
 		System.out.println("Right CLOSE!");
- 		Alert alert = new Alert(AlertType.WARNING, 
-                "No file to close", 
+		if(fileIOController.getLeftFile()!=null){
+ 			fileIOController.getBlocks().clear();
+ 			try {
+				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			listView_rightController.showFile();
+ 		}else{
+ 			Alert alert = new Alert(AlertType.WARNING, 
+ 				"No file to close", 
                 ButtonType.YES, ButtonType.NO);
 
- 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.YES){
-			alert.close();
-		} else {
-			alert.close();
+ 			Optional<ButtonType> result = alert.showAndWait();
+ 			if (result.get() == ButtonType.YES){
+ 				alert.close();
+			} else {
+				alert.close();
+			}
 		}
 	}
 	
