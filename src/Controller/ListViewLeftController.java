@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -86,8 +87,10 @@ public class ListViewLeftController implements Initializable {
 	                        	}
                         	}
                         	if(!t.isSame()&&fileIOController.getBlocks().size()>1){
+                       		
                          		this.setStyle("-fx-background-color : yellow");
-                         	}
+ 	
+                        	}
                         	this.setText(sb.toString());
                         }
                     }
@@ -96,6 +99,7 @@ public class ListViewLeftController implements Initializable {
             }
         });
         listView_left.setItems(listItems);
+        
 	}
 	
 	public void showFile(){
@@ -144,6 +148,8 @@ public class ListViewLeftController implements Initializable {
 
 		System.out.println("BlockIdx : " + index);
 		fileIOController.setSelectedBlockIndex(index);
+		//listView_right.getSelectionModel().select(index);
+		
 	}
 	
 	

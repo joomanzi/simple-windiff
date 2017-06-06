@@ -1,5 +1,7 @@
 package Controller;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
@@ -78,5 +80,16 @@ public class ScrollbarBinding {
                 }
             });
         }
+        
+        
+        
+        
+        /*selected cell binding*/
+       // IntegerProperty property = new SimpleIntegerProperty();
+       // property.bind(lv1.getSelectionModel().selectedIndexProperty());
+        
+        
+        
+        
     }
 }

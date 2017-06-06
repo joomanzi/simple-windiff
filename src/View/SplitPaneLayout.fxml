@@ -25,7 +25,8 @@
                       </Menu>
                       <Menu fx:id="menu_left_edit" mnemonicParsing="false" text="Edit">
                         <items>
-                          <MenuItem fx:id="menuItem_left_edit" mnemonicParsing="false" onAction="#leftEditOnAction" text="Edit" />
+                          <MenuItem fx:id="menuItem_left_editOn" mnemonicParsing="false" onAction="#leftEditOnOnAction" text="EditOn" />
+                          <MenuItem fx:id="menuItem_left_editOff" mnemonicParsing="false" onAction="#leftEditOffOnAction" text="EditOff" />
                         </items>
                       </Menu>
                     </menus>
@@ -55,7 +56,8 @@
                         </Menu>
                         <Menu fx:id="menu_right_edit" mnemonicParsing="false" text="Edit">
                            <items>
-                              <MenuItem fx:id="menuItem_right_edit" mnemonicParsing="false" onAction="#rightEditOnAction" text="Edit" />
+                              <MenuItem fx:id="menuItem_right_editOn" mnemonicParsing="false" onAction="#rightEditOnOnAction" text="EditOn" />
+                              <MenuItem fx:id="menuItem_right_editOff" mnemonicParsing="false" onAction="#rightEditOffOnAction" text="EditOff" />
                            </items>
                         </Menu>
                      </menus>
