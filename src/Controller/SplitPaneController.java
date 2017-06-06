@@ -94,7 +94,7 @@ public class SplitPaneController implements Initializable {
  	public void leftCloseOnAction(){
  		System.out.println("Left CLOSE!");
  		Alert alert = new Alert(AlertType.WARNING, 
-                "�뿴�젮�엳�뒗 �뙆�씪�씠 �뾾�뒿�땲�떎.", 
+ 				"No file to close", 
                 ButtonType.YES, ButtonType.NO);
 
  		Optional<ButtonType> result = alert.showAndWait();
@@ -108,6 +108,16 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void leftEditOnAction(){
  		System.out.println("Left EDIT!");
+ 		try {
+ 			fileIOController.getBlocks().clear();
+			fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
+			fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
+			listView_leftController.showFile();
+			listView_rightController.showFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -137,12 +147,31 @@ public class SplitPaneController implements Initializable {
 	
 	@FXML
  	public void rightCloseOnAction(){
- 		System.out.println("Right CLOSE!");
+		System.out.println("Right CLOSE!");
+ 		Alert alert = new Alert(AlertType.WARNING, 
+                "No file to close", 
+                ButtonType.YES, ButtonType.NO);
+
+ 		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.YES){
+			alert.close();
+		} else {
+			alert.close();
+		}
 	}
 	
 	@FXML
  	public void rightEditOnAction(){
- 		System.out.println("Right EDIT!");
+		try {
+ 			fileIOController.getBlocks().clear();
+			fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
+			fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
+			listView_leftController.showFile();
+			listView_rightController.showFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void setControllerFileIO(FileIOController fileIOController){

@@ -2,6 +2,9 @@ package Model;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
 public class Model_Block {
 	
 	private ArrayList<Integer> leftLineInfo;
@@ -92,4 +95,14 @@ public class Model_Block {
 	public void setisSame(boolean isSame){
 		this.isSame = isSame;
 	}
+	//TODO
+	/*public ObservableList<String> toString(Model_File file, int flag){
+		
+		if(flag == 1){
+			for(int i = 0 ; i < this.leftLineInfo.size(); i++){
+				file.getLines().get(this.leftLineInfo.get(i));
+			}
+		}
+		return ;
+	}*/
 }

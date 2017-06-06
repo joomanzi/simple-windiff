@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener.Change;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -55,7 +56,23 @@ public class ListViewRightController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		 listView_right.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
+		listView_right.setEditable(true);
+		listView_right.setOnEditCommit(new EventHandler<ListView.EditEvent<Model_Block>>() {
+			@Override
+			public void handle(ListView.EditEvent<Model_Block> t) {
+				listView_right.getItems().set(t.getIndex(), t.getNewValue());
+				System.out.println("setOnEditCommit");
+			}
+						
+		});
+
+		listView_right.setOnEditCancel(new EventHandler<ListView.EditEvent<Model_Block>>() {
+			@Override
+			public void handle(ListView.EditEvent<Model_Block> t) {
+				System.out.println("setOnEditCancel");
+			}
+		});
+		listView_right.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
 	            @Override
 	            public ListCell<Model_Block> call(ListView<Model_Block> p) {
 	 
@@ -63,7 +80,7 @@ public class ListViewRightController implements Initializable {
 	                    @Override
 	                    protected void updateItem(Model_Block t, boolean bln) {
 	                        super.updateItem(t, bln); 
-	                       
+	                        
 	                        if (t != null) {
 	                        	int blankNum = t.getRightBlank();
 	                        	StringBuilder sb = new StringBuilder();
@@ -96,7 +113,6 @@ public class ListViewRightController implements Initializable {
 		 listView_right.setItems(listItems);
 	}
 	public void showFile(){
-		listItems.clear();
 		file = fileIOController.getRightFile();
 		listItems = fileIOController.getBlocks();
 		

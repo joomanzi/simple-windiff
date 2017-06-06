@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.FocusModel;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
 
@@ -47,7 +48,6 @@ public class ScrollbarBinding {
     public static void bind(ListView lv1, ListView lv2, int bindType) {
         ScrollBar bar1 = null;
         ScrollBar bar2 = null;
-
         for (Node node : lv1.lookupAll(".scroll-bar")) {
             if (node instanceof ScrollBar && ((ScrollBar)node).getOrientation().equals(Orientation.VERTICAL)) {
                 bar1 = (ScrollBar)node;
@@ -62,6 +62,7 @@ public class ScrollbarBinding {
 
         final ScrollBar fbar1 = bar1;
         final ScrollBar fbar2 = bar2;
+        
         if (fbar1 != null && (bindType & BIND_RIGHT_TO_LEFT) != 0) {
             fbar1.valueProperty().addListener(new ChangeListener<Number>() {
                 @Override
@@ -78,5 +79,54 @@ public class ScrollbarBinding {
                 }
             });
         }
+        
+        lv1.getSelectionModel().selectedIndexProperty().addListener(
+        	      new ChangeListener<Number>() {
+        	           @Override
+        	           public void changed(ObservableValue<? extends Number> observable,
+        	                                    Number oldVal , Number newVal) {
+        	        	   lv2.getSelectionModel().clearAndSelect(newVal.intValue());
+        	           }
+        	      }
+        	);
+        lv2.getSelectionModel().selectedIndexProperty().addListener(
+      	      new ChangeListener<Number>() {
+      	           @Override
+      	           public void changed(ObservableValue<? extends Number> observable,
+      	                                    Number oldVal , Number newVal) {
+      	        	   lv1.getSelectionModel().clearAndSelect(newVal.intValue());
+      	           }
+      	      }
+      	);
+/*        
+        FocusModel<?> f1 = lv1.getFocusModel();
+        FocusModel<?> f2 = lv2.getFocusModel();
+        
+        final FocusModel<?> ff1 = f1;
+        final FocusModel<?> ff2 = f2;
+        
+        if (ff1 != null && (bindType & BIND_RIGHT_TO_LEFT) != 0) {
+        	ff1.focusedIndexProperty().addListener(new ChangeListener<Number>(){
+    			@Override
+    			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+    				// TODO Auto-generated method stub
+    				ff2.focus(newValue.intValue());
+    				System.out.println("f1 selected and bind with f2?");
+    			}	
+            });
+        }
+        if (ff2 != null && (bindType & BIND_LEFT_TO_RIGHT) != 0) {
+            ff2.focusedIndexProperty().addListener(new ChangeListener<Number>(){
+    			@Override
+    			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+    				// TODO Auto-generated method stub
+    				ff1.focus(newValue.intValue());
+    				System.out.println("f2 selected and bind with f1?");
+    			}	
+            }); 
+        }
+  */      
+       
+        
     }
 }

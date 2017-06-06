@@ -14,6 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
@@ -55,15 +57,25 @@ public class ListViewLeftController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		listView_left.setEditable(true);
+
         listView_left.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
             @Override
             public ListCell<Model_Block> call(ListView<Model_Block> p) {
- 
+            	
                 ListCell<Model_Block> cell = new ListCell<Model_Block>() {
+                
                     @Override
                     protected void updateItem(Model_Block t, boolean empty) {
                         super.updateItem(t, empty); 
+                        
+                        if (empty || t == null) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(t.toString());
+                        }
+                        
                         if (t != null) {
                         	int blankNum = t.getLeftBlank();
                         	StringBuilder sb = new StringBuilder();
@@ -91,6 +103,7 @@ public class ListViewLeftController implements Initializable {
                         }
                     }
                 };
+                cell.setEditable(true);
                 return cell;
             }
         });
@@ -137,9 +150,10 @@ public class ListViewLeftController implements Initializable {
 	
 	@FXML
 	public void onListViewLeftMouseClicked(){
-		int index = listView_left.getSelectionModel().getSelectedIndex();
+		int index = listView_left.focusModelProperty().getValue().getFocusedIndex();
 		System.out.println("BlockIdx : " + index);
 		fileIOController.setSelectedBlockIndex(index);
+		
 	}
 	
 }
