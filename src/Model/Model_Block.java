@@ -36,14 +36,14 @@ public class Model_Block {
 				all.add(i);
 			}
 		}catch (NullPointerException e){
-			e.printStackTrace();
+			System.out.println("Right only ");
 		}
 		try{
 			for (int i = 0 ; i < fileright.getLines().size() ; i++){
 				alr.add(i);
 			}
 		}catch (NullPointerException e){
-			e.printStackTrace();
+			System.out.println("Left only ");
 		}
 		setLeftLineInfo(all);
 		setRightLineInfo(alr);
