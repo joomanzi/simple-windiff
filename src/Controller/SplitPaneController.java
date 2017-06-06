@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Controller.FileIOController;
-import Model.Model_File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,6 +22,9 @@ public class SplitPaneController implements Initializable {
 	private static int FILE_LEFT = 0;
 	private static int FILE_RIGHT = 1;
 	private FileIOController fileIOController;
+	private MainFrameController mainFrameController;
+	private boolean rightEditFlag = false;
+	private boolean leftEditFlag = false;
 	
 	@FXML
 	private SplitPane split_text_frame;
@@ -34,10 +36,9 @@ public class SplitPaneController implements Initializable {
 	private Menu menu_left_file, menu_left_edit,
 				menu_right_file, menu_right_edit;
 	@FXML
-	private MenuItem menuItem_left_load, menuItem_left_save, menuItem_left_saveas, menuItem_left_close, menuItem_left_edit,
-					menuItem_right_load, menuItem_right_save, menuItem_right_saveas, menuItem_right_close, menuItem_right_edit;
-	@FXML
-	private TextField textField_left, textField_right;
+	private MenuItem menuItem_left_load, menuItem_left_save, menuItem_left_saveas, menuItem_left_close, menuItem_left_editOn, menuItem_left_editOff,
+					menuItem_right_load, menuItem_right_save, menuItem_right_saveas, menuItem_right_close, menuItem_right_editOn, menuItem_right_editOff;
+	
 	@FXML
 	private Parent listView_left;
 	@FXML
@@ -45,16 +46,17 @@ public class SplitPaneController implements Initializable {
 	@FXML
 	private ListViewRightController listView_rightController;
 	
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		menuBar_left = null; menuBar_right = null;
 		menu_left_file = null; menu_left_edit = null; menu_right_file = null; menu_right_edit = null;
-		menuItem_left_load = null; menuItem_left_save = null; menuItem_left_saveas = null; menuItem_left_close = null; menuItem_left_edit = null;
-		menuItem_right_load = null; menuItem_right_save = null; menuItem_right_saveas = null; menuItem_right_close = null; menuItem_right_edit = null;
-		textField_left = null; textField_right = null;
+		
+		setLeftDisableButton("true","false","false","false","false","false");
+		setRightDisableButton("true","false","false","false","false","false");
 	
-		//textArea_left.setDisable(true);  //占싣울옙 占싫븝옙占쏙옙 -> 占쏙옙占쏙옙占쏙옙 load占싹몌옙 false占쏙옙 占쌕뀐옙途
 	}
 	
 	@FXML
@@ -66,10 +68,13 @@ public class SplitPaneController implements Initializable {
 		try {
 			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_LEFT);
 			listView_leftController.showFile();
+			setLeftDisableButton("true","true","true","true","true","false");	
+			checkCompareButton();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		//load占쌀띰옙 占쌩븝옙占싯삼옙 flag占쏙옙占쏙옙 占십울옙
 		//load占쏙옙占쏙옙占쏙옙 textArea disable true -> false占쏙옙
@@ -106,20 +111,25 @@ public class SplitPaneController implements Initializable {
  			Alert alert = new Alert(AlertType.WARNING, 
  				"No file to close", 
                 ButtonType.YES, ButtonType.NO);
-
  			Optional<ButtonType> result = alert.showAndWait();
  			if (result.get() == ButtonType.YES){
  				alert.close();
 			} else {
 				alert.close();
 			}
-		}
+ 		}
+		setLeftDisableButton("true","false","false","false","false","false");
+		checkCompareButton();
 	}
 	
 	@FXML
- 	public void leftEditOnAction(){
+
+ 	public void leftEditOnOnAction(){
  		System.out.println("Left EDIT!");
  		try {
+ 			leftEditFlag = true;
+ 	 		setLeftDisableButton("false","false","false","false","false","true");
+ 	 		checkCompareButton();
  			fileIOController.getBlocks().clear();
 			fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
 			fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
@@ -129,6 +139,12 @@ public class SplitPaneController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void leftEditOffOnAction(){
+ 		System.out.println("Left EDITOFF!");
+ 		leftEditFlag = false;
+ 		setLeftDisableButton("true","true","true","true","true","false");
+ 		checkCompareButton();
 	}
 	
 	@FXML
@@ -140,10 +156,14 @@ public class SplitPaneController implements Initializable {
 		try {
 			fileIOController.fileLoad(file.getAbsolutePath().toString(), FILE_RIGHT);
 			listView_rightController.showFile();
+			setRightDisableButton("true","true","true","true","true","false");
+			checkCompareButton();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		
+		
 	}
 	
 	@FXML
@@ -162,6 +182,8 @@ public class SplitPaneController implements Initializable {
 		if(fileIOController.getLeftFile()!=null){
  			fileIOController.getBlocks().clear();
  			try {
+ 				setRightDisableButton("true","false","false","false","false","false");
+ 				checkCompareButton();
 				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -183,11 +205,14 @@ public class SplitPaneController implements Initializable {
 	}
 	
 	@FXML
- 	public void rightEditOnAction(){
+ 	public void rightEditOnOnAction(){
 		try {
  			fileIOController.getBlocks().clear();
 			fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
 			fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
+	 		setRightDisableButton("false","false","false","false","false","true");
+	 		rightEditFlag = true;
+	 		checkCompareButton();
 			listView_leftController.showFile();
 			listView_rightController.showFile();
 		} catch (IOException e) {
@@ -196,11 +221,22 @@ public class SplitPaneController implements Initializable {
 		}
 	}
 	
+	
+	public void rightEditOffOnAction(){
+ 		System.out.println("Right EDITOFF!");
+ 		setRightDisableButton("true","true","true","true","true","false");
+ 		rightEditFlag = false;
+ 		checkCompareButton();
+	}
+	
 	public void setControllerFileIO(FileIOController fileIOController){
 		this.fileIOController = fileIOController;
 		listView_leftController.setControllerFileIO(fileIOController);
 		listView_rightController.setControllerFileIO(fileIOController);
-		
+	}
+	
+	public void setMainFrameController(MainFrameController mainFrameController){
+		this.mainFrameController = mainFrameController;
 	}
 	
 	public ListViewLeftController getListViewLeftController(){
@@ -213,6 +249,7 @@ public class SplitPaneController implements Initializable {
 	public void foo(String foo) {
 	       System.out.println(foo);
 	    }
+
 	/*FileChooser*/
 	FileChooser myFileChooser(String name){
 		FileChooser fileChooser = new FileChooser();
@@ -223,8 +260,68 @@ public class SplitPaneController implements Initializable {
 				);
 		return fileChooser;
 	}
-
 	
+	private void setLeftDisableButton(String load, String save, String saveas, String close, String editOn, String editOff){
+		boolean myload = load == "true" ? true : false;
+		boolean mysave = save == "true" ? true : false;
+		boolean mysaveas = saveas == "true" ? true : false;
+		boolean myclose = close == "true" ? true : false;
+		boolean myeditOn = editOn == "true" ? true : false;
+		boolean myeditOff = editOff == "true" ? true : false;
 
+		if(!myload) menuItem_left_load.setDisable(true);
+		else menuItem_left_load.setDisable(false);
+		
+		if(!mysave) menuItem_left_save.setDisable(true);
+		else menuItem_left_save.setDisable(false);
+		
+		if(!mysaveas) menuItem_left_saveas.setDisable(true);
+		else menuItem_left_saveas.setDisable(false);
+		
+		if(!myclose) menuItem_left_close.setDisable(true);
+		else menuItem_left_close.setDisable(false);
+		
+		if(!myeditOn) menuItem_left_editOn.setDisable(true);
+		else menuItem_left_editOn.setDisable(false);	
+		
+		if(!myeditOff) menuItem_left_editOff.setDisable(true);
+		else menuItem_left_editOff.setDisable(false);	
+	}
+	
+	private void setRightDisableButton(String load, String save, String saveas, String close, String editOn, String editOff){
+		boolean myload = load == "true" ? true : false;
+		boolean mysave = save == "true" ? true : false;
+		boolean mysaveas = saveas == "true" ? true : false;
+		boolean myclose = close == "true" ? true : false;
+		boolean myeditOn = editOn == "true" ? true : false;
+		boolean myeditOff = editOff == "true" ? true : false;
+		
+		if(!myload) menuItem_right_load.setDisable(true);
+		else menuItem_right_load.setDisable(false);
+		
+		if(!mysave) menuItem_right_save.setDisable(true);
+		else menuItem_right_save.setDisable(false);
+		
+		if(!mysaveas) menuItem_right_saveas.setDisable(true);
+		else menuItem_right_saveas.setDisable(false);
+		
+		if(!myclose) menuItem_right_close.setDisable(true);
+		else menuItem_right_close.setDisable(false);
+		
+		if(!myeditOn) menuItem_right_editOn.setDisable(true);
+		else menuItem_right_editOn.setDisable(false);
+	
+		if(!myeditOff) menuItem_right_editOff.setDisable(true);
+		else menuItem_right_editOff.setDisable(false);
+	}
 
+	private void checkCompareButton(){
+		if(fileIOController.getLeftFile()!=null && fileIOController.getRightFile()!= null){
+			if(leftEditFlag || rightEditFlag){
+				mainFrameController.setCompare("false");
+			}
+			else mainFrameController.setCompare("true");
+		}
+		else mainFrameController.setCompare("false");
+	}
 }

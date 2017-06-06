@@ -1,5 +1,7 @@
 package Controller;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
@@ -79,7 +81,7 @@ public class ScrollbarBinding {
                 }
             });
         }
-        
+       
         lv1.getSelectionModel().selectedIndexProperty().addListener(
         	      new ChangeListener<Number>() {
         	           @Override
@@ -99,35 +101,5 @@ public class ScrollbarBinding {
       	           }
       	      }
       	);
-/*        
-        FocusModel<?> f1 = lv1.getFocusModel();
-        FocusModel<?> f2 = lv2.getFocusModel();
-        
-        final FocusModel<?> ff1 = f1;
-        final FocusModel<?> ff2 = f2;
-        
-        if (ff1 != null && (bindType & BIND_RIGHT_TO_LEFT) != 0) {
-        	ff1.focusedIndexProperty().addListener(new ChangeListener<Number>(){
-    			@Override
-    			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-    				// TODO Auto-generated method stub
-    				ff2.focus(newValue.intValue());
-    				System.out.println("f1 selected and bind with f2?");
-    			}	
-            });
-        }
-        if (ff2 != null && (bindType & BIND_LEFT_TO_RIGHT) != 0) {
-            ff2.focusedIndexProperty().addListener(new ChangeListener<Number>(){
-    			@Override
-    			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-    				// TODO Auto-generated method stub
-    				ff1.focus(newValue.intValue());
-    				System.out.println("f2 selected and bind with f1?");
-    			}	
-            }); 
-        }
-  */      
-       
-        
     }
 }

@@ -4,7 +4,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -26,7 +25,8 @@
                       </Menu>
                       <Menu fx:id="menu_left_edit" mnemonicParsing="false" text="Edit">
                         <items>
-                          <MenuItem fx:id="menuItem_left_edit" mnemonicParsing="false" onAction="#leftEditOnAction" text="Edit" />
+                          <MenuItem fx:id="menuItem_left_editOn" mnemonicParsing="false" onAction="#leftEditOnOnAction" text="EditOn" />
+                          <MenuItem fx:id="menuItem_left_editOff" mnemonicParsing="false" onAction="#leftEditOffOnAction" text="EditOff" />
                         </items>
                       </Menu>
                     </menus>
@@ -35,9 +35,6 @@
                <center>
                   <fx:include fx:id="listView_left" source="ListViewLeft.fxml" />
                </center>
-               <bottom>
-                  <TextField fx:id="textField_left"  BorderPane.alignment="CENTER" />
-               </bottom>
             </BorderPane>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" stylesheets="@touch.css">
@@ -46,9 +43,6 @@
                <center>
                   <fx:include fx:id="listView_right" source="ListViewRight.fxml" />
                </center>
-               <bottom>
-                  <TextField fx:id="textField_right" BorderPane.alignment="CENTER" />
-               </bottom>
                <top>
                   <MenuBar fx:id="menuBar_right" BorderPane.alignment="CENTER">
                      <menus>
@@ -62,7 +56,8 @@
                         </Menu>
                         <Menu fx:id="menu_right_edit" mnemonicParsing="false" text="Edit">
                            <items>
-                              <MenuItem fx:id="menuItem_right_edit" mnemonicParsing="false" onAction="#rightEditOnAction" text="Edit" />
+                              <MenuItem fx:id="menuItem_right_editOn" mnemonicParsing="false" onAction="#rightEditOnOnAction" text="EditOn" />
+                              <MenuItem fx:id="menuItem_right_editOff" mnemonicParsing="false" onAction="#rightEditOffOnAction" text="EditOff" />
                            </items>
                         </Menu>
                      </menus>

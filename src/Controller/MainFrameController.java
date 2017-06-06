@@ -37,14 +37,30 @@ public class MainFrameController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		buttonBar_main = null;
-		button_compare = null;
-		splitMenu_merge = null;
 		menuItem_lefttoright = null;
 		menuItem_righttoleft = null;
 		
+		button_compare.setDisable(true);
+		splitMenu_merge.setDisable(true);
+		
 		fileIOController = new FileIOController();
 		split_text_frameController.setControllerFileIO(fileIOController);
+		split_text_frameController.setMainFrameController(this);
+		
 	}
+	
+	public void setCompare(String compare){
+		boolean myCompare = compare == "true" ? true : false;
+		if(!myCompare) button_compare.setDisable(true);
+		else button_compare.setDisable(false);
+	}
+	
+	public void setMerge(String merge){
+		boolean myMerge = merge == "true" ? true : false;
+		if(!myMerge) splitMenu_merge.setDisable(true);
+		else splitMenu_merge.setDisable(false);
+	}
+	
 	
 	@FXML
  	public void compareOnAction(){

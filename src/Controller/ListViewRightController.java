@@ -32,6 +32,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -117,13 +118,14 @@ public class ListViewRightController implements Initializable {
 	           	//listItems.add(file.getLines().get(i).getValue());
 	     }
 		 listView_right.setItems(listItems);
-		
 	}
 	
 	public void showBlocks(){
 		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
+
 			listItems.add(blocks.get(i));
+
         }
 		listView_right.autosize();
         listView_right.setItems(listItems);
@@ -135,10 +137,12 @@ public class ListViewRightController implements Initializable {
 		return this.listView_right;
 	}
 	
+	
 	@FXML
 	public void onListViewRightMouseClicked(){
 		int index = listView_right.getSelectionModel().getSelectedIndex();
 		System.out.println("BlockIdx : "+ index);
 		fileIOController.setSelectedBlockIndex(index);
 	}
+	
 }

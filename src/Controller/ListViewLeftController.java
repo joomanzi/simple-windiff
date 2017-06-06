@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+
 import Model.Model_Block;
 import Model.Model_File;
 import View.MainFrame;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -101,6 +103,7 @@ public class ListViewLeftController implements Initializable {
             }
         });
         listView_left.setItems(listItems);
+        
 	}
 	
 	public void showFile(){
@@ -125,6 +128,7 @@ public class ListViewLeftController implements Initializable {
 			}
 		listView_left.setItems(listItems);
 	}
+	
 	public void showBlocks(){
 		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
@@ -141,12 +145,11 @@ public class ListViewLeftController implements Initializable {
 		return this.listView_left;
 	}
 	
+	
 	@FXML
 	public void onListViewLeftMouseClicked(){
 		int index = listView_left.focusModelProperty().getValue().getFocusedIndex();
 		System.out.println("BlockIdx : " + index);
 		fileIOController.setSelectedBlockIndex(index);
-		
 	}
-	
 }
