@@ -22,7 +22,7 @@ public class CompareCode {
 		this.fileIO = fileIO;
 		//this.fileIO. = fileIO.getLeftFile(); // left
 		//this.right = fileIO.getRightFile(); //FXCollections.observableArrayList();
-	//	this.blocks = this.fileIO.getBlocks(); //FXCollections.observableArrayList();
+		//this.blocks = this.fileIO.getBlocks(); //FXCollections.observableArrayList();
 		this.file1Lines = this.fileIO.getLeftFile().getLines();
 		this.file2Lines = this.fileIO.getRightFile().getLines();
 		this.fileIO.getLeftFile().setIsCompare(true); //file1 is compared

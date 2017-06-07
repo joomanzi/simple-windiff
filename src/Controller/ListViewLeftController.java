@@ -20,6 +20,8 @@ import javafx.scene.control.ListCell;
 
 public class ListViewLeftController implements Initializable {
 	private FileIOController fileIOController;
+	private MainFrameController mainFrameController;
+
 
 	@FXML
 	private ListView<Model_Block> listView_left;
@@ -108,6 +110,9 @@ public class ListViewLeftController implements Initializable {
 	public void setControllerFileIO(FileIOController fileIOController){
 		this.fileIOController = fileIOController;
 	}
+	public void setMainFrameController(MainFrameController mainFrameController){
+		this.mainFrameController = mainFrameController;
+	}
 	public ListView<Model_Block> getListViewLeft(){
 		return this.listView_left;
 	}
@@ -118,5 +123,10 @@ public class ListViewLeftController implements Initializable {
 		int index = listView_left.focusModelProperty().getValue().getFocusedIndex();
 		System.out.println("BlockIdx : " + index);
 		fileIOController.setSelectedBlockIndex(index);
+		
+		if(!listView_left.getItems().get(index).isSame()){
+			mainFrameController.setMerge("true");
+		}
+		else mainFrameController.setMerge("false");
 	}
 }

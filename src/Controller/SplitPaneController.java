@@ -54,6 +54,7 @@ public class SplitPaneController implements Initializable {
 		// TODO Auto-generated method stub
 		menuBar_left = null; menuBar_right = null;
 		menu_left_file = null; menu_left_edit = null; menu_right_file = null; menu_right_edit = null;
+
 		
 		setLeftDisableButton("true","false","false","false","false","false");
 		setRightDisableButton("true","false","false","false","false","false");
@@ -132,7 +133,10 @@ public class SplitPaneController implements Initializable {
 				System.out.println("Edit when no right file");
 			}
 			
-			//EditingWindow ew = new EditingWindow(fileIOController.getLeftFile());
+			EditingWindow ew = new EditingWindow(fileIOController.getLeftFile());
+			//EditTextAreaController editTextAreaController = (EditTextAreaController)ew.getEditTextAreaController();
+			//editTextAreaController.setFileText(fileIOController.getLeftFile());
+			//fileIOController.setLeftFile(editTextAreaController.getEditedFile());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,6 +242,8 @@ public class SplitPaneController implements Initializable {
 	
 	public void setMainFrameController(MainFrameController mainFrameController){
 		this.mainFrameController = mainFrameController;
+		listView_leftController.setMainFrameController(mainFrameController);
+		listView_rightController.setMainFrameController(mainFrameController);
 	}
 	
 	public ListViewLeftController getListViewLeftController(){
