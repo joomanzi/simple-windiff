@@ -132,7 +132,7 @@ public class SplitPaneController implements Initializable {
 				System.out.println("Edit when no right file");
 			}
 			
-			EditingWindow ew = new EditingWindow(fileIOController.getLeftFile());
+			//EditingWindow ew = new EditingWindow(fileIOController.getLeftFile());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

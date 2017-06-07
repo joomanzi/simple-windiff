@@ -31,6 +31,7 @@ public class CompareCode {
 		LCS = new LCSalgorithms(file1Lines, file2Lines); //do LCS algorithms
 		fileIO.getBlocks().clear();
 		createBlock();
+		System.out.println(fileIO.getBlocks().size());
 	}
 	
 	private void createBlock(){
