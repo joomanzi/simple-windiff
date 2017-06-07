@@ -89,7 +89,7 @@ public class CompareCode {
 		
 		ObservableList<Model_Block> blocks = this.fileIO.getBlocks();
 		Model_Block block = new Model_Block();
-		block.setisSame(true);
+		block.setisSame(false);
 		
 		if(!hasPriorBlock(prior1, prior2, current1, current2)){
 			if(blocks.size() == 0){

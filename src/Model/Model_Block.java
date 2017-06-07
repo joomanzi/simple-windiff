@@ -22,7 +22,7 @@ public class Model_Block {
 		rightBlank = 0;
 		flag = 0;
 		modified = false;
-		isSame = false;
+		isSame = true;
 	}
 	public Model_Block(Model_File fileleft, Model_File fileright){
 		leftLineInfo = new ArrayList<Integer>();

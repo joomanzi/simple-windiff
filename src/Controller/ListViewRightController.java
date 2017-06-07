@@ -88,7 +88,7 @@ public class ListViewRightController implements Initializable {
 		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\t\n");
 		                        	}
 	                        	}
-	                        	if(!t.isSame()&&fileIOController.getBlocks().size()>1){
+	                        	if(t.isSame()){
 	                        		this.getStyleClass().add("diff-cell");
 	                         	}
 	                        	this.setText(sb.toString());   
