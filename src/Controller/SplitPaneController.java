@@ -185,7 +185,7 @@ public class SplitPaneController implements Initializable {
 			listView_rightController.showFile();
 			
 			
-			
+			EditingWindow ew = new EditingWindow(fileIOController.getRightFile());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -196,6 +196,7 @@ public class SplitPaneController implements Initializable {
 	public void rightEditOffOnAction(){
  		System.out.println("Right EDITOFF!");
  		setRightDisableButton("true","true","true","true","true","false");
+ 		listView_rightController.showFile();
  		rightEditFlag = false;
  		checkCompareButton();
 	}

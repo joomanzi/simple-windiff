@@ -22,13 +22,13 @@ public class EditTextAreaController implements Initializable {
 	@FXML
 	private String editingFileName;
 	private Model_File oldFile;
+	private String[] ss;
 	private Model_File newFile = new Model_File("NewFile");
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
 		editTextArea.setWrapText(true);
-		
 		editTextArea.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -36,8 +36,6 @@ public class EditTextAreaController implements Initializable {
 				editTextArea.setText(newValue);
 			}
         });
-		
-		
 		}
 	
 	public void setFileText(Model_File file){
@@ -51,15 +49,18 @@ public class EditTextAreaController implements Initializable {
 	}
 	public void changeEditedFile(){
 		System.out.println("----------Editresult------------");
+		ss = editTextArea.getText().split("\n");
+		
 		oldFile.getLines().clear();
-		for(int i = 0 ; i < newFile.getLines().size() ; i++){
-			oldFile.setLinesLineByLine(newFile.getLines().get(i).getValue()+"\n");
+		for(int i = 0 ; i < ss.length ; i++){
+			System.out.println(ss[i]);
+			oldFile.setLinesLineByLine(ss[i]);
 		}
 	}
 	
 	public void showStat(){
 		System.out.println("------show--------");
-		for(int i = 0 ; i < newFile.getLines().size() ; i++){
+		for(int i = 0 ; i < ss.length ; i++){
 			System.out.println(oldFile.getLines().get(i).getValue());
 		}
 	}

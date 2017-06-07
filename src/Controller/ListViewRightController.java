@@ -112,18 +112,13 @@ public class ListViewRightController implements Initializable {
 			initBlock = new Model_Block(fileIOController.getLeftFile(), file);
 			listItems.set(0, initBlock);
 		}
-		for(int i = 0 ; i < file.getLines().size(); i++){
-	           	//listItems.add(file.getLines().get(i).getValue());
-	     }
-		 listView_right.setItems(listItems);
+		listView_right.setItems(listItems);
 	}
 	
 	public void showBlocks(){
 		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
 		for(int i = 0 ; i < blocks.size() ; i++){
-
 			listItems.add(blocks.get(i));
-
         }
 		listView_right.autosize();
         listView_right.setItems(listItems);

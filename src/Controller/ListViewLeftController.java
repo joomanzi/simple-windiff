@@ -32,9 +32,7 @@ public class ListViewLeftController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		listView_left.setEditable(true);
-
-        listView_left.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
+		listView_left.setCellFactory(new Callback<ListView<Model_Block>, ListCell<Model_Block>>() {
             @Override
             public ListCell<Model_Block> call(ListView<Model_Block> p) {
             	
@@ -91,10 +89,6 @@ public class ListViewLeftController implements Initializable {
 			initBlock = new Model_Block(file, fileIOController.getRightFile());
 			listItems.set(0, initBlock);
 		}
-		
-		for(int i = 0 ; i < initBlock.getLeftLineInfo().size() ; i++){
-			//	System.out.println(initBlock.getLeftLineInfo().get(i));
-			}
 		listView_left.setItems(listItems);
 	}
 	

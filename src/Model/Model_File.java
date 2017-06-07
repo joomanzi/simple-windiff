@@ -10,6 +10,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.text.Text;
 
 public class Model_File {
 	private String directory; //directory
@@ -56,12 +57,6 @@ public class Model_File {
 	}
 	public void setLinesLineByLine(String value){
 		line = new SimpleStringProperty(value);
-		line.addListener(new InvalidationListener() {
-		      @Override
-		      public void invalidated(Observable o) {
-		        System.out.println(o.toString());
-		      }
-		    });
 		lines.add(line);
 	}
 }
