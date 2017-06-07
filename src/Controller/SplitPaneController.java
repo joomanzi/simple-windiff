@@ -91,28 +91,11 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void leftCloseOnAction(){
  		System.out.println("Left CLOSE!");
- 		if(fileIOController.getLeftFile()!=null){
- 			fileIOController.getBlocks().clear();
- 			try {
-				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			listView_rightController.showFile();
- 		}else{
- 			Alert alert = new Alert(AlertType.WARNING, 
- 				"No file to close", 
-                ButtonType.YES, ButtonType.NO);
- 			Optional<ButtonType> result = alert.showAndWait();
- 			if (result.get() == ButtonType.YES){
- 				alert.close();
-			} else {
-				alert.close();
-			}
- 		}
-		setLeftDisableButton("true","false","false","false","false","false");
+ 		setLeftDisableButton("true","false","false","false","false","false");
 		checkCompareButton();
+ 		fileIOController.setLeftFile(null);
+		listView_leftController.showFile();
+		listView_rightController.showFile();
 	}
 	
 	@FXML
@@ -145,6 +128,7 @@ public class SplitPaneController implements Initializable {
 	public void leftEditOffOnAction(){
  		System.out.println("Left EDITOFF!");
  		leftEditFlag = false;
+ 		listView_leftController.showFile();
  		setLeftDisableButton("true","true","true","true","true","false");
  		checkCompareButton();
 	}
@@ -181,29 +165,11 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void rightCloseOnAction(){
 		System.out.println("Right CLOSE!");
-		if(fileIOController.getLeftFile()!=null){
- 			fileIOController.getBlocks().clear();
- 			try {
- 				setRightDisableButton("true","false","false","false","false","false");
- 				checkCompareButton();
-				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			listView_rightController.showFile();
- 		}else{
- 			Alert alert = new Alert(AlertType.WARNING, 
- 				"No file to close", 
-                ButtonType.YES, ButtonType.NO);
-
- 			Optional<ButtonType> result = alert.showAndWait();
- 			if (result.get() == ButtonType.YES){
- 				alert.close();
-			} else {
-				alert.close();
-			}
-		}
+		setRightDisableButton("true","false","false","false","false","false");
+		checkCompareButton();
+		fileIOController.setRightFile(null);
+		listView_leftController.showFile();
+		listView_rightController.showFile();
 	}
 	
 	@FXML

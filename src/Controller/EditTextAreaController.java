@@ -33,9 +33,7 @@ public class EditTextAreaController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				// TODO Auto-generated method stub
-				oldValue = newValue;
-			
-				newFile.setLinesLineByLine(newValue);
+				editTextArea.setText(newValue);
 			}
         });
 		
@@ -44,6 +42,8 @@ public class EditTextAreaController implements Initializable {
 	
 	public void setFileText(Model_File file){
 		oldFile = file;
+		
+		
 		editingFileName = oldFile.getfileName();
 		for(int i = 0; i < oldFile.getLines().size(); i++){
 			editTextArea.appendText(oldFile.getLines().get(i).getValue()+"\n");

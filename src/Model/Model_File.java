@@ -1,7 +1,13 @@
 package Model;
 
+
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,6 +22,7 @@ public class Model_File {
 	public Model_File(String fileName){
 		this.newLines();
 		this.setfileName(fileName);
+		
 	}
   			
 	//getter
@@ -49,6 +56,12 @@ public class Model_File {
 	}
 	public void setLinesLineByLine(String value){
 		line = new SimpleStringProperty(value);
+		line.addListener(new InvalidationListener() {
+		      @Override
+		      public void invalidated(Observable o) {
+		        System.out.println(o.toString());
+		      }
+		    });
 		lines.add(line);
 	}
 }
