@@ -102,28 +102,13 @@ public class SplitPaneController implements Initializable {
 
  	public void leftEditOnOnAction(){
  		System.out.println("Left EDIT!");
- 		try {
- 			leftEditFlag = true;
- 	 		setLeftDisableButton("false","false","false","false","false","true");
- 	 		checkCompareButton();
- 			fileIOController.getBlocks().clear();
-			fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
-			listView_leftController.showFile();
-			try{
-				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
-				listView_rightController.showFile();
-			}catch (NullPointerException e){
-				System.out.println("Edit when no right file");
-			}
-			
-			EditingWindow ew = new EditingWindow(fileIOController.getLeftFile());
-			//EditTextAreaController editTextAreaController = (EditTextAreaController)ew.getEditTextAreaController();
-			//editTextAreaController.setFileText(fileIOController.getLeftFile());
-			//fileIOController.setLeftFile(editTextAreaController.getEditedFile());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+ 		leftEditFlag = true;
+ 	 	setLeftDisableButton("false","false","false","false","false","true");
+ 	 	checkCompareButton();
+ 	 	fileIOController.getBlocks().clear();
+		listView_leftController.showFile();
+		listView_rightController.showFile();
+		EditingWindow ew = new EditingWindow(fileIOController.getLeftFile());
 	}
 	public void leftEditOffOnAction(){
  		System.out.println("Left EDITOFF!");
@@ -174,31 +159,22 @@ public class SplitPaneController implements Initializable {
 	
 	@FXML
  	public void rightEditOnOnAction(){
-		try {
- 			fileIOController.getBlocks().clear();
-			fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
-			fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
-	 		setRightDisableButton("false","false","false","false","false","true");
-	 		rightEditFlag = true;
-	 		checkCompareButton();
-			listView_leftController.showFile();
-			listView_rightController.showFile();
-			
-			
-			EditingWindow ew = new EditingWindow(fileIOController.getRightFile());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("Right EDIT!");
+ 		rightEditFlag = true;
+ 	 	setRightDisableButton("false","false","false","false","false","true");
+ 	 	checkCompareButton();
+ 		fileIOController.getBlocks().clear();
+		listView_leftController.showFile();
+		listView_rightController.showFile();
+		EditingWindow ew = new EditingWindow(fileIOController.getRightFile());
 	}
-	
 	
 	public void rightEditOffOnAction(){
  		System.out.println("Right EDITOFF!");
  		setRightDisableButton("true","true","true","true","true","false");
- 		listView_rightController.showFile();
  		rightEditFlag = false;
  		checkCompareButton();
+ 		listView_rightController.showFile();
 	}
 	
 	public void setControllerFileIO(FileIOController fileIOController){

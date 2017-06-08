@@ -88,10 +88,12 @@ public class ListViewRightController implements Initializable {
 		                        		sb.append(file.getLines().get((t.getRightLineInfo().get(j))).getValue()+"\t\n");
 		                        	}
 	                        	}
-	                        	if(t.isSame()){
+	                        	if(!t.isSame()){
 	                        		this.getStyleClass().add("diff-cell");
 	                         	}
 	                        	this.setText(sb.toString());   
+	                        }else{
+	                        	setText("");
 	                        }
 	                    }
 	                };
@@ -104,6 +106,7 @@ public class ListViewRightController implements Initializable {
 		file = fileIOController.getRightFile();
 		listItems = fileIOController.getBlocks();
 		
+			
 		Model_Block initBlock;
 		if(listItems.isEmpty()){
 			initBlock = new Model_Block(null, file);
@@ -115,14 +118,6 @@ public class ListViewRightController implements Initializable {
 		listView_right.setItems(listItems);
 	}
 	
-	public void showBlocks(){
-		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
-		for(int i = 0 ; i < blocks.size() ; i++){
-			listItems.add(blocks.get(i));
-        }
-		listView_right.autosize();
-        listView_right.setItems(listItems);
-	}
 	public void setControllerFileIO(FileIOController fileIOController){
 		this.fileIOController = fileIOController;
 	} 

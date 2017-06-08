@@ -61,11 +61,14 @@ public class ListViewLeftController implements Initializable {
 	                        		sb.append(file.getLines().get((t.getLeftLineInfo().get(j))).getValue()+"\n");
 	                        	}
                         	}
-                        	if(t.isSame()){
+                        	if(!t.isSame()){
                          		this.getStyleClass().add("diff-cell");
+                         	}else{
+                         		System.out.println("white");
                          	}
                         	this.setText(sb.toString());
-                 
+                        }else{
+                        	setText("");
                         }
                     }
                 };
@@ -80,25 +83,22 @@ public class ListViewLeftController implements Initializable {
 	public void showFile(){
 		file = fileIOController.getLeftFile();
 		listItems = fileIOController.getBlocks();
-		
 		Model_Block initBlock;
 		if(listItems.isEmpty()){
-			initBlock = new Model_Block(file, null);
+			System.out.println("listItems are empty"+listItems.size());
+			initBlock = new Model_Block(file, fileIOController.getRightFile());
 			listItems.add(initBlock);
 		}else{
+			System.out.println("listItems are Not empty anyway"+listItems.size());
 			initBlock = new Model_Block(file, fileIOController.getRightFile());
 			listItems.set(0, initBlock);
+			System.out.println(listItems.size());
 		}
 		listView_left.setItems(listItems);
-	}
-	
-	public void showBlocks(){
-		ObservableList<Model_Block> blocks = fileIOController.getBlocks();
-		for(int i = 0 ; i < blocks.size() ; i++){
-			listItems.add(blocks.get(i));
+		
+		for(int i = 0 ; i < listItems.size(); i++){
+			System.out.println(listItems.get(i).isSame());
 		}
-		listView_left.autosize();
-        listView_left.setItems(listItems);
 	}
 	
 	public void setControllerFileIO(FileIOController fileIOController){

@@ -31,7 +31,7 @@ public class Model_Block {
 		rightBlank = 0;
 		flag = 0;
 		modified = false;
-		isSame = false;
+		isSame = true;
 		ArrayList<Integer> all = new ArrayList<Integer>();
 		ArrayList<Integer> alr = new ArrayList<Integer>();
 		try{
