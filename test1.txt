@@ -1,9 +1,5 @@
-
-
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-
-
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -12,31 +8,22 @@ void generalization(float* input, float* temp, int size) {		//this function make
 
 	int i;
 
-
-
 	for (i = 0; i < size; i++) {								//the criteria is making all numbers in input array into 5 digit numbers.
 																//(4 digit integer and 1 digit real number which is more than 0 and less than 1)
 
-
 		if (input[i] == 1000) {									//1000 will be 1000.1
-
 			temp[i] = input[i] + (input[i] * 0.0001);
 		}
 
-		else if (input[i] >= 100.0) {							//such as a number '121' which is more than 100,
-																//that number will be '1211.2'. (actually, the number will be 1211.21)
+		else if (input[i] >= 100.0) {											//that number will be '1211.2'. (actually, the number will be 1211.21)
 			temp[i] = (input[i] * 10) + (input[i] * 0.01);
 		}
-		else if (input[i] >= 10.0) {							//like previous process, a number '15' which is more than 10 and less than 100,
-																//that number will also be '1515.1'(actually, that number will be 1515.15)
+		else if (input[i] >= 10.0) {											//that number will also be '1515.1'(actually, that number will be 1515.15)
 			temp[i] = (input[i] * 100) + input[i] + (input[i] * 0.01);
 		}
-		else {													//a single digit number such as '2' will be '2222.2'(actually 2222.2)
-			
+		else {				
 			temp[i] = (input[i] * 1000) + (input[i] * 100) + (input[i] * 10) + input[i] + (input[i] * 0.1);
 		}
-
-
 	}
 }
 
@@ -44,10 +31,7 @@ void selectionSort(float* input, float* temp, int size) {	//this selection sorti
 
 	int i, j, minIndex, tp;
 
-
-
 	for (i = 0; i < size - 1; i++) {
-
 		minIndex = i;
 
 		for (j = i + 1; j < size; j++)
@@ -57,8 +41,6 @@ void selectionSort(float* input, float* temp, int size) {	//this selection sorti
 		tp = temp[minIndex];
 		temp[minIndex] = temp[i];
 		temp[i] = tp;
-
-
 
 		tp = input[minIndex];
 		input[minIndex] = input[i];

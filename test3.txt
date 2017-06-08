@@ -1,9 +1,4 @@
-
-
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-
-
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -14,7 +9,7 @@ void generalization(float* input, float* temp, int size) {		//this function make
 
 
 
-	for (i = 0; i < size; i++) {								//the criteria is making all numbers in input array into 5 digit numbers.
+	for (i = 0; i < Max; i++) {								//the criteria is making all numbers in input array into 5 digit numbers.
 																//(4 digit integer and 1 digit real number which is more than 0 and less than 1)
 
 
@@ -31,15 +26,39 @@ void generalization(float* input, float* temp, int size) {		//this function make
 																//that number will also be '1515.1'(actually, that number will be 1515.15)
 			temp[i] = (input[i] * 100) + input[i] + (input[i] * 0.01);
 		}
-		else {													//a single digit number such as '2' will be '2222.2'(actually 2222.2)
+		else if(input[i] >= 1.0) {													//a single digit number such as '2' will be '2222.2'(actually 2222.2)
 			
 			temp[i] = (input[i] * 1000) + (input[i] * 100) + (input[i] * 10) + input[i] + (input[i] * 0.1);
 		}
+		else
+			break;
 
 
 	}
 }
 
+void insertionSort(float* input, float* temp, int size) {	//A general insertion sorting algorithm.
+						
+
+									//If we want to make program faster, i think it will be good to use a this sorting algorithm.
+	int i, j;												//So I attached insertion sorting algorithm codes by comment.
+	float key[2];											//This program is satisfied with the time limit,
+															//whether using selection sorting algorithm or insertion sorting algorithm
+	for (i = 1; i < size; i++) {
+
+		key[0] = temp[i];
+		key[1] = input[i];
+
+		for (j = i - 1; j >= 0 && temp[j] > k; y[0]; j--) {
+
+			temp[j + 1] = temp[j];
+			input[j + 1] = input[j];
+		}
+
+		temp[j + 1] = key[0];
+		input[j + 1] = key[1];
+	}
+}
 void selectionSort(float* input, float* temp, int size) {	//this selection sorting algorithm is a proper algorithm for 'greedy approach'.
 
 	int i, j, minIndex, tp;
@@ -65,32 +84,6 @@ void selectionSort(float* input, float* temp, int size) {	//this selection sorti
 		input[i] = tp;
 	}
 }
-/*
-void insertionSort(float* input, float* temp, int size) {	//A general insertion sorting algorithm.
-						
-
-									//If we want to make program faster, i think it will be good to use a this sorting algorithm.
-	int i, j;												//So I attached insertion sorting algorithm codes by comment.
-	float key[2];											//This program is satisfied with the time limit,
-															//whether using selection sorting algorithm or insertion sorting algorithm
-	for (i = 1; i < size; i++) {
-
-		key[0] = temp[i];
-		key[1] = input[i];
-
-		for (j = i - 1; j >= 0 && temp[j] > k
-
-y[0]; j--) {
-
-			temp[j + 1] = temp[j];
-			input[j + 1] = input[j];
-		}
-
-		temp[j + 1] = key[0];
-		input[j + 1] = key[1];
-	}
-}
-*/
 
 char* LargestNumber(float* input, float* temp, int siz
 

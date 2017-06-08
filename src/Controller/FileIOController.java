@@ -73,6 +73,7 @@ public class FileIOController {
 		
 		for(int i = 0; i< file.getLines().size(); i++){
 			this.bufferedWriter.write(file.getLines().get(i).getValue());
+			this.bufferedWriter.newLine();
 		}
 	}
 	public void saveLeftWithChange(Model_File file) throws IOException {
@@ -100,7 +101,8 @@ public class FileIOController {
 	public void write(Model_File file, int index) throws IOException {	this.bufferedWriter.write(file.getLines().get(index).getValue());	}
 	public void fileSave(int leftOrRight) throws IOException{
 		
-		if(this.blocks.size() == 0){	//compare,merge 占쏙옙占쏙옙 占쏙옙占�
+		if(this.blocks.size() == 1){	//compare,merge 占쏙옙占쏙옙 占쏙옙占�
+			System.out.println("x");
 			switch(leftOrRight){
 			case 0:	//占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
 				this.newBufferedWriter(this.leftFile.getfileName());
@@ -138,7 +140,7 @@ public class FileIOController {
 		
 		this.newBufferedWriter(fileName);
 		
-		if(this.blocks.size() == 0){	//compare,merge 占쏙옙占쏙옙 占쏙옙占�
+		if(this.blocks.size() == 1){	//compare,merge 占쏙옙占쏙옙 占쏙옙占�
 			switch(leftOrRight){
 			case 0:	//占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
 				this.saveWithNoChange(this.leftFile);
