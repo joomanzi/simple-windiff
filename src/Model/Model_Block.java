@@ -2,13 +2,16 @@ package Model;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
 public class Model_Block {
 	
 	private ArrayList<Integer> leftLineInfo;
 	private ArrayList<Integer> rightLineInfo;
 	private int leftBlank;
 	private int rightBlank;
-	private int flag; //flag==1 getData From Left, flag==2 getDataFromright flag==0 getDataFromThis
+	private int flag; 		//flag==1 getData From Left, flag==2 getDataFromright
 	private boolean modified;
 	private boolean isSame;
 		
@@ -19,7 +22,34 @@ public class Model_Block {
 		rightBlank = 0;
 		flag = 0;
 		modified = false;
-		isSame = false;
+		isSame = true;
+	}
+	public Model_Block(Model_File fileleft, Model_File fileright){
+		leftLineInfo = new ArrayList<Integer>();
+		rightLineInfo = new ArrayList<Integer>();
+		leftBlank = 0;
+		rightBlank = 0;
+		flag = 0;
+		modified = false;
+		isSame = true;
+		ArrayList<Integer> all = new ArrayList<Integer>();
+		ArrayList<Integer> alr = new ArrayList<Integer>();
+		try{
+			for (int i = 0 ; i < fileleft.getLines().size() ; i++){
+				all.add(i);
+			}
+		}catch (NullPointerException e){
+			System.out.println("Right only ");
+		}
+		try{
+			for (int i = 0 ; i < fileright.getLines().size() ; i++){
+				alr.add(i);
+			}
+		}catch (NullPointerException e){
+			System.out.println("Left only ");
+		}
+		setLeftLineInfo(all);
+		setRightLineInfo(alr);
 	}
 	public int getFlag() {
 		return flag;
@@ -65,4 +95,14 @@ public class Model_Block {
 	public void setisSame(boolean isSame){
 		this.isSame = isSame;
 	}
+	//TODO
+	/*public ObservableList<String> toString(Model_File file, int flag){
+		
+		if(flag == 1){
+			for(int i = 0 ; i < this.leftLineInfo.size(); i++){
+				file.getLines().get(this.leftLineInfo.get(i));
+			}
+		}
+		return ;
+	}*/
 }

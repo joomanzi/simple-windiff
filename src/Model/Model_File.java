@@ -1,10 +1,16 @@
 package Model;
 
 
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.text.Text;
 
 public class Model_File {
 	private String directory; //directory
@@ -17,6 +23,7 @@ public class Model_File {
 	public Model_File(String fileName){
 		this.newLines();
 		this.setfileName(fileName);
+		
 	}
   			
 	//getter
@@ -49,7 +56,7 @@ public class Model_File {
 		this.isCompare = isCompare;
 	}
 	public void setLinesLineByLine(String value){
-		line = new SimpleStringProperty(value+"\r\n");
+		line = new SimpleStringProperty(value);
 		lines.add(line);
 	}
 }

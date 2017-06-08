@@ -105,4 +105,10 @@ public class LCSalgorithms {
 	private int max(int a, int b){
 		return (a>b) ? a : b;
 	}
+	public boolean equals(LCSalgorithms a){
+	      if(this.LCSlength != a.LCSlength){return false;}
+	      if(!this.X_Index.equals(a.X_Index)){return false;}
+	      if(!this.Y_Index.equals(a.Y_Index)){return false;}
+	      return true;
+	   }
 }
