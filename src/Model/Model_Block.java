@@ -11,7 +11,7 @@ public class Model_Block {
 	private ArrayList<Integer> rightLineInfo;
 	private int leftBlank;
 	private int rightBlank;
-	private int flag; 		//flag==1 getData From Left, flag==2 getDataFromright flag==0 getDataFromThis
+	private int flag; 		//flag==1 getData From Left, flag==2 getDataFromright
 	private boolean modified;
 	private boolean isSame;
 		

@@ -65,6 +65,7 @@ public class MainFrameController implements Initializable {
 	@FXML
  	public void compareOnAction(){
  		compareCode = new CompareCode(fileIOController);
+ 		compareCode.createBlock();
  		System.out.println("COMPARE!");
  		ListViewLeftController lc = split_text_frameController.getListViewLeftController();
  		ListViewRightController rc = split_text_frameController.getListViewRightController();
@@ -74,13 +75,15 @@ public class MainFrameController implements Initializable {
 	@FXML
 	public void lefttorightOnAction(){
 		System.out.println("Left To Right MERGE!");
-		MergeCode mc = new MergeCode(fileIOController, 2);
+		MergeCode mc = new MergeCode(fileIOController);
+		mc.copyLeftToRight();
 	}
 	
 	@FXML
 	public void righttoleftOnAction(){
 		System.out.println("Right To Left MERGE!");
-		MergeCode mc = new MergeCode(fileIOController, 1);
+		MergeCode mc = new MergeCode(fileIOController);
+		mc.copyRightToleft();
 	}	
 	
 	public void setMainFrame(MainFrame mainFrame){

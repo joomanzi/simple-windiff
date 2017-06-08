@@ -23,6 +23,9 @@ public class CompareCode {
 		//this.fileIO. = fileIO.getLeftFile(); // left
 		//this.right = fileIO.getRightFile(); //FXCollections.observableArrayList();
 	//	this.blocks = this.fileIO.getBlocks(); //FXCollections.observableArrayList();
+	}
+	
+	public void createBlock(){
 		this.file1Lines = this.fileIO.getLeftFile().getLines();
 		this.file2Lines = this.fileIO.getRightFile().getLines();
 		this.fileIO.getLeftFile().setIsCompare(true); //file1 is compared
@@ -30,10 +33,6 @@ public class CompareCode {
 		
 		LCS = new LCSalgorithms(file1Lines, file2Lines); //do LCS algorithms
 		fileIO.getBlocks().clear();
-		createBlock();
-	}
-	
-	private void createBlock(){
 		int priorIndex1 = -1, priorIndex2 = -1;
 		int currentIndex1, currentIndex2;
 		for(int i = LCS.getLCSlength() -1 ; i >= 0 ; i--){
@@ -53,12 +52,12 @@ public class CompareCode {
 		insertLastBlock(priorIndex1, priorIndex2, this.file1Lines.size()-1, this.file2Lines.size()-1);
 	
 	}
-	private boolean hasPriorBlock(int prior1, int prior2, int current1, int current2){
+	public boolean hasPriorBlock(int prior1, int prior2, int current1, int current2){
 		if(current1 - prior1 != 1 || current2 - prior2 != 1)
 			return true;
 		return false;
 	}
-	private void insertBlock(int prior1, int prior2, int current1, int current2){
+	public void insertBlock(int prior1, int prior2, int current1, int current2){
 		int blockSize;
 		ObservableList<Model_Block> blocks = this.fileIO.getBlocks();
 		Model_Block block = new Model_Block();
@@ -76,7 +75,7 @@ public class CompareCode {
 		blocks.add(block);
 	}
 	
-	private void insertLineInfo(Model_Block block, int leftStart, int leftEnd, int rightStart, int rightEnd){
+	public void insertLineInfo(Model_Block block, int leftStart, int leftEnd, int rightStart, int rightEnd){
 		for(int i = leftStart+1 ; i < leftEnd; i++){
 			block.getLeftLineInfo().add(i);
 		}
@@ -84,7 +83,7 @@ public class CompareCode {
 			block.getRightLineInfo().add(i);
 		}
 	}
-	private void insertCurrentBlock(int prior1, int prior2, int current1, int current2){
+	public void insertCurrentBlock(int prior1, int prior2, int current1, int current2){
 		
 		ObservableList<Model_Block> blocks = this.fileIO.getBlocks();
 		Model_Block block = new Model_Block();
@@ -110,7 +109,7 @@ public class CompareCode {
 		
 		return;
 	}
-	private void insertLastBlock(int start1, int start2, int last1, int last2){
+	public void insertLastBlock(int start1, int start2, int last1, int last2){
 		if(start1 == last1 && start2 == last2) return;
 		
 		insertBlock(start1, start2, last1+1, last2+1);

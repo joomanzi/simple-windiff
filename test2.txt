@@ -1,139 +1,170 @@
+package Controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import Model.Model_Block;
+import Model.Model_File;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+public class FileIOController {
 
-
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
-void generalization(float* input, float* temp, int size) {		//this function make input array be modified by 'my' criteria.
-
-	int i;
-
-
-
-	for (i = 0; i < size; i++) {								//the criteria is making all numbers in input array into 5 digit numbers.
-																//(4 digit integer and 1 digit real number which is more than 0 and less than 1)
-
-
-		if (input[i] == 1000) {									//1000 will be 1000.1
-
-			temp[i] = input[i] + (input[i] * 0.0001);
-		}
-
-		else if (input[i] >= 100.0) {							//such as a number '121' which is more than 100,
-																//that number will be '1211.2'. (actually, the number will be 1211.21)
-			temp[i] = (input[i] * 10) + (input[i] * 0.01);
-		}
-		else if (input[i] >= 10.0) {							//like previous process, a number '15' which is more than 10 and less than 100,
-																//that number will also be '1515.1'(actually, that number will be 1515.15)
-			temp[i] = (input[i] * 100) + input[i] + (input[i] * 0.01);
-		}
-		else {													//a single digit number such as '2' will be '2222.2'(actually 2222.2)
-			
-			temp[i] = (input[i] * 1000) + (input[i] * 100) + (input[i] * 10) + input[i] + (input[i] * 0.1);
-		}
-
-
-	}
-}
-
-void selectionSort(float* input, float* temp, int size) {	//this selection sorting algorithm is a proper algorithm for 'greedy approach'.
-
-	int i, j, minIndex, tp;
-
-
-
-	for (i = 0; i < size - 1; i++) {
-
-		minIndex = i;
-
-		for (j = i + 1; j < size; j++)
-			if (temp[j] < temp[minIndex])
-				minIndex = j;
-
-		tp = temp[minIndex];
-		temp[minIndex] = temp[i];
-		temp[i] = tp;
-
-
-
-		tp = input[minIndex];
-		input[minIndex] = input[i];
-		input[i] = tp;
-	}
-}
-/*
-void insertionSort(float* input, float* temp, int size) {	//A general insertion sorting algorithm.
-						
-
-									//If we want to make program faster, i think it will be good to use a this sorting algorithm.
-	int i, j;												//So I attached insertion sorting algorithm codes by comment.
-	float key[2];											//This program is satisfied with the time limit,
-															//whether using selection sorting algorithm or insertion sorting algorithm
-	for (i = 1; i < size; i++) {
-
-		key[0] = temp[i];
-		key[1] = input[i];
-
-		for (j = i - 1; j >= 0 && temp[j] > k
-
-y[0]; j--) {
-
-			temp[j + 1] = temp[j];
-			input[j + 1] = input[j];
-		}
-
-		temp[j + 1] = key[0];
-		input[j + 1] = key[1];
-	}
-}
-*/
-
-char* LargestNumber(float* input, float* temp, int siz
-
-e) {	//this function will make a answer string by selecting the largest number of inputs.
-
-	char* answer;
-	char ch[5];
-	int i, j, max, count = 0;
-
-	generalization(input, temp, size);						//making numbers in input array to generalized number by the criteria.
-	answer = (char*)malloc(sizeof(char)*size * 4);
-
-//	insertionSort(input, temp, size);						//if we want faster program, use this function.
-	selectionSort(input, temp, size);						
-
-	for (i = size - 1; i >= 0; i--) {
-
-		sprintf(ch, "%d", (int)input[i]);
-
-		if (i == size - 1)
-			strcpy(answer, ch);								//at first, use strcpy to write a first number.
-		else
-			strcat(answer, ch);								//after that, use strcat to append numbers.
-
-	}
-
-	return answer;
-}
-
-int main(int argc, char* argv[]) {
-
-	float* input, *temp;
-	char* answer;
-	int size, index, i = 0;
-	FILE* file;
-	clock_t start, end;
+	private BufferedReader bufferedReader = null;
+	private BufferedWriter bufferedWriter = null;
+	private Model_File leftFile = null;
+	private Model_File rightFile = null;
+	private ObservableList<Model_Block> blocks = null;
+	private Scanner in;
+	private int selectedBlockIndex;
 	
-	file = fopen(argv[1], "r");
-	fscanf(file, "%d", &size);
+	public Model_File getLeftFile() {return leftFile;}
+	public void setLeftFile(Model_File leftFile) {this.leftFile = leftFile;}
+	public Model_File getRightFile() {return rightFile;}
+	public void setRightFile(Model_File rightFile) {this.rightFile = rightFile;}
+	public BufferedReader getBufferedReader() {return bufferedReader;}	
+	public void setBufferedReader(BufferedReader bufferedReader) {this.bufferedReader = bufferedReader;}	
+	public void newBufferedReader(String fileName) throws FileNotFoundException{this.bufferedReader = new BufferedReader(new FileReader(fileName));}	
+	public ObservableList<Model_Block> getBlocks() {return blocks;}	
+	public void setBlocks(ObservableList<Model_Block> blocks) {this.blocks = blocks;}	
+	public BufferedWriter getBufferedWriter() {return bufferedWriter;}
+	public void setBufferedWriter(BufferedWriter bufferedWriter) {this.bufferedWriter = bufferedWriter;}
+	public void newBufferedWriter(String fileName) throws IOException{this.bufferedWriter = new BufferedWriter(new FileWriter(fileName));}
+	public Scanner getIn() {return in;}
+	public void setIn(Scanner in) {this.in = in;}
 
-	if (size > 100)
-		return 0;
+	public FileIOController(){ blocks = FXCollections.observableArrayList(); }
 
-	input = (float*)malloc(sizeof(float)*size);
-	temp = (float*)malloc(sizeof(float)*size);
-
+	
+	public void setSelectedBlockIndex(int selectedBlockIndex){ this.selectedBlockIndex = selectedBlockIndex; }
+	
+	public int getSelectedBlockIndex(){ return this.selectedBlockIndex; }
+	
+	public void fileLoad(String fileName, int leftOrRight) throws IOException {
+		
+		Model_File new_file = new Model_File(fileName);
+		this.newBufferedReader(fileName);
+		this.in = new Scanner(this.bufferedReader);
+		String s;
+		
+		while((s = this.getBufferedReader().readLine()) != null)		
+			new_file.setLinesLineByLine(s);
+		switch(leftOrRight){
+		case 0:
+			this.leftFile = new_file;
+			break;
+		case 1:
+			this.rightFile = new_file;
+			break;
+		default:
+			System.out.println("Load operation has been failed");
+			System.exit(1);
+		}
+	}
+	public void saveWithNoChange(Model_File file) throws IOException {
+		
+		for(int i = 0; i< file.getLines().size(); i++){
+			this.bufferedWriter.write(file.getLines().get(i).getValue());
+			this.bufferedWriter.newLine();
+		}
+	}
+	public void saveLeftWithChange(Model_File file) throws IOException {
+		
+		for(int i = 0; i < this.blocks.size(); i++)
+			this.useInfoToSave(i, this.blocks.get(i).getLeftLineInfo());
+	}
+	public void saveRightWithChange(Model_File file) throws IOException {
+		
+		for(int i = 0; i < this.blocks.size(); i++)
+			this.useInfoToSave(i, this.blocks.get(i).getRightLineInfo());
+	}
+	public void useInfoToSave(int index, ArrayList<Integer> lineInfo) throws IOException{
+		
+		int k;
+		
+		for(int i = 0; i < lineInfo.size(); i++){
+			k = lineInfo.get(i);
+			
+			if(this.blocks.get(i).getFlag() == 1)	this.write(this.leftFile, k);
+			else									this.write(this.rightFile, k);
+		}
+	}
+	
+	public void write(Model_File file, int index) throws IOException {	this.bufferedWriter.write(file.getLines().get(index).getValue());	}
+	public void fileSave(int leftOrRight) throws IOException{
+		
+		if(this.blocks.size() == 1){
+			System.out.println("x");
+			switch(leftOrRight){
+			case 0:
+				this.newBufferedWriter(this.leftFile.getfileName());
+				this.saveWithNoChange(this.leftFile);
+				break;
+			case 1:
+				this.newBufferedWriter(this.rightFile.getfileName());
+				this.saveWithNoChange(this.rightFile);
+				break;
+			default:
+				System.out.println("Save operation has been failed");
+				System.exit(1);
+				break;
+			}
+		}
+		else{	
+			switch(leftOrRight){
+			case 0:
+				this.newBufferedWriter(this.leftFile.getfileName());
+				this.saveLeftWithChange(this.leftFile);
+				break;
+			case 1:
+				this.newBufferedWriter(this.rightFile.getfileName());
+				this.saveRightWithChange(this.rightFile);
+				break;
+			default:
+				System.out.println("Save operation has been failed");
+				System.exit(1);
+				break;
+			}
+		}
+		this.bufferedWriter.close();
+	}
+	public void fileSaveAs(int leftOrRight, String fileName) throws IOException{
+		
+		this.newBufferedWriter(fileName);
+		
+		if(this.blocks.size() == 1){
+			switch(leftOrRight){
+			case 0:
+				this.saveWithNoChange(this.leftFile);
+				break;
+			case 1:
+				this.saveWithNoChange(this.rightFile);
+				break;
+			default:
+				System.out.println("SaveAs operation has been failed");
+				System.exit(1);
+				break;
+			}
+		}
+		else{
+			switch(leftOrRight){
+			case 0:
+				this.saveLeftWithChange(this.leftFile);
+				break;
+			case 1:
+				this.saveRightWithChange(this.rightFile);
+				break;
+			default:
+				System.out.println("SaveAs operation has been failed");
+				System.exit(1);
+				break;
+			}
+		}
+		this.bufferedWriter.close();
+	}
+}

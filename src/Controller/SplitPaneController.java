@@ -179,17 +179,17 @@ public class SplitPaneController implements Initializable {
 	@FXML
  	public void rightCloseOnAction(){
 		System.out.println("Right CLOSE!");
-		if(fileIOController.getLeftFile()!=null){
+		if(fileIOController.getRightFile()!=null){
  			fileIOController.getBlocks().clear();
  			try {
  				setRightDisableButton("true","false","false","false","false","false");
  				checkCompareButton();
-				fileIOController.fileLoad(fileIOController.getRightFile().getfileName(), FILE_RIGHT);
+				fileIOController.fileLoad(fileIOController.getLeftFile().getfileName(), FILE_LEFT);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			listView_rightController.showFile();
+			listView_leftController.showFile();
  		}else{
  			Alert alert = new Alert(AlertType.WARNING, 
  				"No file to close", 
